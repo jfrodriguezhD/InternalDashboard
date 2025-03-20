@@ -1,0 +1,233 @@
+openapi: 3.0.4
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: |-
+    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
+    Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
+    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
+    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+
+    Some useful links:
+    - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
+    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
+  termsOfService: https://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.12
+externalDocs:
+  description: Find out more about Swagger
+  url: https://swagger.io
+servers:
+  - url: https://petstore3.swagger.io/api/v3
+tags:
+  - name: pet
+    description: Everything about your Pets
+    externalDocs:
+      description: Find out more
+      url: https://swagger.io
+  - name: store
+    description: Access to Petstore orders
+    externalDocs:
+      description: Find out more about our store
+      url: https://swagger.io
+  - name: user
+    description: Operations about user
+paths:
+  /api/prospects:
+    get:
+      tags:
+        - prospects
+      summary: Get all prospects
+      description: Get all prospects
+      operationId: getProspects
+      requestHeader:
+        
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prospects'
+        '400':
+          description: Bad Request
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    post:
+      tags:
+        - pet
+      summary: Add a new pet to the store.
+      description: Add a new pet to the store.
+      operationId: addPet
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pet'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+
+
+
+components:
+  schemas:
+    Prospects:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          format: string
+          example: Jonatan Leonel
+        lastname:
+          type: string
+          format: string
+          example: Rodriguez Gonzalez
+        email:
+          type: string
+          format: string
+          example: ale@deloitte.com
+        phone:
+          type: integer
+          format: int64
+          example: 3121321341
+        route_to_resume:
+          type: string
+          format: string
+          example: asdas/pdf.pdf
+        status:
+          type: string
+          example: Active
+          enum:
+            - Active
+            - Hired
+            - Not in process
+            - Discarted
+            - Paused
+        seniority: 
+          type: string
+          description: level
+          example: Senior
+          enum:
+            - Senior
+            - Consultant
+            - Analyst
+        job_title:
+          type: string
+          description: expertise
+          example: Backend Developer
+          enum:
+            - Backend Developer
+            - Frontend Developer
+            - FullStack Developer
+        capabilities:
+          type: string
+          description: technologies
+          schema: Capabilities
+        sub_capabilities:
+          type: string
+          description: expertise areas
+          schema: Sub_capabilities
+        prospected_for:
+          type: string
+          schema: Projects
+        crosstraining:
+          type: string
+          example: salesforce
+        project:
+          type: string
+          description: as
+          schema: Project
+          
+    Capabilities:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          example: 4
+        name: 
+          type: string
+          format: string
+          example: Java
+          
+    Sub_Capabilities:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          example: 4
+        name: 
+          type: string
+          format: string
+          example: Java
+          
+    Projects:
+      type: object
+      properties:
+        id: 
+          type: integer
+          format: int64
+          example: 4
+        name: 
+          type: string
+          format: string
+          example: Java
+          
+    Users:
+      type: object
+      properties:
+        username: 
+          type: string
+          format: string
+          example: username
+        password: 
+          type: string
+          format: string
+          example: password
