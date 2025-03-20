@@ -104,5 +104,5 @@ One postgres database
 	* Varchar - username
 	* Varchar - password
 	* Varchar - Level
-		* User - No puede crear user
-		* Admin - Puede crear user
+		* User - Can't create user
+		* Admin - Can create user
