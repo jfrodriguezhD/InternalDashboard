@@ -51,9 +51,10 @@ Sort reset button
 * Hiring
 	* Figures and tables
 	* Add section to add Capabilites/Sub Capabilites/Prospected For
-	* Archive (?)
+	* Archive (Logical Erase) --
 * Roster
 	* Figures and tables
+* Projects
 
 ## Prospects Table
 
@@ -64,7 +65,7 @@ One postgres database
 	* VarChar - Name
 	* VarChar - Last Name
 	* Varchar - Email(Can be NULL)
-	* Varchar - route to resume(?)(Can be NULL)
+	* Varchar - route to resume(Will be URL to S3)(Can be NULL) --
 	* Int - Phone(Can be NULL)
 	* VarChar - Status
 		* Active
@@ -72,23 +73,28 @@ One postgres database
 		* Not in process
 		* Discarted
 		* Paused
+		* Archived -- Added
 	* VarChar - Seniority(Level)
 		* Senior
 		* Consultant
 		* Analyst
+		* Manager --
 	* VarChar - Job Title(Expertise)
 		* Front End Developer
 		* Back End Developer
 		* Full Stack Developer
 	* ManyToMany - Capability
 	* ManyToMany - Sub Capability(Otro Nombre)
-	* ManyToMany - Prospected For(Can be NULL)
-	* VarChar - Crosstraining(?)(Can be NULL)
-	* ManyToOne - Project(?)(Can be NULL)
-* Capabilites
+	* ManyToOne - Prospected For(Can be NULL) ---
+	* VarChar - Crosstraining(?)(Can be NULL) -- Eliminate
+	* ManyToOne - Project(Can be NULL)
+* Capabilites -- Same as down
 	* Int - ID
 	* VarChar - Name
-* Sub Capabilites
+	* Varchar - Type
+		* Main
+		* Sub
+* Sub Capabilites -- Same as up
 	* Int - ID
 	* VarChar - Name
 * Prospected For
@@ -97,6 +103,24 @@ One postgres database
 * Project
 	* Int - ID
 	* VarChar - Name
+	* company --
+	* Start time --
+	* deadline --
+	* OneToMany - projectcontacts
+* Project Contacts
+	* id
+	* name
+	* phone
+
+## Roster
+
+* VarChar - Status
+	* Coming available
+	* Assigned
+	* Available
+	* Not available
+	* Hold
+* ManyToMany - Prospected For(Can be NULL)
 
 ## Users Table
 
