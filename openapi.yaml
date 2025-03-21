@@ -243,7 +243,7 @@ components:
         project_contacts:
             type: array
             items:
-              $ref: '#/components/schemas/Prospects'
+              $ref: '#/components/schemas/Project_Contacts'
 
     Project_Contacts:
       type: object
