@@ -4,6 +4,26 @@
     "title": "Swagger Dashboard",
     "version": "0.0.1"
   },
+  "tags": [
+    {
+      "name": "prospects"
+    },
+    {
+      "name": "capabilities"
+    },
+    {
+      "name": "project"
+    },
+    {
+      "name": "project_contacts"
+    },
+    {
+      "name": "users"
+    },
+    {
+      "name": "roster"
+    }
+  ],
   "paths": {
     "/api/v1/prospects": {
       "get": {
@@ -194,6 +214,956 @@
           }
         }
       }
+    },
+    "/api/v1/roster": {
+      "get": {
+        "tags": [
+          "roster"
+        ],
+        "summary": "Get full roster",
+        "description": "Get full roster",
+        "operationId": "getRoster",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Roster"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "roster"
+        ],
+        "summary": "Create new roster element",
+        "description": "Create new roster element",
+        "operationId": "postRoster",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Roster"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Roster"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/roster/{rosterId}": {
+      "get": {
+        "tags": [
+          "roster"
+        ],
+        "summary": "Get roster by Id",
+        "description": "Get roster by Id",
+        "operationId": "getRosterById",
+        "parameters": [
+          {
+            "name": "rosterId",
+            "in": "path",
+            "description": "ID of roster to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Roster"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "roster"
+        ],
+        "summary": "Modify roster by Id",
+        "description": "Modify roster by Id",
+        "operationId": "postRosterById",
+        "parameters": [
+          {
+            "name": "rosterId",
+            "in": "path",
+            "description": "ID of roster to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Roster"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Roster"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "roster"
+        ],
+        "summary": "Delete roster by Id",
+        "description": "Delete roster by Id",
+        "operationId": "deleteRosterById",
+        "parameters": [
+          {
+            "name": "rosterId",
+            "in": "path",
+            "description": "ID of roster to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Roster"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/capabilities": {
+      "get": {
+        "tags": [
+          "capabilities"
+        ],
+        "summary": "Get all capabilities",
+        "description": "Get all capabilities",
+        "operationId": "getCapabilities",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Capabilities"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "capabilities"
+        ],
+        "summary": "Create new capability element",
+        "description": "Create new capability element",
+        "operationId": "postCapabilities",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Capabilities"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Capabilities"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/capabilities/{capabilitiesId}": {
+      "get": {
+        "tags": [
+          "capabilities"
+        ],
+        "summary": "Get capabilities by Id",
+        "description": "Get capabilities by Id",
+        "operationId": "getCapabilitiesById",
+        "parameters": [
+          {
+            "name": "capabilitiesId",
+            "in": "path",
+            "description": "ID of capabilities to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Capabilities"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "capabilities"
+        ],
+        "summary": "Modify capabilities by Id",
+        "description": "Modify capabilities by Id",
+        "operationId": "postCapabilitiesById",
+        "parameters": [
+          {
+            "name": "capabilitiesId",
+            "in": "path",
+            "description": "ID of capabilities to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Capabilities"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Capabilities"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "capabilities"
+        ],
+        "summary": "Delete capabilities by Id",
+        "description": "Delete capabilities by Id",
+        "operationId": "deleteCapabilitiesById",
+        "parameters": [
+          {
+            "name": "capabilitiesId",
+            "in": "path",
+            "description": "ID of capabilities to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Capabilities"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/project": {
+      "get": {
+        "tags": [
+          "project"
+        ],
+        "summary": "Get all projects",
+        "description": "Get all projects",
+        "operationId": "getProjects",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Projects"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "project"
+        ],
+        "summary": "Create new project element",
+        "description": "Create new project element",
+        "operationId": "postProject",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Projects"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Projects"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/project/{projectId}": {
+      "get": {
+        "tags": [
+          "project"
+        ],
+        "summary": "Get project by Id",
+        "description": "Get project by Id",
+        "operationId": "getProjectById",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "ID of project to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Projects"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "project"
+        ],
+        "summary": "Modify project by Id",
+        "description": "Modify project by Id",
+        "operationId": "postProjectById",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "ID of project to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Projects"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Projects"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "project"
+        ],
+        "summary": "Delete project by Id",
+        "description": "Delete project by Id",
+        "operationId": "deleteProjectById",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "ID of project to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Projects"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/project_contacts": {
+      "get": {
+        "tags": [
+          "project_contacts"
+        ],
+        "summary": "Get all project_contacts",
+        "description": "Get all project_contacts",
+        "operationId": "getProject_contacts",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project_Contacts"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "project_contacts"
+        ],
+        "summary": "Create new project_contacts element",
+        "description": "Create new project_contacts element",
+        "operationId": "postProject_contacts",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Project_Contacts"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project_Contacts"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/project_contacts/{project_contactsId}": {
+      "get": {
+        "tags": [
+          "project_contacts"
+        ],
+        "summary": "Get project_contacts by Id",
+        "description": "Get project_contacts by Id",
+        "operationId": "getProject_contactsById",
+        "parameters": [
+          {
+            "name": "project_contactsId",
+            "in": "path",
+            "description": "ID of project_contacts to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project_Contacts"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "project_contacts"
+        ],
+        "summary": "Modify project_contacts by Id",
+        "description": "Modify project_contacts by Id",
+        "operationId": "postProject_contactsById",
+        "parameters": [
+          {
+            "name": "project_contactsId",
+            "in": "path",
+            "description": "ID of project_contacts to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Project_Contacts"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project_Contacts"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "project_contacts"
+        ],
+        "summary": "Delete project_contacts by Id",
+        "description": "Delete project_contacts by Id",
+        "operationId": "deleteProject_contactsById",
+        "parameters": [
+          {
+            "name": "project_contactsId",
+            "in": "path",
+            "description": "ID of project_contacts to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project_Contacts"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all users",
+        "description": "Get all users",
+        "operationId": "getusers",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create new users element",
+        "description": "Create new users element",
+        "operationId": "postusers",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/api/v1/users/{usersId}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get users by Id",
+        "description": "Get users by Id",
+        "operationId": "getUsersById",
+        "parameters": [
+          {
+            "name": "usersId",
+            "in": "path",
+            "description": "ID of users to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Modify users by Id",
+        "description": "Modify users by Id",
+        "operationId": "postUsersById",
+        "parameters": [
+          {
+            "name": "usersId",
+            "in": "path",
+            "description": "ID of users to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Delete users by Id",
+        "description": "Delete users by Id",
+        "operationId": "deleteUsersById",
+        "parameters": [
+          {
+            "name": "usersId",
+            "in": "path",
+            "description": "ID of users to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -229,7 +1199,7 @@
           "route_to_resume": {
             "type": "string",
             "format": "string",
-            "example": "asdas/pdf.pdf"
+            "example": "asdas/pdf"
           },
           "status": {
             "type": "string",
@@ -239,7 +1209,8 @@
               "Hired",
               "Not in process",
               "Discarted",
-              "Paused"
+              "Paused",
+              "Archived"
             ]
           },
           "seniority": {
@@ -249,7 +1220,8 @@
             "enum": [
               "Senior",
               "Consultant",
-              "Analyst"
+              "Analyst",
+              "Manager"
             ]
           },
           "job_title": {
@@ -271,7 +1243,89 @@
           "sub_capabilities": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Sub_capabilities"
+              "$ref": "#/components/schemas/Capabilities"
+            }
+          },
+          "prospected_for": {
+            "$ref": "#/components/schemas/Projects"
+          }
+        }
+      },
+      "Roster": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "name": {
+            "type": "string",
+            "format": "string",
+            "example": "Jonatan Leonel"
+          },
+          "lastname": {
+            "type": "string",
+            "format": "string",
+            "example": "Rodriguez Gonzalez"
+          },
+          "email": {
+            "type": "string",
+            "format": "string",
+            "example": "ale@deloitte.com"
+          },
+          "phone": {
+            "type": "integer",
+            "format": "int64",
+            "example": 3121321341
+          },
+          "route_to_resume": {
+            "type": "string",
+            "format": "string",
+            "example": "asdas/pdf"
+          },
+          "status": {
+            "type": "string",
+            "example": "Active",
+            "enum": [
+              "Coming available",
+              "Assigned",
+              "Available",
+              "Not available",
+              "Hold"
+            ]
+          },
+          "seniority": {
+            "type": "string",
+            "description": "level",
+            "example": "Senior",
+            "enum": [
+              "Senior",
+              "Consultant",
+              "Analyst",
+              "Manager"
+            ]
+          },
+          "job_title": {
+            "type": "string",
+            "description": "expertise",
+            "example": "Backend Developer",
+            "enum": [
+              "Backend Developer",
+              "Frontend Developer",
+              "FullStack Developer"
+            ]
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Capabilities"
+            }
+          },
+          "sub_capabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Capabilities"
             }
           },
           "prospected_for": {
@@ -279,10 +1333,6 @@
             "items": {
               "$ref": "#/components/schemas/Projects"
             }
-          },
-          "crosstraining": {
-            "type": "string",
-            "example": "salesforce"
           },
           "project": {
             "$ref": "#/components/schemas/Projects"
@@ -301,21 +1351,20 @@
             "type": "string",
             "format": "string",
             "example": "Java"
-          }
-        }
-      },
-      "Sub_capabilities": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 4
           },
-          "name": {
+          "type": {
             "type": "string",
-            "format": "string",
-            "example": "Java"
+            "example": "Main Capability",
+            "enum": [
+              "Main Capability",
+              "Sub Capability"
+            ]
+          },
+          "prospects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Prospects"
+            }
           }
         }
       },
@@ -331,6 +1380,49 @@
             "type": "string",
             "format": "string",
             "example": "Java"
+          },
+          "company": {
+            "type": "string",
+            "format": "string",
+            "example": "Oracle"
+          },
+          "prospects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Prospects"
+            }
+          },
+          "project_contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Project_Contacts"
+            }
+          }
+        }
+      },
+      "Project_Contacts": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 5
+          },
+          "name": {
+            "type": "string",
+            "format": "string",
+            "example": "Java"
+          },
+          "phone": {
+            "type": "integer",
+            "format": "int64",
+            "example": 3121321341
+          },
+          "project": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Projects"
+            }
           }
         }
       },
@@ -346,6 +1438,14 @@
             "type": "string",
             "format": "string",
             "example": "password"
+          },
+          "level": {
+            "type": "string",
+            "example": "Main Capability",
+            "enum": [
+              "Main Capability",
+              "Sub Capability"
+            ]
           }
         }
       }
