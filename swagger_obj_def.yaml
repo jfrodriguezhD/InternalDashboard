@@ -912,10 +912,6 @@ components:
           enum:
             - Main Capability
             - Sub Capability
-        prospects:
-            type: array
-            items:
-              $ref: '#/components/schemas/Prospects'
           
     Projects:
       type: object
@@ -936,6 +932,10 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Prospects'
+        roster:
+            type: array
+            items:
+              $ref: '#/components/schemas/Roster'
         project_contacts:
             type: array
             items:
