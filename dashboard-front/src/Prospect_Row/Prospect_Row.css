@@ -1,0 +1,43 @@
+.prospects__row{
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: 1fr;
+	justify-items: left;
+	gap: 1rem;
+
+	background-color: #383838ff;
+	padding: .5rem;
+	color: #f2f2f2ff;
+}
+
+.Active{
+	color: #11c211;
+}
+.Hired{
+	color: #6b5dc2;
+}
+.Discarted{
+	color: red;
+}
+.Paused{
+	color: gray;
+}
+
+.prospects__row__member__prospected_for{
+	padding-inline: .5rem;
+	padding-block: .25rem;
+	border-radius: 35%;
+}
+
+.Amazon{
+	background-color: #dfcd2c;
+	color: black;
+}
+.Youtube{
+	background-color: #ff2c2c;
+	color: black;
+}
+.Kaiser{
+	background-color: #7667db;
+	color: black;
+}
