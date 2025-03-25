@@ -1,14 +1,14 @@
-.table-header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    text-align: center;
+.table-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-align: center;
 }
 
-.name{
-    width: 28%;
+.name {
+  width: 28%;
 }
 
-p{
-    width: 12%;
+p {
+  width: 12%;
 }

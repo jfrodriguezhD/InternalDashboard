@@ -1,18 +1,18 @@
 import Control from "./control/Control";
-import "./App.css";
-import Header from "./Header/Header";
+import Header from "./header/Header";
+import { Outlet } from "react-router";
 
 function App() {
   return (
     <>
-      <Control />
-      <div>
-        <Header />
-        <Main>
-          <Control />
-          <Roster />
-        </Main>
-      </div>
+      <div className="link__container"></div>
+      <Header />
+      <main>
+        <Control />
+        {/* <Prospects_Table /> */}
+        <Outlet />
+        {/* <Roster_Row_Container /> */}
+      </main>
     </>
   );
 }
