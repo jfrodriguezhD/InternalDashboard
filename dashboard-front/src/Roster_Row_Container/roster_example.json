@@ -1,0 +1,24 @@
+[
+    {
+    "id": 10,
+    "firstname": "Jonatan Leonel",
+    "lastname": "Rodriguez Gonzalez",
+    "status": "Leaving",
+    "seniority": "Senior",
+    "job_title": "Backend Developer",
+    "capability": "Java",
+    "prospected_for": "Amazon",
+    "project": "Google"
+    },
+    {
+    "id": 129,
+    "firstname": "Leonel Jonatan",
+    "lastname": "Gonzalez Rodriguez",
+    "status": "On Project",
+    "seniority": "Analyst",
+    "job_title": "Frontend Developer",
+    "capability": "Java",
+    "prospected_for": "Amazon",
+    "project": "Google"
+    }
+]
