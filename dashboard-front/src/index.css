@@ -2,28 +2,36 @@
 @import "./control/Control.css";
 @import "./toolbutton/ToolButton.css";
 
-:root{
-  --background: #2C2C2C;
+:root {
+  --background: #2c2c2c;
   --light-comp: #383838;
   --dark-comp: #242424;
-  --green: #4DCD6B;
-  --yellow: #F6D181;
-  --red: #FF7171;
-  --light-blue: #82F3FF;
-  --dark-blue: #689DFE;
+  --green: #4dcd6b;
+  --yellow: #f6d181;
+  --red: #ff7171;
+  --light-blue: #82f3ff;
+  --dark-blue: #689dfe;
 }
 
-*{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   font-weight: normal;
   background-color: var(--background);
-  color: white; margin: 0;
+  color: white;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-h2{
+h1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+h3 {
+  font-weight: 300;
+  font-size: 16px;
+}
+h2 {
   font-size: 20px;
   font-weight: bold;
 }
