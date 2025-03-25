@@ -1,5 +1,9 @@
 package com.engineering.dashboard.repositories;
 
-public class ProspectRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.engineering.dashboard.entities.ProspectEntity;
+
+public interface ProspectRepository extends JpaRepository<ProspectEntity, Long> {
 
 }

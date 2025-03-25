@@ -1,0 +1,56 @@
+.control {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 1rem;
+  background-color: var(--background);
+}
+
+.control__heading {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 24px;
+}
+
+.control__heading__total {
+  display: flex;
+  align-self: flex-end;
+}
+
+.control__output {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.control__grid {
+  display: grid;
+  grid-template-columns: 326px 1fr;
+  grid-template-rows: 1fr 40px;
+  column-gap: 32px;
+  row-gap: 8px;
+}
+
+.control__grid__search {
+  display: flex;
+  padding-left: 12px;
+  align-items: center;
+  background-color: var(--light-comp);
+  border: none;
+  border-radius: 16px;
+  outline: none;
+}
+
+.control__grid__filters {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 12px;
+}
+
+.control__tools {
+  display: flex;
+  padding-top: 24px;
+  gap: 12px;
+}

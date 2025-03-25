@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class capability {
+public class CapabilityEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +30,10 @@ public class capability {
     MAIN_CAPABILITY,
     SECONDARY_CAPABILITY,
   }
+
+  @ManyToMany(mappedBy = "capabilities")
+  private List<ProspectEntity> prospects;
+
+  @ManyToMany(mappedBy = "sub_capabilities")
+  private List<ProspectEntity> prospects_sub;
 }
