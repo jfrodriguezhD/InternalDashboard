@@ -7,7 +7,7 @@ function App() {
     <>
       <div className="link__container"></div>
       <Header />
-      <main>
+      <main className="main">
         <Control />
         <Outlet />
       </main>
