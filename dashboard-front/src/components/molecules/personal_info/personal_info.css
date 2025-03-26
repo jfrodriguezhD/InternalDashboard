@@ -1,0 +1,72 @@
+@import "../../../styles/index.css";
+
+.personal__info__edit{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: .5rem;
+}
+
+.personal__info__edit__form{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
+	gap: .5rem;
+}
+
+.personal__info__submit{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
+}
+
+.personal__info__submit__button{
+	padding: .5rem;
+	width: 100%;
+}
+
+.save__button{
+	background-color: var(--green);
+}
+
+.personal__info__edit__form__input{
+	background-color: var(--lightcomp);
+}
+
+.file__upload {
+    border: 2px dashed #cccccc;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #333333;
+    position: relative;
+}
+
+.file__input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file__upload__message {
+    font-size: 14px;
+    color: #cccccc;
+}
+
+.file__upload__link {
+    color: #00aaff;
+    text-decoration: none;
+}
+
+.file__upload__link:hover {
+    text-decoration: underline;
+}
+
+.file-upload-instructions {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #cccccc;
+}
