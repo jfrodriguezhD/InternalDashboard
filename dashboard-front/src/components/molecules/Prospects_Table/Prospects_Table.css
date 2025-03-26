@@ -1,3 +1,5 @@
+@import "../../../styles/index.css";
+
 .prospects__table {
   width: 100%;
   display: flex;
@@ -5,7 +7,7 @@
   gap: 1rem;
   height: 100vh;
   padding-top: 8px;
-  background-color: #2b2b2bff;
+  background-color: var(--background);
 }
 
 .prospects__table__header {
@@ -16,8 +18,7 @@
   gap: 1rem;
 
   padding: 0.5rem;
-  background-color: #242424ff;
-  color: #f2f2f2ff;
+  background-color: var(--background);
 }
 
 .prospects__table__row__container {

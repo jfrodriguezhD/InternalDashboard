@@ -1,3 +1,5 @@
+@import "../../../styles/index.css";
+
 .prospects__row {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -5,16 +7,20 @@
   justify-items: left;
   gap: 1rem;
 
-  background-color: #383838ff;
+  background-color: var(--light-comp);
   padding: 0.5rem;
-  color: #f2f2f2ff;
+  color: white;
+}
+
+.prospects__row__member{
+	background-color: var(--light-comp);
 }
 
 .Active {
-  color: #11c211;
+  color: var(--green);
 }
 .Hired {
-  color: #6b5dc2;
+  color: var(--dark-blue);
 }
 .Discarted {
   color: red;
