@@ -1,6 +1,6 @@
-import ToolButton from "../toolbutton/ToolButton";
-import WordBubble from "../wordbubble/WordBubble";
-import { outputs, filters, tools } from "../data/control/control_data";
+import ToolButton from "../../atoms/toolbutton/ToolButton";
+import WordBubble from "../../atoms/wordbubble/WordBubble";
+import { outputs, filters, tools } from "../../../data/control/control_data";
 
 export default function Control() {
   return (
