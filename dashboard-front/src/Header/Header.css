@@ -13,6 +13,7 @@
 .menu-icon {
   font-size: 24px;
   background-color: var(--light-comp);
+  padding-top: 0.2rem;
 }
 .menu-icon:hover {
   cursor: pointer;
@@ -21,5 +22,16 @@
 .header-left {
   display: flex;
   gap: 12px;
+  background-color: var(--light-comp);
+}
+.header-title {
+  background-color: var(--light-comp);
+}
+.header-user-name {
+  display: flex;
+  gap: 12px;
+  background-color: var(--light-comp);
+}
+.header-user-name h3 {
   background-color: var(--light-comp);
 }
