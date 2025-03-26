@@ -1,5 +1,3 @@
-@import "../../../styles/index.css";
-
 .ToolButton {
   display: flex;
   background-color: var(--light-comp);
