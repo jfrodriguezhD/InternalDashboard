@@ -1,5 +1,5 @@
-import Roster_Footer from "../roster_footer/Roster_Footer";
-import Roster_Row from "../roster_row/Roster_Row";
+import Roster_Footer from "../../atoms/Roster_Footer/Roster_Footer";
+import Roster_Row from "../../atoms/Roster_Row/Roster_Row.tsx";
 import "./Roster_Row_Container.css";
 import data from "./roster_example.json";
 
