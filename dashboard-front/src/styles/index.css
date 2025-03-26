@@ -1,6 +1,6 @@
-@import "./wordbubble/WordBubble.css";
-@import "./control/Control.css";
-@import "./toolbutton/ToolButton.css";
+@import "../components/atoms/wordbubble/WordBubble.css";
+@import "../components/organism/control/Control.css";
+@import "../components/atoms/toolbutton/ToolButton.css";
 
 :root {
   --background: #2c2c2c;

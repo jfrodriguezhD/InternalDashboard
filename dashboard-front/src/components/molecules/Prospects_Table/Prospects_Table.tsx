@@ -1,6 +1,6 @@
 import "./Prospects_Table.css";
-import { Prospects_Row, Data } from "../prospect_Row/Prospect_Row.tsx";
-import { Prospects_Footer_Page_Marker } from "../prospects_footer_page_marker/Prospects_Footer_Page_Marker.tsx";
+import { Prospects_Row, Data } from "../../atoms/Prospect_Row/Prospect_Row.tsx";
+import { Prospects_Footer_Page_Marker } from "../../atoms/Prospects_Footer_Page_Marker/Prospects_Footer_Page_Marker.tsx";
 
 const one: Data = {
   name: "Leonel Gonzalez Valencia",

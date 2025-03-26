@@ -1,5 +1,5 @@
-import Control from "./control/Control";
-import Header from "./Header/Header";
+import Control from "../components/organism/control/Control";
+import Header from "../components/molecules/header/Header";
 import { Outlet } from "react-router";
 
 function App() {
