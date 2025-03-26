@@ -10,6 +10,7 @@ function Header() {
         </div>
         <div className="header-user-name">
           <h3>User Name goes here</h3>
+          <button>Darkmode</button>
         </div>
       </section>
     </>
