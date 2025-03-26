@@ -31,7 +31,7 @@ function Roster_Row_Container() {
           />
         ))}
       </div>
-      <Roster_Footer tables={Math.floor(data.length / 20)} />
+      <Roster_Footer len={Math.floor(data.length / 20)} selected={1} />
     </>
   );
 }

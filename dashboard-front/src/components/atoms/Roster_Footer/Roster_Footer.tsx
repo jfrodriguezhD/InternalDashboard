@@ -1,9 +1,20 @@
 import './Roster_Footer.css'
 
-function Roster_Footer({tables}:{tables:number}) {
+interface tables{
+    len:number;
+    selected:number;
+}
 
+function Roster_Footer({len,selected}:tables) {
+  const table = Array.from({length:len}, (_,i) => i + 1);
+  console.log(table);
   return (
     <>
+    {len>0? 
+        <div className='roster-table-footer'>
+            {table.map((item)=>
+            <a className={selected==item?'selected':'not-selected'} href='/table'>{item}</a>)}
+        </div> : null}
     </>
   )
 }
