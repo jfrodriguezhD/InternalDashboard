@@ -23,12 +23,12 @@ public class RosterController {
 @Autowired
     RosterService rosterService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<RosterEntity>> getRosters() {
         return rosterService.getAllRosters();
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<RosterEntity> postRoster(@RequestBody RosterEntity roster) {
         return rosterService.createRoster(roster);
     }

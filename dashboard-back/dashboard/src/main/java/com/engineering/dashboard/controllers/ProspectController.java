@@ -18,17 +18,17 @@ import com.engineering.dashboard.entities.ProspectEntity;
 import com.engineering.dashboard.services.ProspectService;
 
 @RestController
-@RequestMapping("/api/v1/prospects")
+@RequestMapping("/api/v1/prospect")
 public class ProspectController {
 	@Autowired
     ProspectService prospectService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<ProspectEntity>> getProspects() {
         return prospectService.getAllProspects();
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<ProspectEntity> postProspect(@RequestBody ProspectEntity prospect) {
         return prospectService.createProspect(prospect);
     }

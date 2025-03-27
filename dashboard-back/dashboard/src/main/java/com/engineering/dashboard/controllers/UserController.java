@@ -27,12 +27,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<UserEntity>> getUsers() {
         return userService.getAllUsers();
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<UserEntity> postUser(@RequestBody UserEntity user) {
         return userService.createUser(user);
     }
