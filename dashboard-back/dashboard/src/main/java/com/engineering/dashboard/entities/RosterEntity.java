@@ -1,5 +1,7 @@
 package com.engineering.dashboard.entities;
 
+import java.util.List;
+
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,8 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import java.util.List;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Entity
@@ -32,12 +33,11 @@ public class RosterEntity {
   private List<StatusEnum> status;
 
   private enum StatusEnum {
-    ACTIVE,
-    HIRED,
-    NOT_IN_PROCESS,
-    DISCARTED,
-    PAUSED,
-    ARCHIVED,
+    COMING_AVAILABLE, 
+	ASSIGNED, 
+	AVAILABLE, 
+	NOT_AVAILABLE, 
+	HOLD 
   }
 
   @ElementCollection
@@ -83,12 +83,9 @@ public class RosterEntity {
   )
   private List<CapabilityEntity> sub_capabilities;
 
-  /*  @OneToMany(mappedBy = "roster")
-  private List<ProspectedForEntity> projects; */
-
-  @ManyToMany(mappedBy = "roster")
+  @ManyToMany(mappedBy = "roster_prospected")
   private List<ProjectEntity> projects;
 
-  @OneToMany(mappedBy = "roster")
-  private List<ProjectContactEntity> project_contacts;
+  @ManyToOne
+  private List<ProjectEntity> project;
 }
