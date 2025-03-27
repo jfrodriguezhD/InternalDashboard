@@ -21,34 +21,48 @@ function HamburguerMenu({ setMenuVisible }: HamburguerMenuProps) {
           <ul className="menu-links">
             <li className="nav-link">
               <Link to="/roster" onClick={handleLinkClick}>
-                <span className="material-symbols-outlined">engineering</span>
-                <span className="nav-text">Roster Management</span>
+                <div className="nav-element">
+                  <p className="material-symbols-outlined ham-icon">
+                    engineering
+                  </p>
+                  <p className="nav-text">Roster Management</p>
+                </div>
               </Link>
             </li>
             <li className="nav-link">
               <Link to="/prospects" onClick={handleLinkClick}>
-                <span className="material-symbols-outlined">groups</span>
-                <span className="nav-text">Prospects Management</span>
+                <div className="nav-element">
+                  <p className="material-symbols-outlined ham-icon">groups</p>
+                  <p className="nav-text">Prospects Management</p>
+                </div>
               </Link>
             </li>
             <li className="nav-link">
               <Link to="/projects" onClick={handleLinkClick}>
-                <span className="material-symbols-outlined">library_books</span>
-                <span className="nav-text">Projects</span>
+                <div className="nav-element">
+                  <p className="material-symbols-outlined ham-icon">
+                    library_books
+                  </p>
+                  <p className="nav-text">Projects</p>
+                </div>
               </Link>
             </li>
             <li className="nav-link">
               <Link to="/capabilities" onClick={handleLinkClick}>
-                <span className="material-symbols-outlined">
-                  format_list_bulleted
-                </span>
-                <span className="nav-text">Capabilities</span>
+                <div className="nav-element">
+                  <p className="material-symbols-outlined ham-icon">
+                    format_list_bulleted
+                  </p>
+                  <p className="nav-text">Capabilities</p>
+                </div>
               </Link>
             </li>
             <li className="nav-link logout">
               <Link to="/logout" onClick={handleLinkClick}>
-                <span className="material-symbols-outlined">logout</span>
-                <span className="nav-text">Logout</span>
+                <div className="nav-element">
+                  <p className="material-symbols-outlined ham-icon">logout</p>
+                  <p className="nav-text">Logout</p>
+                </div>
               </Link>
             </li>
           </ul>

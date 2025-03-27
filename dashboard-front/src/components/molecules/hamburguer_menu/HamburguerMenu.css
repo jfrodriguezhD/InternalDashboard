@@ -30,7 +30,12 @@
   align-content: center;
   background-color: var(--light-comp);
   border: solid var(--dark-comp) 1px;
-  border-radius: 1rem 2rem 2rem 1rem;
+  border-radius: 1rem 2.5rem 2.5rem 1rem;
+}
+.nav-element {
+  display: flex;
+  width: 90%;
+  background-color: var(--light-comp);
 }
 .shortcuts ul,
 li {
@@ -49,7 +54,6 @@ li .material-symbols-outlined {
   padding-left: 0.5rem;
   background-color: var(--light-comp);
 }
-
 @media (max-width: 950px) {
   .main-ham-menu-container {
     width: 80vw;
