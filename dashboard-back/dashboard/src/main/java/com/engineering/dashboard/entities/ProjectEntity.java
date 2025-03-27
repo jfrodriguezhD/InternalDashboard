@@ -33,6 +33,27 @@ public class ProjectEntity {
     private List<ProjectContactEntity> projectContacts;
 
     @ManyToMany
-    @JoinTable(name = "prospect_project", joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "prospect_id", referencedColumnName = "id"))
+    @JoinTable(
+		name = "prospect_project", 
+		joinColumns = @JoinColumn(
+			name = "project_id", 
+			referencedColumnName = "id"), 
+		inverseJoinColumns = @JoinColumn(
+			name = "prospect_id", 
+			referencedColumnName = "id"))
     private List<ProspectEntity> prospects;
+
+	@ManyToMany
+    @JoinTable(
+		name = "roster_project", 
+		joinColumns = @JoinColumn(
+			name = "project_id", 
+			referencedColumnName = "id"), 
+		inverseJoinColumns = @JoinColumn(
+			name = "roster_id", 
+			referencedColumnName = "id"))
+    private List<RosterEntity> roster_prospected;
+
+	@OneToMany(mappedBy = "project")
+    private List<RosterEntity> roster;
 }
