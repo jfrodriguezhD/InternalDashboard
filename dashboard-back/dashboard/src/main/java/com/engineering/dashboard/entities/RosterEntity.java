@@ -87,5 +87,5 @@ public class RosterEntity {
   private List<ProjectEntity> projects;
 
   @ManyToOne
-  private List<ProjectEntity> project;
+  private ProjectEntity project;
 }
