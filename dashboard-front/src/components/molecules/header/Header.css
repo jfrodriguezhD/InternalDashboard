@@ -36,9 +36,6 @@
 .header-user-name h3 {
   background-color: var(--light-comp);
 }
-/* Todo */
-/* Modify Darkmode Button */
-
 .darkmode-button {
   background-color: var(--light-comp);
   display: flex;
