@@ -1,6 +1,6 @@
-import Roster_Footer from "../../atoms/roster_footer/Roster_Footer";
-import Roster_Row from "../../atoms/roster_row/Roster_Row.tsx";
-import "./Roster_Table.css";
+import Roster_Footer from "../../atoms/Roster_Footer/Roster_Footer";
+import Roster_Row from "../../atoms/Roster_Row/Roster_Row.tsx";
+import "./Roster_Table.css"; 
 import data from "./roster_example.json";
 
 function Roster_Table() {
