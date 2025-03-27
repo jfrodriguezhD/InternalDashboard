@@ -1,0 +1,89 @@
+.profile__info__card{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.profile__info__card__jobTitle{
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em;
+}
+
+.profile__info__card__status{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.profile__info__card__content{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.personal__info__card__capabilities{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.personal__info__card__subcapabilities{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.profile__info__card__color__red{
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 50%;
+    background-color: red;
+    align-content: center;
+    justify-content: center;
+}
+.profile__info__card__color__yellow{
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 50%;
+    background-color: rgb(183, 183, 0);
+    align-content: center;
+    justify-content: center;
+}
+.profile__info__card__color__purple{
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 50%;
+    background-color: purple;
+    align-content: center;
+    justify-content: center;
+}
+.profile__info__card__color__blue{
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 50%;
+    background-color: blue;
+    align-content: center;
+    justify-content: center;
+}
+.profile__info__card__color__green{
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 50%;
+    background-color: green;
+    align-content: center;
+    justify-content: center;
+}
+
+.profile__info__card__status__Project{
+    color: green;
+}
+.profile__info__card__status__Bench{
+    color: red;
+}.profile__info__card__status__Leaving{
+    color: blue;
+}.profile__info__card__status__Waiting{
+    color: beige;
+}

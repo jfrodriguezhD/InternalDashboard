@@ -5,6 +5,10 @@
   text-align: center;
 }
 
-.name {
+.roster__name__cell {
   width: 28%;
+}
+
+.roster__cell{
+  width: 12%
 }

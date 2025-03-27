@@ -22,13 +22,13 @@ function Roster_Row({id,firstName,lastName,status,level,expertise,capability,pro
   return (
     <>
     <div className='roster-member' onClick={()=>setSelected(id)}>
-      <p className='name'>{firstName} {lastName}</p>
-      <p>{status}</p>
-      <p>{level}</p>
-      <p>{expertise}</p>
-      <p>{capability}</p>
-      <p>{project}</p>
-      <p>{prospectedFor}</p>
+      <p className='roster__name__cell'>{firstName} {lastName}</p>
+      <p className="roster__cell">{status}</p>
+      <p className="roster__cell">{level}</p>
+      <p className="roster__cell">{expertise}</p>
+      <p className="roster__cell">{capability}</p>
+      <p className="roster__cell">{project}</p>
+      <p className="roster__cell">{prospectedFor}</p>
     </div>
     </>
   )
