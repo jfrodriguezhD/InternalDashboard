@@ -1,0 +1,23 @@
+.prospect-modal-view{
+    flex-direction: column;
+    width: 30%;
+    justify-self: right;
+    align-self: right;
+    padding: 18px;
+    border: none;
+    height: 100%;
+}
+
+.prospect__view__modal{
+    background: #2C2C2C;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.prospect__view__modal__header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+}

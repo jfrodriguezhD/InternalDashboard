@@ -14,8 +14,15 @@ type Prop = {
 }
 
 function Prospects_Row({ data }: Prop) {
+	const showModal = () => {
+		const modal = document.querySelector(
+		  ".prospect-modal-view"
+		) as HTMLDialogElement;
+		modal!.showModal();
+	  };
+	
   return (
-    <div className='prospects__row'>
+    <div className='prospects__row' onClick={showModal}>
 		<div className='prospects__row__member'>{data.name}</div>
 		<div className={'prospects__row__member prospects__row__member__status ' + data.status}>{data.status}</div>
 		<div className='prospects__row__member'>{data.level}</div>

@@ -11,7 +11,7 @@ function Roster_Footer({len,selected}:tables) {
   return (
     <>
     {len>0? 
-        <div className='roster-table-footer'>
+        <div className='roster__table__footer'>
             {table.map((item)=>
             <a className={selected==item?'selected':'not-selected'} href='/table'>{item}</a>)}
         </div> : null}

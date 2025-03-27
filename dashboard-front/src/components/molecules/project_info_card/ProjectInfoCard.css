@@ -1,0 +1,57 @@
+.project__info__card{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.project__info__list{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.project__info__card__color__red{
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 50%;
+    background-color: red;
+    align-content: center;
+    justify-content: center;
+}
+
+.project__info__card__color__yellow{
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 50%;
+    background-color: rgb(183, 183, 0);
+    align-content: center;
+    justify-content: center;
+}
+
+.project__info__card__color__purple{
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 50%;
+    background-color: purple;
+    align-content: center;
+    justify-content: center;
+}
+
+.project__info__card__color__blue{
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 50%;
+    background-color: blue;
+    align-content: center;
+    justify-content: center;
+}
+
+.project__info__card__color__green{
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    border-radius: 50%;
+    background-color: green;
+    align-content: center;
+    justify-content: center;
+}
+

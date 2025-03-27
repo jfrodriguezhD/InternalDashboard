@@ -1,0 +1,32 @@
+{
+    "name":"Alejandra Guadalupe",
+    "lastName":"Fernandez Gutierrez",
+    "seniority":"Analyst",
+    "job_title":"Front-end Developer",
+    "status": "Project",
+    "capabilities":[
+        {
+            "capability":"Java"
+        },
+        {
+            "capability":"React"
+        }
+    ],
+    "subcapailities":[
+        {
+            "capability":"Frontend"
+        },
+        {
+            "capability":"Testing"
+        }
+    ],
+    "info":{
+        "phone":"+520002340930",
+        "email":"test@email.com",
+        "resume":"/resume.pdf"
+    },
+    "project":{
+        "id":93,
+        "name":"Youtube"
+    }
+}
