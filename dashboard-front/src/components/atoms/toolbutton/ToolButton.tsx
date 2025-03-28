@@ -1,8 +1,10 @@
+import "./ToolButton.css";
+
 interface ToolButtonProps {
   word: string;
   icon: string;
   group: string;
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 
 function ToolButton({ word, icon, group, handleClick }: ToolButtonProps) {
