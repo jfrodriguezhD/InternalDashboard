@@ -17,18 +17,17 @@ import lombok.Data;
 @Table(name = "project_contact")
 public class ProjectContactEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @NotBlank
-    private String name;
+  @NotBlank
+  private String name;
 
-    @Positive
-    private Integer phone;
+  @Positive
+  private Long phone;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "project_id")
-    private ProjectEntity project;
-
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "project_id")
+  private ProjectEntity project;
 }
