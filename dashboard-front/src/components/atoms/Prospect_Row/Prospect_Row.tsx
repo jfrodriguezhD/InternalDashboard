@@ -87,4 +87,4 @@ function Prospects_Row({ data }: Prop) {
 }
 
 export { Prospects_Row }
-export type { Prospects }
+export type { Prospects, Projects, Roster }
