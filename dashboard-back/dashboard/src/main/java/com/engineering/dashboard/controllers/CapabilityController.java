@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/capabilities")
+@RequestMapping("/api/v1/capability")
 public class CapabilityController {
 
   @Autowired
@@ -21,7 +21,7 @@ public class CapabilityController {
   }
 
   /* GET BY ID */
-  @GetMapping("/{capabilitiesId}")
+  @GetMapping("/{capabilityId}")
   public ResponseEntity<CapabilityEntity> getCapabilityById(
     @PathVariable Long capabilitiesId
   ) {
@@ -37,7 +37,7 @@ public class CapabilityController {
   }
 
   /* PUT */
-  @PutMapping("/{capabilitiesId}")
+  @PutMapping("/{capabilityId}")
   public ResponseEntity<CapabilityEntity> updateCapability(
     @PathVariable Long capabilitiesId,
     @RequestBody CapabilityEntity capabilityEntity
@@ -46,7 +46,7 @@ public class CapabilityController {
   }
 
   /* DELETE */
-  @DeleteMapping("/{capabilitiesId}")
+  @DeleteMapping("/{capabilityId}")
   public ResponseEntity<Void> deleteCapability(
     @PathVariable Long capabilitiesId
   ) {
