@@ -1,3 +1,5 @@
+import "./WordBubble.css";
+
 interface WordBubbleProps {
   word: string;
   group: string;

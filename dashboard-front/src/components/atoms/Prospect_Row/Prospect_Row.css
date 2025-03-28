@@ -3,7 +3,6 @@
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 1fr;
   justify-items: left;
-  gap: 1rem;
 
   background-color: var(--light-comp);
   padding: 4px 16px;
@@ -18,16 +17,16 @@
 	text-align: center;
 }
 
-.Active {
+.ACTIVE {
   color: var(--green);
 }
-.Hired {
+.HIRED {
   color: var(--dark-blue);
 }
-.Discarted {
+.DISCARTED {
   color: red;
 }
-.Paused {
+.PAUSED {
   color: gray;
 }
 

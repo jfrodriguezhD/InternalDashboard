@@ -1,15 +1,9 @@
+import "./Control.css";
 import ToolButton from "../../atoms/toolbutton/ToolButton";
 import WordBubble from "../../atoms/wordbubble/WordBubble";
 import { outputs, filters, tools } from "../../../data/control/control_data";
 
 export default function Control() {
-  const showModal = () => {
-    const modal = document.querySelector(
-      ".edit-profile-modal"
-    ) as HTMLDialogElement;
-    modal!.showModal();
-  };
-
   return (
     <div className="control">
       <section className="control__heading">
@@ -37,14 +31,7 @@ export default function Control() {
       </section>
       <section className="control__tools">
         {tools.map((tool) => {
-          return (
-            <ToolButton
-              word={tool.word}
-              group="tools"
-              icon={tool.icon}
-              handleClick={showModal}
-            />
-          );
+          return <ToolButton word={tool.word} group="tools" icon={tool.icon} />;
         })}
       </section>
     </div>

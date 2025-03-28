@@ -1,43 +1,31 @@
-import "./Prospects_Table.css";
-import { Prospects_Row, Data } from "../../atoms/Prospect_Row/Prospect_Row.tsx";
+import { useState, useEffect } from "react";
+import { Prospects, Prospects_Row } from "../../atoms/Prospect_Row/Prospect_Row.tsx";
 import { Prospects_Footer_Page_Marker } from "../../atoms/Prospects_Footer_Page_Marker/Prospects_Footer_Page_Marker.tsx";
+import "./Prospects_Table.css";
 
-const one: Data = {
-  name: "Leonel Gonzalez Valencia",
-  status: "Active",
-  level: "Senior",
-  expertise: "Fullstack Developer",
-  capability: "Java",
-  prospected_for: "Amazon",
-};
-const two: Data = {
-  name: "Jose Alfredo Gutierrez",
-  status: "Discarted",
-  level: "Consultant",
-  expertise: "Frontend Developer",
-  capability: "HTML",
-  prospected_for: "Youtube",
-};
-const three: Data = {
-  name: "Leonel Gonzalez Valencia",
-  status: "Paused",
-  level: "Senior",
-  expertise: "Fullstack Developer",
-  capability: "Java",
-  prospected_for: "Kaiser",
-};
-const four: Data = {
-  name: "Leonel Gonzalez Valencia",
-  status: "Hired",
-  level: "Senior",
-  expertise: "Fullstack Developer",
-  capability: "Java",
-  prospected_for: "None",
-};
-
-const list = [one, two, three, four];
+const prospectBaseApiURL = "http://localhost:8080/api/v1/prospect"
 
 function Prospects_Table() {
+
+	const [list, setList] = useState<Prospects[]>([])
+
+	async function fetchData() {
+		try {
+			const response = await fetch(prospectBaseApiURL);
+			if (!response.ok) {
+				throw new Error('Network response was not ok ' + response.statusText);
+			}
+			const data: Prospects[] = await response.json();
+			setList(data);
+		} catch (error) {
+		  	console.error('There was a problem with the fetch operation:', error);
+		}
+	}
+
+	useEffect(() => {
+		fetchData();
+	  }, []);
+
   return (
     <div className="prospects__table">
       <div className="prospects__table__header">
@@ -52,6 +40,9 @@ function Prospects_Table() {
         {list.map((data, index) => {
           return <Prospects_Row data={data} key={index} />;
         })}
+		<div className='prospects__row add__new__prospect'>
+			Add New Prospect
+		</div>
       </div>
       <div className="prospects__table__footer">
         <div className="prospects__table__footer__page__number__marker">

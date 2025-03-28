@@ -1,7 +1,3 @@
-@import "../components/atoms/wordbubble/WordBubble.css";
-@import "../components/organism/control/Control.css";
-@import "../components/atoms/toolbutton/ToolButton.css";
-
 :root {
   --background: #2c2c2c;
   --light-comp: #383838;
