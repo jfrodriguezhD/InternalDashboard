@@ -6,11 +6,13 @@ interface Props {
     toggleDialog: () => void;
   }
 
+const prospectBaseApiURL = "http://localhost:8080/api/v1/prospect";
 
 export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
   { toggleDialog },
   ref
 ) {
+    
     //Supposed to get 5 last projects on initialization, changes when a search is called
     const [projectList,setProjectList] = useState<string[]>(["Amazon","Google","Toyota","Nissan","Nasa"])
     return (

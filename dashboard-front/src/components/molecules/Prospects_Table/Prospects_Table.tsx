@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Prospects, Prospects_Row } from "../../atoms/Prospect_Row/Prospect_Row.tsx";
-import { Prospects_Footer_Page_Marker } from "../../atoms/Prospects_Footer_Page_Marker/Prospects_Footer_Page_Marker.tsx";
+import { Prospects, Prospects_Row } from "../../atoms/prospect_row/Prospect_Row.tsx";
+import { Prospects_Footer_Page_Marker } from "../../atoms/prospects_footer_page_marker/Prospects_Footer_Page_Marker.tsx";
 import "./Prospects_Table.css";
 
 const prospectBaseApiURL = "http://localhost:8080/api/v1/prospect"
