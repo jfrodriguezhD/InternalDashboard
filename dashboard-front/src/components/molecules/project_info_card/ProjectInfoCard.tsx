@@ -1,12 +1,12 @@
 import './ProjectInfoCard.css'
 import InfoViewHeader from "../../atoms/info_view_header/InfoViewHeader";
+import { Projects } from '../../atoms/prospect_row/Prospect_Row';
 
-interface ProjectInfo{
-    projectId:number;
-    projectName:string;
+interface Props{
+    project:Projects;
 }
 
-function ProjectInfoCard({projectId,projectName}:ProjectInfo){
+function ProjectInfoCard({project}:Props){
     const colors:string[] = ["red","blue","green","yellow","purple"];
     const setColor = (text:string): string =>{
         console.log(text);
@@ -16,14 +16,14 @@ function ProjectInfoCard({projectId,projectName}:ProjectInfo){
     }
 
     const projectInfo = ()=>{
-        console.log(projectId);
+        console.log("projectId");
     };
     return(
         <>
         <div className="project__info__card">
-            <InfoViewHeader title="Project Information"/>
+            <InfoViewHeader title="Project Information" />
             <div className='project__info__list'>
-                <p className={"project__info__card__color__"+setColor(projectName)} onClick={projectInfo}>{projectName}</p>
+                {project==null? <p onClick={projectInfo}>Not prospected for a project</p>:<p className={"project__info__card__color__"+setColor(project.name)} onClick={projectInfo}>{project.name}</p>}
             </div>
         </div>
         </>

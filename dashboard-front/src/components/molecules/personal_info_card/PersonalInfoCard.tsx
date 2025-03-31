@@ -2,7 +2,7 @@ import './PersonalInfoCard.css'
 import InfoViewHeader from "../../atoms/info_view_header/InfoViewHeader";
 
 interface PersonalInfo{
-    phone:string;
+    phone:number;
     email:string;
     resume:string;
 }
