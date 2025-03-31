@@ -1,22 +1,17 @@
 import { forwardRef, useState, useEffect } from "react";
 import { senorities } from "../../../data/edit_prospect_information/edit_prospect_information_data";
+import { prospectBaseApiURL, capabilityBaseApiURL } from "../../../data/endpoints/api_endpoints.ts"
 import { Capabilities } from '../../../data/entities_types/types.ts'
 import "./CreateNewProspect.css";
 
 type ProspectStarter = {
-	name: String;
+	name: string;
 	status: ['ACTIVE'] | ['HIRED'] | ['NOT_IN_PROCESS'] | ['DISCARTED'] | ['PAUSED'] | ['ARCHIVED'];
 	seniority: ['SENIOR'] | ['CONSULTANT'] | ['ANALYST'] | ['MANAGER'];
 	job_title: ['BACKEND_DEVELOPER'] | ['FRONTEND_DEVELOPER'] | ['FULLSTACK_DEVELOPER'];
 	capabilities: Capabilities[] | null | undefined;
 	sub_capabilities: Capabilities[] | null | undefined;
 }
-
-const prospectBaseApiURL = "http://localhost:8080/api/v1/prospect"
-//const prospectBaseApiURL = "http://backend:80/api/v1/prospect"
-
-const capabilityBaseApiURL = "http://localhost:8080/api/v1/capability"
-//const capabilityBaseApiURL = "http://backend:80/api/v1/capability"
 
 interface Props {
   toggleDialog: () => void;
@@ -29,7 +24,7 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 	const [formData, setFormData] = useState<ProspectStarter>({
 		name: "",
 		status: ["ACTIVE"],
-		seniority: ["SENIOR"],
+		seniority: ["ANALYST"],
 		job_title: ["FULLSTACK_DEVELOPER"],
 		capabilities: [],
 		sub_capabilities: []
@@ -74,9 +69,7 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
 		const dataToSend = { ...formData };
-
 		if (dataToSend.capabilities && dataToSend.capabilities.length === 0) {
 			delete dataToSend.capabilities;
 		}
@@ -124,7 +117,7 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 					{senorities.map((senority, index) => (
 						<label className={`WordBubble senority`} key={index}>
 							{senority}
-							<input type="radio" name="senority" onChange={() => setFormData({ ...formData, seniority: senority })}></input>
+							<input type="radio" name="senority" onChange={() => setFormData({ ...formData, seniority: [senority as "SENIOR" | "CONSULTANT" | "ANALYST" | "MANAGER"] })}></input>
 						</label>
 					))}
 				</div>

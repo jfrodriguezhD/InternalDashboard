@@ -1,19 +1,18 @@
-import { useState, useEffect, useRef, useContext, createContext, ReactNode, SetStateAction, Dispatch } from "react";
+import { createContext, Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { Prospects, Prospects_Row } from "../../atoms/prospect_row/Prospect_Row.tsx";
 import { Prospects_Footer_Page_Marker } from "../../atoms/prospects_footer_page_marker/Prospects_Footer_Page_Marker.tsx";
-import "./Prospects_Table.css";
 import { CreateNewProspect } from "../../organism/create_new_prospect/CreateNewProspect.tsx";
 import ProspectView from "../../organism/prospect_view_menu/ProspectView.tsx";
+import "./Prospects_Table.css";
+import { prospectBaseApiURL } from "../../../data/endpoints/api_endpoints.ts"
 
-const prospectBaseApiURL = "http://localhost:8080/api/v1/prospect"
-//const prospectBaseApiURL = "http://backend:80/api/v1/prospect"
 
 
 export const SelectedRowContext = createContext<Dispatch<SetStateAction<number>> | undefined>(undefined);
 
 function Prospects_Table() {
 
-  const [selectedRow,setSelectedRow] = useState<number>(0);
+  const [selectedRow, setSelectedRow] = useState<number>(0);
   
   const viewRef = useRef<HTMLDialogElement>(null);
   
