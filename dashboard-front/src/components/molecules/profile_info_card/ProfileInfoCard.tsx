@@ -1,6 +1,8 @@
 import "./ProfileInfoCard.css";
 import InfoViewHeader from "../../atoms/info_view_header/InfoViewHeader";
 import { useRef } from "react";
+import { Capabilities } from '../../atoms/prospect_row/Prospect_Row'
+
 
 interface Prospect {
   name: string;
@@ -8,8 +10,8 @@ interface Prospect {
   seniority: string;
   jobTitle: string;
   status: string;
-  capabilities: { capability: string }[];
-  subcapabilities: { capability: string }[];
+  capabilities: Capabilities[];
+  subcapabilities: Capabilities[];
 }
 
 function ProfileInfoCard({
@@ -62,17 +64,17 @@ function ProfileInfoCard({
           </div>
           <p>Main Capabillities</p>
           <div className="personal__info__card__capabilities">
-            {capabilities.map((capability, index) => (
-              <p className={"profile__info__card__color__" + setColor(status)} key={index}>
-                {capability.capability}
+            {capabilities.map((capability) => (
+              <p className={"profile__info__card__color__" + setColor(status)}>
+                {capability.name}
               </p>
             ))}
           </div>
           <p>Subcapabillity</p>
           <div className="personal__info__card__subcapabilities">
-            {subcapabilities.map((capability, index) => (
-              <p className={"profile__info__card__color__" + setColor(status)} key={index}>
-                {capability.capability}
+            {subcapabilities.map((capability) => (
+              <p className={"profile__info__card__color__" + setColor(status)}>
+                {capability.name}
               </p>
             ))}
           </div>

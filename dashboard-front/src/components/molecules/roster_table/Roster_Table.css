@@ -5,6 +5,16 @@
   text-align: center;
 }
 
+.roster-member__new{
+  p{
+    color: var(--light-gray);
+  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
 .roster__name__cell {
   width: 28%;
 }

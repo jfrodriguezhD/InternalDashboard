@@ -2,14 +2,15 @@ import './ProspectView.css'
 import PersonalInfoCard from "../../molecules/personal_info_card/PersonalInfoCard"
 import ProfileInfoCard from "../../molecules/profile_info_card/ProfileInfoCard"
 import ProjectInfoCard from "../../molecules/project_info_card/ProjectInfoCard"
-import prospect from './prospect.json'
 import { forwardRef } from 'react'
+import { Prospects } from '../../atoms/prospect_row/Prospect_Row'
 
 interface Props {
     toggleDialog: () => void;
+    prospect: Prospects;
 }
 
-export default forwardRef<HTMLDialogElement, Props>(function ProspectView({toggleDialog},ref)
+export default forwardRef<HTMLDialogElement, Props>(function ProspectView({toggleDialog,prospect},ref)
 {
     return(
         <dialog ref={ref} className="prospect-modal-view">
@@ -21,17 +22,16 @@ export default forwardRef<HTMLDialogElement, Props>(function ProspectView({toggl
                 </button>
             </div>
             <ProfileInfoCard name={prospect.name}
-                            lastName={prospect.lastName}
+                            lastName={prospect.last_name}
                             capabilities={prospect.capabilities}
                             jobTitle={prospect.job_title}
                             seniority={prospect.seniority}
                             status={prospect.status}
-                            subcapabilities={prospect.subcapailities}/>
-            <PersonalInfoCard   phone={prospect.info.phone}
-                                email={prospect.info.email}
-                                resume={prospect.info.resume}/>
-            <ProjectInfoCard projectId={prospect.project.id}
-                            projectName={prospect.project.name}/>
+                            subcapabilities={prospect.sub_capabilities}/>
+            <PersonalInfoCard   phone={prospect.phone}
+                                email={prospect.email}
+                                resume={prospect.route_to_resume}/>
+            <ProjectInfoCard project={prospect.prospected_for}/>
         </div>
         </dialog>
     )

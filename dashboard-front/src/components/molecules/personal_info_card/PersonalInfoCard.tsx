@@ -1,12 +1,10 @@
 import "./PersonalInfoCard.css";
 import InfoViewHeader from "../../atoms/info_view_header/InfoViewHeader";
-import { useRef, useEffect } from "react";
-import { Personal_Info_Edit } from "../personal_info/personal_info";
 
-interface PersonalInfo {
-  phone: string;
-  email: string;
-  resume: string;
+interface PersonalInfo{
+    phone:number;
+    email:string;
+    resume:string;
 }
 
 function PersonalInfoCard({ phone, email, resume }: PersonalInfo) {

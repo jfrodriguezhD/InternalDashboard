@@ -1,12 +1,19 @@
+import { useContext } from 'react';
+import { SelectedRowContext } from '../../molecules/prospects_table/Prospects_Table';
 import './Prospect_Row.css'
 import { Prospects } from '../../../data/entities_types/types.ts'
 
 type Prop = {
 	data: Prospects
+	index: number;
 }
 
-function Prospects_Row({ data }: Prop) {
+function Prospects_Row({ data, index }: Prop) {
+	const setSelectedRow = useContext(SelectedRowContext);
 	const showModal = () => {
+		if (setSelectedRow!=undefined){
+			setSelectedRow(index);
+		}
 		const modal = document.querySelector(
 		  ".prospect-modal-view"
 		) as HTMLDialogElement;
@@ -33,4 +40,4 @@ function Prospects_Row({ data }: Prop) {
 }
 
 export { Prospects_Row }
-export type { Prospects }
+export type { Prospects, Projects, Roster, Capabilities,ProjectContacts }
