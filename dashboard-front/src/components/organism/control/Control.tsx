@@ -11,8 +11,8 @@ export default function Control() {
         <p className="control__heading__total">x in total</p>
       </section>
       <section className="control__output">
-        {outputs.map((output) => {
-          return <WordBubble word={output} group="output" type="radio" />;
+        {outputs.map((output, index) => {
+          return <WordBubble word={output} group="output" type="radio" key={index}/>;
         })}
       </section>
       <section className="control__grid">
@@ -24,14 +24,14 @@ export default function Control() {
           placeholder="Search by Name"
         ></input>
         <div className="control__grid__filters">
-          {filters.map((filter) => {
-            return <WordBubble word={filter} group="filters" type="radio" />;
+          {filters.map((filter, index) => {
+            return <WordBubble word={filter} group="filters" type="radio" key={index}/>;
           })}
         </div>
       </section>
       <section className="control__tools">
-        {tools.map((tool) => {
-          return <ToolButton word={tool.word} group="tools" icon={tool.icon} />;
+        {tools.map((tool, index) => {
+          return <ToolButton word={tool.word} group="tools" icon={tool.icon} key={index}/>;
         })}
       </section>
     </div>

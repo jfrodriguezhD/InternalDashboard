@@ -1,7 +1,8 @@
-export const senorities = ["Analyst", 
-    "Consultant", 
-    "Senior Consultant", 
-    "Manager"
+export const senorities = [
+	"ANALYST", 
+	"CONSULTANT", 
+	"SENIOR", 
+	"MANAGER"
 ];
 export const mainCapabilities = [
   "Java",
