@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Prospects, Prospects_Row } from "../../atoms/Prospect_Row/Prospect_Row.tsx";
 import { Prospects_Footer_Page_Marker } from "../../atoms/Prospects_Footer_Page_Marker/Prospects_Footer_Page_Marker.tsx";
 import "./Prospects_Table.css";
+import { CreateNewProspect } from "../../organism/create_new_prospect/CreateNewProspect.tsx";
 
 const prospectBaseApiURL = "http://localhost:8080/api/v1/prospect"
+//const prospectBaseApiURL = "http://backend:80/api/v1/prospect"
 
 function Prospects_Table() {
 
@@ -21,6 +23,17 @@ function Prospects_Table() {
 		  	console.error('There was a problem with the fetch operation:', error);
 		}
 	}
+
+	const profileModal = useRef<HTMLDialogElement>(null);
+
+	function toggleDialog() {
+		if (!profileModal.current) {
+		  return;
+		}
+		profileModal.current.hasAttribute("open")
+		  ? profileModal.current.close()
+		  : profileModal.current.showModal();
+	  }
 
 	useEffect(() => {
 		fetchData();
@@ -40,7 +53,7 @@ function Prospects_Table() {
         {list.map((data, index) => {
           return <Prospects_Row data={data} key={index} />;
         })}
-		<div className='prospects__row add__new__prospect'>
+		<div className='prospects__row add__new__prospect' onClick={() => toggleDialog()}>
 			Add New Prospect
 		</div>
       </div>
@@ -48,6 +61,7 @@ function Prospects_Table() {
         <div className="prospects__table__footer__page__number__marker">
           <Prospects_Footer_Page_Marker data={list.length} />
         </div>
+		<CreateNewProspect toggleDialog={toggleDialog} ref={ profileModal }/>
       </div>
     </div>
   );

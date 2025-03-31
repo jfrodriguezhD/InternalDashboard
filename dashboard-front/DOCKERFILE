@@ -10,7 +10,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
 COPY package-lock.json ./
 
-RUN npm install --silent && npm run build
+RUN npm install && npm run build
 
 # nginx state for serving content
 FROM nginx:alpine

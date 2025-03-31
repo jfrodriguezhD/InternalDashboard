@@ -15,7 +15,7 @@ public class CapabilityController {
   private CapabilityService capabilityService;
 
   /* GET ALL */
-  @GetMapping
+  @GetMapping("")
   public ResponseEntity<List<CapabilityEntity>> getAllCapabilities() {
     return capabilityService.getAllCapabilities();
   }
