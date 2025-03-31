@@ -13,6 +13,7 @@ function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
           X
         </button>
       </div>
+
       <form action="" method="post" className="personal__info__edit__form">
         <label htmlFor="phone_num">Phone: </label>
         <input
@@ -43,6 +44,8 @@ function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
               Select a file from your computer{" "}
             </a>
           </div>
+        </div>
+        <div className="file-upload-instructions">
           Please ensure the resume is a Word or PDF file up to 2MB size
         </div>
         <div className="personal__info__submit">
