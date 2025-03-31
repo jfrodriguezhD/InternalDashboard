@@ -1,46 +1,74 @@
-.edit-project-modal{
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    justify-self: center;
-    align-self: center;
-    padding: 18px;
-    border: none;
-    max-height: 80%;
+.edit-project-modal__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.edit-project-modal__heading{
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
+.edit-project-modal__heading {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
 }
 
-.edit-project-modal__container{
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
+.edit-project__searchbar {
+  display: flex;
+  padding-left: 12px;
+  align-items: center;
+  background-color: var(--light-comp);
+  border: none;
+  border-radius: 16px;
+  outline: none;
+  margin: 0rem 1rem;
 }
 
-.edit-project__searchbar{
-    width: 90%;
-    padding: 15px;
-    align-self: center;
+.edit-project__searchbutton {
+  width: 40%;
+  height: 2rem;
+  text-align: center;
+  align-self: center;
+  border-radius: 16px;
+}
+.edit-project__searchbutton:hover {
+  cursor: pointer;
 }
 
-.edit-project__searchbutton{
-    width: 60%;
-    padding: 15px;
-    align-self: center;
+.edit-project__list {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding: 0.5rem;
 }
 
-.edit-project__list{
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    justify-self: center;
-    gap: 1em;
+.projects {
+  border-radius: 25px;
 }
 
-.projects{
-    border-radius: 25px;
+.projects:hover {
+  cursor: pointer;
+}
+
+.edit-project__submitbutton {
+  width: 80%;
+  height: 2.5rem;
+  text-align: center;
+  align-self: center;
+  border-radius: 16px;
+}
+
+.edit-project__submitbutton:hover {
+  cursor: pointer;
+  background-color: var(--green);
+  color: var(--dark-comp);
+}
+
+.close-edit-project-modal {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 30%;
+}
+
+.close-edit-project-modal:hover {
+  cursor: pointer;
 }
