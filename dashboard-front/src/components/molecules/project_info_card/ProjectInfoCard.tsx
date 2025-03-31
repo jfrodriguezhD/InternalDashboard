@@ -12,9 +12,9 @@ function ProjectInfoCard({ projectId, projectName }: ProjectInfo) {
   const projectInfoModal = useRef<HTMLDialogElement>(null);
   const colors: string[] = ["red", "blue", "green", "yellow", "purple"];
   const setColor = (text: string): string => {
-    console.log(text);
+    //console.log(text);
     const index = Math.floor(Math.random() * (4 - 0 + 1));
-    console.log(index);
+    //console.log(index);
     return colors[index];
   };
 

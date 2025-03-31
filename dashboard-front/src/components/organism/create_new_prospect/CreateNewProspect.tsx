@@ -74,18 +74,17 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 		e.preventDefault();
 		try {
 		const response = await fetch(prospectBaseApiURL, {
-			method: "POST",
-			headers: {
-			"Content-Type": "application/json"
+				method: "POST",
+				headers: {
+				"Content-Type": "application/json"
 			},
 			body: JSON.stringify(formData)
 		});
 		if (!response.ok) {
 			throw new Error('Network response was not ok ' + response.statusText);
 		}
-		// Handle successful response
 		} catch (error) {
-		console.error('There was a problem with the submit operation:', error);
+			console.error('There was a problem with the submit operation:', error);
 		}
 	};
 
@@ -95,7 +94,7 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 
 	return (
 		<dialog ref={ref} className="edit-profile-modal">
-			<form action="" method="post">
+			<form onSubmit={handleSubmit}>
 				<div className="edit-profile-modal__heading">
 					<h2>New Prospect Information</h2>
 					<button className="close-modal" onClick={() => toggleDialog()}>
@@ -105,62 +104,59 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 
 				<div className="edit-profile-modal__name">
 					<p>Prospect Name:</p>
-					<input type="text" />
+					<input type="text" name="name" value={formData.name} onChange={handleChange}/>
 				</div>
 
 				<div className="edit-profile-modal__senority">
 					<p>Senority:</p>
 					{senorities.map((senority, index) => (
-						<WordBubble 
-						word={senority}
-						group={"senority"} 
-						type={"radio"} 
-						key={index}/>
+						<label className={`WordBubble senority`} key={index}>
+							{senority}
+							<input type="radio" name="senority" onChange={() => setFormData({ ...formData, seniority: senority })}></input>
+						</label>
 					))}
 				</div>
 
 				<div className="edit-profile-modal__status">
 					<p>Status:</p>
-					<select name="status">
-					<option value="HIRED">Hired</option>
-					<option value="ACTIVE">Active</option>
-					<option value="DISCARTED">Discarted</option>
-					<option value="PAUSED">Paused</option>
+					<select name="status" value={formData.status} onChange={handleChange}>
+						<option value="HIRED">Hired</option>
+						<option value="ACTIVE">Active</option>
+						<option value="DISCARTED">Discarted</option>
+						<option value="PAUSED">Paused</option>
 					</select>
 				</div>
 
 				<div className="edit-profile-modal__job-title">
 					<p>Job Title:</p>
-					<select name="job_title">
-					<option value="frontend">Frontend Developer</option>
-					<option value="backend">Backend Developer</option>
-					<option value="fullstack">Full Stack Developer</option>
+					<select name="job_title" value={formData.job_title} onChange={handleChange}>
+						<option value="FRONTEND_DEVELOPER">Frontend Developer</option>
+						<option value="BACKEND_DEVELOPER">Backend Developer</option>
+						<option value="FULLSTACK_DEVELOPER">Full Stack Developer</option>
 					</select>
 				</div>
 
 				<div className="edit-profile-modal__capabilities">
 					<p>Main Capabilities:</p>
 					{Capabilities.filter(capability => capability.type === "MAIN_CAPABILITY").map((mainCapability, index) => (
-						<WordBubble
-							word={mainCapability.name}
-							group={"capabilities"}
-							type={"checkbox"}
-							key={index}/>
+						<label className={`WordBubble capabilities`} key={index}>
+							{mainCapability.name}
+							<input type="checkbox" name="capabilities" onChange={() => handleCapabilityChange(mainCapability, "MAIN_CAPABILITY")}></input>
+						</label>
 					))}
 				</div>
 				<div className="edit-profile-modal__capabilities">
 					<p>Sub Capabilities:</p>
 					{Capabilities.filter(capability => capability.type === "SECONDARY_CAPABILITY").map((subCapability, index) => (
-						<WordBubble
-							word={subCapability.name}
-							group={"capabilities"}
-							type={"checkbox"}
-							key={index}/>
+						<label className={`WordBubble capabilities`} key={index}>
+							{subCapability.name}
+							<input type="checkbox" name="capabilities" onChange={() => handleCapabilityChange(subCapability, "SECONDARY_CAPABILITY")}></input>
+						</label>
 					))}
 				</div>
 				<div className="edit-profile-modal__buttons">
 					<button className="save-button" type="submit">Save</button>
-					<button className="cancel-button">Cancel</button>
+					<button className="cancel-button" onClick={() => toggleDialog()}>Cancel</button>
 				</div>
 			</form>
 		</dialog>

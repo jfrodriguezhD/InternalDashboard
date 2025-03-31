@@ -62,16 +62,16 @@ function ProfileInfoCard({
           </div>
           <p>Main Capabillities</p>
           <div className="personal__info__card__capabilities">
-            {capabilities.map((capability) => (
-              <p className={"profile__info__card__color__" + setColor(status)}>
+            {capabilities.map((capability, index) => (
+              <p className={"profile__info__card__color__" + setColor(status)} key={index}>
                 {capability.capability}
               </p>
             ))}
           </div>
           <p>Subcapabillity</p>
           <div className="personal__info__card__subcapabilities">
-            {subcapabilities.map((capability) => (
-              <p className={"profile__info__card__color__" + setColor(status)}>
+            {subcapabilities.map((capability, index) => (
+              <p className={"profile__info__card__color__" + setColor(status)} key={index}>
                 {capability.capability}
               </p>
             ))}

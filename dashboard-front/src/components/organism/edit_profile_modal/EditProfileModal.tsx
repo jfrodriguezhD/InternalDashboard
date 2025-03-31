@@ -31,8 +31,8 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
 
       <div className="edit-profile-modal__senority">
         <p>Senority:</p>
-        {senorities.map((senority) => (
-          <WordBubble word={senority} group={"senority"} type={"radio"} />
+        {senorities.map((senority, index) => (
+          <WordBubble word={senority} group={"senority"} type={"radio"} key={index}/>
         ))}
       </div>
 
@@ -57,21 +57,22 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
 
       <div className="edit-profile-modal__capabilities">
         <p>Main Capabilities:</p>
-        {mainCapabilities.map((mainCapability) => (
+        {mainCapabilities.map((mainCapability, index) => (
           <WordBubble
             word={mainCapability}
             group={"capabilities"}
             type={"checkbox"}
-          />
+          	key={index}/>
         ))}
       </div>
       <div className="edit-profile-modal__capabilities">
         <p>Sub Capabilities:</p>
-        {subCapabilities.map((subCapability) => (
+        {subCapabilities.map((subCapability, index) => (
           <WordBubble
             word={subCapability}
             group={"capabilities"}
             type={"checkbox"}
+			key={index}
           />
         ))}
       </div>
