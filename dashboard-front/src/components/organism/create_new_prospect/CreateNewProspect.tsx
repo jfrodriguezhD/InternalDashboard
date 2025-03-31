@@ -1,9 +1,16 @@
 import { forwardRef, useState, useEffect } from "react";
 import { senorities } from "../../../data/edit_prospect_information/edit_prospect_information_data";
-import { Prospects, Capabilities } from '../../../data/entities_types/types.ts'
-import WordBubble from "../../atoms/wordbubble/WordBubble";
+import { Capabilities } from '../../../data/entities_types/types.ts'
 import "./CreateNewProspect.css";
 
+type ProspectStarter = {
+	name: String;
+	status: ['ACTIVE'] | ['HIRED'] | ['NOT_IN_PROCESS'] | ['DISCARTED'] | ['PAUSED'] | ['ARCHIVED'];
+	seniority: ['SENIOR'] | ['CONSULTANT'] | ['ANALYST'] | ['MANAGER'];
+	job_title: ['BACKEND_DEVELOPER'] | ['FRONTEND_DEVELOPER'] | ['FULLSTACK_DEVELOPER'];
+	capabilities: Capabilities[] | null | undefined;
+	sub_capabilities: Capabilities[] | null | undefined;
+}
 
 const prospectBaseApiURL = "http://localhost:8080/api/v1/prospect"
 //const prospectBaseApiURL = "http://backend:80/api/v1/prospect"
@@ -19,18 +26,13 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 	({ toggleDialog }: Props, ref) => {
 
 	const [Capabilities, setCapabilities] = useState<Capabilities[]>([])
-	const [formData, setFormData] = useState({
+	const [formData, setFormData] = useState<ProspectStarter>({
 		name: "",
-		last_name: "",
-		email: "",
-		phone: "",
-		route_to_resume: "",
-		status: "",
-		seniority: "",
-		job_title: "",
+		status: ["ACTIVE"],
+		seniority: ["SENIOR"],
+		job_title: ["FULLSTACK_DEVELOPER"],
 		capabilities: [],
-		sub_capabilities: [],
-		prospected_for: null
+		sub_capabilities: []
 	  });
 
 	async function fetchCapablities() {
@@ -57,11 +59,11 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 	const handleCapabilityChange = (capability: Capabilities, type: string) => {
 		setFormData(prevState => {
 			const updatedCapabilities = type === "MAIN_CAPABILITY"
-				? [...prevState.capabilities, capability]
-				: prevState.capabilities;
+				? [...(prevState.capabilities || []), capability]
+				: prevState.capabilities || [];
 			const updatedSubCapabilities = type === "SECONDARY_CAPABILITY"
-				? [...prevState.sub_capabilities, capability]
-				: prevState.sub_capabilities;
+				? [...(prevState.sub_capabilities || []), capability]
+				: prevState.sub_capabilities || [];
 			return {
 				...prevState,
 				capabilities: updatedCapabilities,
@@ -72,17 +74,27 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		try {
-		const response = await fetch(prospectBaseApiURL, {
-				method: "POST",
-				headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(formData)
-		});
-		if (!response.ok) {
-			throw new Error('Network response was not ok ' + response.statusText);
+
+		const dataToSend = { ...formData };
+
+		if (dataToSend.capabilities && dataToSend.capabilities.length === 0) {
+			delete dataToSend.capabilities;
 		}
+		if (dataToSend.sub_capabilities && dataToSend.sub_capabilities.length === 0) {
+			delete dataToSend.sub_capabilities;
+		}
+		try {
+			console.log(JSON.stringify(dataToSend))
+			const response = await fetch(prospectBaseApiURL, {
+					method: "POST",
+					headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(dataToSend)
+			});
+			if (!response.ok) {
+				throw new Error('Network response was not ok ' + response.statusText);
+			}
 		} catch (error) {
 			console.error('There was a problem with the submit operation:', error);
 		}

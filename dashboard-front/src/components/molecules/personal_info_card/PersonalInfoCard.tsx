@@ -1,5 +1,7 @@
 import "./PersonalInfoCard.css";
 import InfoViewHeader from "../../atoms/info_view_header/InfoViewHeader";
+import { useEffect, useRef } from "react";
+import { Personal_Info_Edit } from "../personal_info/personal_info";
 
 interface PersonalInfo{
     phone:number;

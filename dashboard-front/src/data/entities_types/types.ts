@@ -5,9 +5,9 @@ type Prospects = {
 	email: string;
 	phone: number;
 	route_to_resume: string;
-	status: 'ACTIVE' | 'HIRED' | 'NOT_IN_PROCESS' | 'DISCARTED' | 'PAUSED' | 'ARCHIVED';
-	seniority: 'SENIOR' | 'CONSULTANT' | 'ANALYST' | 'MANAGER';
-	job_title: 'BACKEND_DEVELOPER' | 'FRONTEND_DEVELOPER' | 'FULLSTACK_DEVELOPER';
+	status: ['ACTIVE'] | ['HIRED'] | ['NOT_IN_PROCESS'] | ['DISCARTED'] | ['PAUSED'] | ['ARCHIVED'];
+	seniority: ['SENIOR'] | ['CONSULTANT'] | ['ANALYST'] | ['MANAGER'];
+	job_title: ['BACKEND_DEVELOPER'] | ['FRONTEND_DEVELOPER'] | ['FULLSTACK_DEVELOPER'];
 	capabilities: Capabilities[];
 	sub_capabilities: Capabilities[];
 	prospected_for: Projects;

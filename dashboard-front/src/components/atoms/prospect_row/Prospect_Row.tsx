@@ -40,4 +40,4 @@ function Prospects_Row({ data, index }: Prop) {
 }
 
 export { Prospects_Row }
-export type { Prospects, Projects, Roster, Capabilities,ProjectContacts }
+export type { Prospects }
