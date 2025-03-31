@@ -69,10 +69,11 @@ function Prospects_Table() {
       </div>
       <div className="prospects__table__row__container">
         {list.length>0?<ProspectView prospect={list[selectedRow]} toggleDialog={toggleView} ref={viewRef} />:null}
-        <SelectedRowContext.Provider value={setSelectedRow}/>
+        <SelectedRowContext.Provider value={setSelectedRow}>
         {list.map((data, index) => {
           return <Prospects_Row data={data} key={index} index={index}/>;
         })}
+        </SelectedRowContext.Provider>
 		<div className='prospects__row add__new__prospect' onClick={() => toggleDialog()}>
 			Add New Prospect
 		</div>
