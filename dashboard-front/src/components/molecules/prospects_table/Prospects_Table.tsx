@@ -73,6 +73,7 @@ function Prospects_Table() {
         {list.map((data, index) => {
           return <Prospects_Row data={data} key={index} index={index}/>;
         })}
+        </SelectedRowContext.Provider>
 		<div className='prospects__row add__new__prospect' onClick={() => toggleDialog()}>
 			Add New Prospect
 		</div>

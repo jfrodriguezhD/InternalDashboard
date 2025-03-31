@@ -31,7 +31,7 @@ export default forwardRef<HTMLDialogElement, Props>(function ProspectView({toggl
             <PersonalInfoCard   phone={prospect.phone}
                                 email={prospect.email}
                                 resume={prospect.route_to_resume}/>
-            <ProjectInfoCard project={prospect.prospected_for}/>
+            <ProjectInfoCard projectId={0} projectName='temp'/>
         </div>
         </dialog>
     )
