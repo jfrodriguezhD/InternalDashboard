@@ -4,6 +4,13 @@
   padding: 20px;
 }
 
+.project__info__modal {
+  margin: auto;
+  width: 60vw;
+  height: 50vh;
+  border: 1.5px solid var(--dark-comp);
+}
+
 .project__info__list {
   display: flex;
   flex-direction: row;
@@ -53,11 +60,4 @@
   background-color: green;
   align-content: center;
   justify-content: center;
-}
-
-.project__info__modal {
-  margin: auto;
-  width: 60vw;
-  height: 45vh;
-  border: 1.5px solid var(--dark-comp);
 }

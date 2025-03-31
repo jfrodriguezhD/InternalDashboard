@@ -3,16 +3,13 @@
 .personal__info__edit {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   overflow-x: hidden;
 }
 
 .personal__info__modal {
   margin: auto;
   width: 50vw;
-  height: 78vh;
+  height: 75vh;
   border: 1.5px solid var(--dark-comp);
 }
 
@@ -27,8 +24,8 @@
 
 .personal__info__edit__header {
   display: flex;
-  gap: 21.5rem;
-  padding: 0.5rem;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
 }
 
 .personal__info__edit__form {
