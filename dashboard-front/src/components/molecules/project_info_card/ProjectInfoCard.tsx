@@ -71,7 +71,11 @@ function ProjectInfoCard({ projectId, projectName }: ProjectInfo) {
           </p>
         </div>
         <dialog ref={projectInfoModal} className="project__info__modal">
-          <EditProjectModal closeModal={toggleProjectInfoDialog} />
+          <EditProjectModal
+            closeModal={toggleProjectInfoDialog}
+            selectedProject={""}
+          />{" "}
+          {/* Cambiar selected Project */}
         </dialog>
       </div>
     </>
