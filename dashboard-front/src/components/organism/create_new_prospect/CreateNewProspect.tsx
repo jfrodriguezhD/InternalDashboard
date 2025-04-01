@@ -6,6 +6,7 @@ import "./CreateNewProspect.css";
 
 type ProspectStarter = {
 	name: string;
+	last_name: string;
 	status: ['ACTIVE'] | ['HIRED'] | ['NOT_IN_PROCESS'] | ['DISCARTED'] | ['PAUSED'] | ['ARCHIVED'];
 	seniority: ['SENIOR'] | ['CONSULTANT'] | ['ANALYST'] | ['MANAGER'];
 	job_title: ['BACKEND_DEVELOPER'] | ['FRONTEND_DEVELOPER'] | ['FULLSTACK_DEVELOPER'];
@@ -23,6 +24,7 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 	const [Capabilities, setCapabilities] = useState<Capabilities[]>([])
 	const [formData, setFormData] = useState<ProspectStarter>({
 		name: "",
+		last_name: "",
 		status: ["HIRED"],
 		seniority: ["ANALYST"],
 		job_title: ["FRONTEND_DEVELOPER"],
@@ -92,6 +94,7 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 		} catch (error) {
 			console.error('There was a problem with the submit operation:', error);
 		}
+		toggleDialog()
 	};
 
 	useEffect(() => {
@@ -111,6 +114,11 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 				<div className="create__prospect-modal__name">
 					<p>Prospect Name:</p>
 					<input type="text" name="name" value={formData.name} onChange={handleChange}/>
+				</div>
+
+				<div className="create__prospect-modal__name">
+					<p>Prospect Last Name:</p>
+					<input type="text" name="last_name" value={formData.last_name} onChange={handleChange}/>
 				</div>
 
 				<div className="create__prospect-modal__senority">
