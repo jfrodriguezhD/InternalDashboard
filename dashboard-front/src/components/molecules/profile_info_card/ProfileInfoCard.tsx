@@ -1,15 +1,23 @@
 import "./ProfileInfoCard.css";
 import InfoViewHeader from "../../atoms/info_view_header/InfoViewHeader";
 import { useRef } from "react";
-import { Capabilities } from '../../atoms/prospect_row/Prospect_Row'
-
+import { Capabilities } from "../../../data/entities_types/types";
 
 interface Prospect {
   name: string;
   lastName: string;
-  seniority: string;
-  jobTitle: string;
-  status: string;
+  seniority: ["SENIOR"] | ["CONSULTANT"] | ["ANALYST"] | ["MANAGER"];
+  jobTitle:
+    | ["BACKEND_DEVELOPER"]
+    | ["FRONTEND_DEVELOPER"]
+    | ["FULLSTACK_DEVELOPER"];
+  status:
+    | ["ACTIVE"]
+    | ["HIRED"]
+    | ["NOT_IN_PROCESS"]
+    | ["DISCARTED"]
+    | ["PAUSED"]
+    | ["ARCHIVED"];
   capabilities: Capabilities[];
   subcapabilities: Capabilities[];
 }
@@ -24,7 +32,15 @@ function ProfileInfoCard({
   subcapabilities,
 }: Prospect) {
   const colors: string[] = ["red", "blue", "green", "yellow", "purple"];
-  const setColor = (text: string): string => {
+  const setColor = (
+    text:
+      | ["ACTIVE"]
+      | ["HIRED"]
+      | ["NOT_IN_PROCESS"]
+      | ["DISCARTED"]
+      | ["PAUSED"]
+      | ["ARCHIVED"]
+  ): string => {
     console.log(text);
     const index = Math.floor(Math.random() * (4 - 0 + 1));
     console.log(index);

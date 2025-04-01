@@ -1,10 +1,10 @@
-export const senorities = [
+const senorities = [
 	"ANALYST", 
 	"CONSULTANT", 
 	"SENIOR", 
 	"MANAGER"
 ];
-export const mainCapabilities = [
+const mainCapabilities = [
   "Java",
   "C++",
   ".NET",
@@ -16,7 +16,7 @@ export const mainCapabilities = [
   "React",
   "Mongo"
 ];
-export const subCapabilities = [
+const subCapabilities = [
     "Frontend",
     "Backend",
     "QA",
@@ -28,3 +28,18 @@ export const subCapabilities = [
     "Cross Platform",
     "Architect"
   ];
+const status = [
+    "HIRED", 
+    "ACTIVE",
+    "DISCARTED", 
+    "PAUSED",
+    "NOT_IN_PROCESS",
+    "ARCHIVED", 
+]
+const job_titles = [
+  "BACKEND_DEVELOPER", 
+  "FRONTEND_DEVELOPER",
+  "FULLSTACK_DEVELOPER"
+]
+
+  export {senorities, mainCapabilities, subCapabilities, status, job_titles};

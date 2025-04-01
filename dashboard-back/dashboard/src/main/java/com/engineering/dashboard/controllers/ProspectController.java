@@ -20,7 +20,7 @@ import com.engineering.dashboard.services.ProspectService;
 @RestController
 @RequestMapping("/api/v1/prospect")
 public class ProspectController {
-	@Autowired
+    @Autowired
     ProspectService prospectService;
 
     @GetMapping("")
@@ -34,17 +34,18 @@ public class ProspectController {
     }
 
     @GetMapping("/{prospectId}")
-    public ResponseEntity<ProspectEntity> getProspect(@RequestParam Long prospectId) {
+    public ResponseEntity<ProspectEntity> getProspect(@PathVariable Long prospectId) {
         return prospectService.getProspect(prospectId);
     }
 
     @PutMapping("/{prospectId}")
-    public ResponseEntity<ProspectEntity> putProspect(@PathVariable Long prospectId, @RequestBody ProspectEntity prospect) {
-        return prospectService.updateProspect(prospectId,prospect);
+    public ResponseEntity<ProspectEntity> putProspect(@PathVariable Long prospectId,
+            @RequestBody ProspectEntity prospect) {
+        return prospectService.updateProspect(prospectId, prospect);
     }
 
     @DeleteMapping("/{prospectId}")
-    public ResponseEntity<ProspectEntity> deleteProspect(@PathVariable Long prospectId){
+    public ResponseEntity<ProspectEntity> deleteProspect(@PathVariable Long prospectId) {
         return prospectService.deleteProspect(prospectId);
     }
 }

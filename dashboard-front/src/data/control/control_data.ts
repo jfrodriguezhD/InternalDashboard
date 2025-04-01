@@ -1,5 +1,5 @@
-export const outputs = ["Table", "Charts"];
-export const filters = [
+const outputs = ["Table", "Charts"];
+const filters = [
   "Name",
   "Capabilities",
   "Project",
@@ -8,7 +8,7 @@ export const filters = [
   "Not In Process",
   "Discarted",
 ];
-export const tools = [
+const tools = [
   {
     word: "Edit",
     icon: "fa-solid fa-pencil",
@@ -22,3 +22,5 @@ export const tools = [
     icon: "fa-solid fa-thumbtack",
   },
 ];
+
+export {outputs, filters, tools}
