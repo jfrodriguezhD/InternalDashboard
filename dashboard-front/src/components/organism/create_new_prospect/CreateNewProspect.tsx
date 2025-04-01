@@ -81,8 +81,9 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 			const response = await fetch(prospectBaseApiURL, {
 					method: "POST",
 					headers: {
-					"Content-Type": "application/json"
-				},
+						"Content-Type": "application/json",
+						"Accept": "*/*"
+					},
 				body: JSON.stringify(dataToSend)
 			});
 			if (!response.ok) {
