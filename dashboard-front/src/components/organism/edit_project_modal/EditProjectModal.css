@@ -30,6 +30,8 @@
 }
 .edit-project__searchbutton:hover {
   cursor: pointer;
+  background-color: var(--green);
+  color: var(--dark-comp);
 }
 
 .edit-project__list {
@@ -43,6 +45,7 @@
 
 .projects {
   border-radius: 25px;
+  margin: 0rem 1rem;
 }
 
 .projects:hover {

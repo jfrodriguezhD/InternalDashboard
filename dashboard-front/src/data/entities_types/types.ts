@@ -37,9 +37,9 @@ type Roster = {
 	email: string;
 	phone: number;
 	route_to_resume: string;
-	status: ["COMING_AVAILABLE" | "ASSIGNED" | "AVAILABLE" | "NOT_AVAILABLE" | "HOLD"];
-	seniority: ["SENIOR" | "CONSULTANT" | "ANALYST" | "MANAGER"];
-	job_title: ["BACKEND_DEVELOPER" | "FRONTEND_DEVELOPER" | "FULLSTACK_DEVELOPER"];
+	status: ["COMING_AVAILABLE"] | ["ASSIGNED"] | ["AVAILABLE"] | ["NOT_AVAILABLE"] | ["HOLD"];
+	seniority: ['SENIOR'] | ['CONSULTANT'] | ['ANALYST'] | ['MANAGER'];
+	job_title: ['BACKEND_DEVELOPER'] | ['FRONTEND_DEVELOPER'] | ['FULLSTACK_DEVELOPER'];
 	capabilities: Capabilities[];
 	sub_capabilities: Capabilities[];
 	prospected_for: Projects[];
