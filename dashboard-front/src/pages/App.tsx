@@ -3,7 +3,6 @@ import Header from "../components/molecules/header/Header";
 import { Outlet } from "react-router";
 
 function App() {
-
   return (
     <>
       <Header />

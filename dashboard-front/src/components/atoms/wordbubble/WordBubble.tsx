@@ -5,6 +5,7 @@ interface WordBubbleProps {
   group: string;
   type: string;
   check?: boolean;
+  onClick?: () => void;
 }
 
 export default function WordBubble({
@@ -12,10 +13,11 @@ export default function WordBubble({
   group,
   type,
   check,
+  onClick,
 }: WordBubbleProps) {
   return (
     <>
-      <label className={`WordBubble ${group}`}>
+      <label className={`WordBubble ${group}`} onClick={onClick}>
         {word}
         <input type={type} name={group} checked={check}></input>
       </label>
