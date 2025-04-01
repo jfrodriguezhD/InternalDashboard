@@ -2,6 +2,8 @@ package com.engineering.dashboard.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,10 +37,12 @@ public class ProjectEntity {
     @OneToMany(mappedBy = "project")
     private List<RosterEntity> roster;
 
+	@JsonIgnore
     @ManyToMany
     @JoinTable(name = "prospect_project", joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "prospect_id", referencedColumnName = "id"))
     private List<ProspectEntity> prospects;
 
+	@JsonIgnore
     @ManyToMany
     @JoinTable(name = "roster_project", joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "roster_id", referencedColumnName = "id"))
     private List<RosterEntity> roster_prospected;
