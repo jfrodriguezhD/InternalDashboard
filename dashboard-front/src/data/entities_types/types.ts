@@ -16,7 +16,7 @@ type Prospects = {
 type Capabilities = {
 	id: number;
 	name: string;
-	type: ['MAIN_CAPABILITY'] | ['SECONDARY_CAPABILITY'];
+	type: 'MAIN_CAPABILITY' | 'SECONDARY_CAPABILITY';
 	prospects: Prospects[];
 	prospects_sub: Prospects[];
 }
