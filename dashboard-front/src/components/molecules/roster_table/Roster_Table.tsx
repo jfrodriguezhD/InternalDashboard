@@ -52,7 +52,7 @@ function Roster_Table() {
         	<Roster_Row member={member}/>
         ))}
 		<div className='roster_table add__new__member' onClick={() => toggleDialog()}>
-			Add New Prospect
+			Add New Roster Member
 		</div>
       </div>
       <Roster_Footer len={Math.floor(rosterList.length / 10)} selected={1} />
