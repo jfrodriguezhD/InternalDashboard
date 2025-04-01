@@ -6,6 +6,7 @@ import "./CreateNewProspect.css";
 
 type ProspectStarter = {
 	name: string;
+	last_name: string;
 	status: ['ACTIVE'] | ['HIRED'] | ['NOT_IN_PROCESS'] | ['DISCARTED'] | ['PAUSED'] | ['ARCHIVED'];
 	seniority: ['SENIOR'] | ['CONSULTANT'] | ['ANALYST'] | ['MANAGER'];
 	job_title: ['BACKEND_DEVELOPER'] | ['FRONTEND_DEVELOPER'] | ['FULLSTACK_DEVELOPER'];
@@ -23,9 +24,10 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 	const [Capabilities, setCapabilities] = useState<Capabilities[]>([])
 	const [formData, setFormData] = useState<ProspectStarter>({
 		name: "",
-		status: ["ACTIVE"],
+		last_name: "",
+		status: ["HIRED"],
 		seniority: ["ANALYST"],
-		job_title: ["FULLSTACK_DEVELOPER"],
+		job_title: ["FRONTEND_DEVELOPER"],
 		capabilities: [],
 		sub_capabilities: []
 	  });
@@ -47,7 +49,7 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 		const { name, value } = e.target;
 			setFormData({
 				...formData,
-				[name]: value
+				[name]: (name === 'status' || name === 'job_title') ? [value] : value
 			});
 		};
   
@@ -92,6 +94,7 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 		} catch (error) {
 			console.error('There was a problem with the submit operation:', error);
 		}
+		toggleDialog()
 	};
 
 	useEffect(() => {
@@ -99,21 +102,26 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 	}, []);
 
 	return (
-		<dialog ref={ref} className="edit-profile-modal">
-			<form onSubmit={handleSubmit}>
-				<div className="edit-profile-modal__heading">
+		<dialog ref={ref} className="create__prospect-modal">
+			<form onSubmit={handleSubmit} className="create__prospect__form">
+				<div className="create__prospect-modal__heading">
 					<h2>New Prospect Information</h2>
 					<button className="close-modal" onClick={() => toggleDialog()}>
 					X
 					</button>
 				</div>
 
-				<div className="edit-profile-modal__name">
+				<div className="create__prospect-modal__name">
 					<p>Prospect Name:</p>
 					<input type="text" name="name" value={formData.name} onChange={handleChange}/>
 				</div>
 
-				<div className="edit-profile-modal__senority">
+				<div className="create__prospect-modal__name">
+					<p>Prospect Last Name:</p>
+					<input type="text" name="last_name" value={formData.last_name} onChange={handleChange}/>
+				</div>
+
+				<div className="create__prospect-modal__senority">
 					<p>Senority:</p>
 					{senorities.map((senority, index) => (
 						<label className={`WordBubble senority`} key={index}>
@@ -123,26 +131,26 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 					))}
 				</div>
 
-				<div className="edit-profile-modal__status">
+				<div className="create__prospect-modal__status">
 					<p>Status:</p>
 					<select name="status" value={formData.status} onChange={handleChange}>
-						<option value="HIRED">Hired</option>
-						<option value="ACTIVE">Active</option>
-						<option value="DISCARTED">Discarted</option>
-						<option value="PAUSED">Paused</option>
+						<option value='HIRED'>Hired</option>
+						<option value='ACTIVE'>Active</option>
+						<option value='DISCARTED'>Discarded</option>
+						<option value='PAUSED'>Paused</option>
 					</select>
 				</div>
 
-				<div className="edit-profile-modal__job-title">
+				<div className="create__prospect-modal__job-title">
 					<p>Job Title:</p>
 					<select name="job_title" value={formData.job_title} onChange={handleChange}>
-						<option value="FRONTEND_DEVELOPER">Frontend Developer</option>
-						<option value="BACKEND_DEVELOPER">Backend Developer</option>
-						<option value="FULLSTACK_DEVELOPER">Full Stack Developer</option>
+						<option value='FRONTEND_DEVELOPER'>Frontend Developer</option>
+						<option value='BACKEND_DEVELOPER'>Backend Developer</option>
+						<option value='FULLSTACK_DEVELOPER'>Full Stack Developer</option>
 					</select>
 				</div>
 
-				<div className="edit-profile-modal__capabilities">
+				<div className="create__prospect-modal__capabilities">
 					<p>Main Capabilities:</p>
 					{Capabilities.filter(capability => capability.type === "MAIN_CAPABILITY").map((mainCapability, index) => (
 						<label className={`WordBubble capabilities`} key={index}>
@@ -151,7 +159,7 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 						</label>
 					))}
 				</div>
-				<div className="edit-profile-modal__capabilities">
+				<div className="create__prospect-modal__capabilities">
 					<p>Sub Capabilities:</p>
 					{Capabilities.filter(capability => capability.type === "SECONDARY_CAPABILITY").map((subCapability, index) => (
 						<label className={`WordBubble capabilities`} key={index}>
@@ -160,7 +168,7 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 						</label>
 					))}
 				</div>
-				<div className="edit-profile-modal__buttons">
+				<div className="create__prospect-modal__buttons">
 					<button className="save-button" type="submit">Save</button>
 					<button className="cancel-button" onClick={() => toggleDialog()}>Cancel</button>
 				</div>
