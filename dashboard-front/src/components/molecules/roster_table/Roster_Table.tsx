@@ -1,12 +1,40 @@
+import { useEffect, useState } from "react";
 import Roster_Footer from "../../atoms/roster_footer/Roster_Footer";
 import Roster_Row from "../../atoms/roster_row/Roster_Row";
 import "./Roster_Table.css"; 
-import data from "./roster_example.json";
+import { Roster } from "../../../data/entities_types/types";
+import { rosterBaseApiURL } from "../../../data/endpoints/api_endpoints";
 
 function Roster_Table() {
-	const addMember = () =>{
-		console.log("new user");
-	}
+
+	const [rosterList, setRosterList] = useState<Roster[]>([])
+  
+	async function fetchData() {
+  
+		  try {
+			  const response = await fetch(rosterBaseApiURL);
+			  if (!response.ok) {
+				  throw new Error('Network response was not ok ' + response.statusText);
+			  }
+			  const data: Roster[] = await response.json();
+			  setRosterList(data);
+		  } catch (error) {
+				console.error('There was a problem with the fetch operation:', error);
+		  }
+	  }
+  
+	useEffect(() => {
+	  fetchData();
+	}, []);
+	
+	function toggleDialog() {/*
+		if (!profileModal.current) {
+		  return;
+		}
+		profileModal.current.hasAttribute("open")
+		  ? profileModal.current.close()
+		  : profileModal.current.showModal();*/
+	  }
 
   	return (
     	<>
@@ -20,30 +48,14 @@ function Roster_Table() {
 			<p className="roster__cell">Project</p>
 			<p className="roster__cell">Prospected for</p>
 		</div>
-        {data.map((member) => (
-        	<Roster_Row
-				id={member.id}
-				firstName={member.firstname}
-				lastName={member.lastname}
-				status={member.status}
-				level={member.seniority}
-				expertise={member.job_title}
-				capability={member.capability}
-				project={member.project}
-				prospectedFor={member.prospected_for}
-          	/>
+        {rosterList.map((member) => (
+        	<Roster_Row member={member}/>
         ))}
-        <div className='roster-member__new' onClick={addMember}>
-			<p className='roster__name__cell'>Add new member to Roster...</p>
-			<p className="roster__cell"></p>
-			<p className="roster__cell"></p>
-			<p className="roster__cell"></p>
-			<p className="roster__cell"></p>
-			<p className="roster__cell"></p>
-			<p className="roster__cell"></p>
-        </div>
+		<div className='roster_table add__new__member' onClick={() => toggleDialog()}>
+			Add New Roster Member
+		</div>
       </div>
-      <Roster_Footer len={Math.floor(data.length / 10)} selected={1} />
+      <Roster_Footer len={Math.floor(rosterList.length / 10)} selected={1} />
     </>
   );
 }

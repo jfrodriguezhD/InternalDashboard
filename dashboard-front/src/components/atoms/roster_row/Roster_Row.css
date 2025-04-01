@@ -3,4 +3,25 @@
     flex-direction: row;
     justify-content: space-evenly;
     text-align: center;
+    background-color: var(--light-comp);
+    padding: 4px 16px;
+    color: white;
+    border-radius: 6px;
+    height: 40px;
 }
+
+.AVAILABLE {
+    color: var(--green);
+  }
+.NOT_AVAILABLE{
+    color: var(--red);
+}
+.COMING_AVAILABLE {
+    color: var(--dark-blue);
+  }
+  .ASSIGNED {
+    color: var(--yellow);
+  }
+  .HOLD {
+    color: gray;
+  }
