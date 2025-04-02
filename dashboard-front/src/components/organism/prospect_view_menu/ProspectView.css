@@ -6,18 +6,44 @@
     padding: 18px;
     border: none;
     height: 100%;
-}
-
-.prospect__view__modal{
-    background: #2C2C2C;
-    display: flex;
-    flex-direction: column;
-    
+    background-color: var(--dark-comp);
 }
 
 .prospect__view__modal__header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 20px;
+    padding-bottom: 18px;
+    background-color: transparent;
+    gap:20px;
+    border-radius: 8px;
+}
+
+.prospect__view__modal{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: transparent;
+    padding-bottom: 16px;
+}
+
+.prospect__view__modal > *{
+    border-radius: 6px;
+}
+
+.delete-prospect-button{
+    display: flex;
+    color: var(--red);
+    background-color: transparent;
+    border: none;
+    justify-self: flex-end;
+    gap: 8px;
+}
+
+.delete-prospect-button:hover{
+    cursor: pointer;
+}
+
+.fa-trash{
+    color: var(--red);
 }

@@ -6,6 +6,10 @@
   min-height: 30px;
 }
 
+.WordBubble:hover{
+  cursor: pointer;
+}
+
 .WordBubble input[type="radio"],
 .WordBubble input[type="checkbox"] {
   display: none;
