@@ -178,7 +178,11 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
           <button className="save-button" type="submit">
             Save
           </button>
-          <button className="cancel-button" onClick={() => toggleDialog()}>
+          <button
+            className="cancel-button"
+            type="button"
+            onClick={() => toggleDialog()}
+          >
             Cancel
           </button>
         </div>

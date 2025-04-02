@@ -4,13 +4,14 @@
   justify-self: center;
   align-self: center;
   padding: 18px;
+  border: none;
 }
 
 .close-modal {
   width: 5%;
 }
 
-.edit-profile-modal > * {
+.edit-profile-modal form > * {
   padding-bottom: 20px;
 }
 

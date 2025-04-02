@@ -18,13 +18,13 @@ export default forwardRef<HTMLDialogElement, Props>(function ProspectView(
 ) {
   return (
     <dialog ref={ref} className="prospect-modal-view">
+      <div className="prospect__view__modal__header">
+        <h2>Prospect Information</h2>
+        <button className="close-modal" onClick={() => toggleDialog()}>
+          X
+        </button>
+      </div>
       <div className="prospect__view__modal">
-        <div className="prospect__view__modal__header">
-          <h2>Prospect Information</h2>
-          <button className="close-modal" onClick={() => toggleDialog()}>
-            X
-          </button>
-        </div>
         <ProspectContext.Provider value={prospect}>
           <ProfileInfoCard
             name={prospect.name}
@@ -46,6 +46,10 @@ export default forwardRef<HTMLDialogElement, Props>(function ProspectView(
           />
         </ProspectContext.Provider>
       </div>
+      <button className="delete-prospect-button">
+        Delete Prospect
+        <i className="fa-solid fa-trash"></i>
+      </button>
     </dialog>
   );
 });
