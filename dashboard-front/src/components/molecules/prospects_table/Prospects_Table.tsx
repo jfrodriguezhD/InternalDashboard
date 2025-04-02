@@ -1,10 +1,12 @@
 import { createContext, Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { prospectBaseApiURL } from "../../../data/endpoints/api_endpoints.ts";
+import { PAGE_LIMIT } from "../../../data/general_variables/important_figures.ts";
 import { Prospects, Prospects_Row } from "../../atoms/prospect_row/Prospect_Row.tsx";
 import { Prospects_Footer_Page_Marker } from "../../atoms/prospects_footer_page_marker/Prospects_Footer_Page_Marker.tsx";
 import { CreateNewProspect } from "../../organism/create_new_prospect/CreateNewProspect.tsx";
 import ProspectView from "../../organism/prospect_view_menu/ProspectView.tsx";
 import "./Prospects_Table.css";
-import { prospectBaseApiURL } from "../../../data/endpoints/api_endpoints.ts"
+import { useParams } from "react-router-dom";
 
 
 
@@ -13,9 +15,11 @@ export const SelectedRowContext = createContext<Dispatch<SetStateAction<number>>
 function Prospects_Table() {
 
   const [selectedRow, setSelectedRow] = useState<number>(0);
-  
+  const [pageNumber, setPageNumber] = useState(1);
+  const { page } = useParams();
+  const [list, setList] = useState<Prospects[]>([])
+  const profileModal = useRef<HTMLDialogElement>(null);
   const viewRef = useRef<HTMLDialogElement>(null);
-  
 
 	function toggleView() {
 		if (!viewRef.current) {
@@ -26,7 +30,11 @@ function Prospects_Table() {
 	  : viewRef.current.showModal();
   	}
 
-	const [list, setList] = useState<Prospects[]>([])
+	function updatePageQuantity() {
+		if(page){
+			setPageNumber(parseInt(page))
+		}
+	}
 
 	async function fetchData() {
 		try {
@@ -41,8 +49,6 @@ function Prospects_Table() {
 		}
 	}
 
-	const profileModal = useRef<HTMLDialogElement>(null);
-
 	function toggleDialog() {
 		if (!profileModal.current) {
 		  return;
@@ -53,8 +59,12 @@ function Prospects_Table() {
 	  }
 
 	useEffect(() => {
-		fetchData();
+		fetchData()
 	  }, []);
+
+	  useEffect(() => {
+		updatePageQuantity()
+	  }, [page])
 
   return (
     <div className="prospects__table">
@@ -69,9 +79,14 @@ function Prospects_Table() {
       <div className="prospects__table__row__container">
         {list.length>0?<ProspectView prospect={list[selectedRow]} toggleDialog={toggleView} ref={viewRef} />:null}
         <SelectedRowContext.Provider value={setSelectedRow}>
-        {list.map((data, index) => {
-          return <Prospects_Row data={data} key={index} index={index}/>;
-        })}
+        {
+			list.map((data, index) => {
+					if (index < (PAGE_LIMIT * pageNumber) && index >= ((PAGE_LIMIT * pageNumber) - PAGE_LIMIT)) {
+						return <Prospects_Row data={data} key={index} index={index}/>
+					}
+				}
+			)
+		}
         </SelectedRowContext.Provider>
 		<div className='prospects__row add__new__prospect' onClick={() => toggleDialog()}>
 			Add New Prospect

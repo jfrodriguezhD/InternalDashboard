@@ -94,6 +94,7 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 		} catch (error) {
 			console.error('There was a problem with the submit operation:', error);
 		}
+		window.location.reload();
 	};
 
 	useEffect(() => {
