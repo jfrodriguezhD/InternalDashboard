@@ -81,7 +81,7 @@ function Prospects_Table() {
         <div className="prospects__table__footer__page__number__marker">
           <Prospects_Footer_Page_Marker data={list.length} />
         </div>
-		<CreateNewProspect toggleDialog={toggleDialog} ref={ profileModal }/>
+		<CreateNewProspect toggleDialog={ toggleDialog } ref={ profileModal }/>
       </div>
     </div>
   );

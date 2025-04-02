@@ -94,7 +94,6 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 		} catch (error) {
 			console.error('There was a problem with the submit operation:', error);
 		}
-		toggleDialog()
 	};
 
 	useEffect(() => {
@@ -103,13 +102,13 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 
 	return (
 		<dialog ref={ref} className="create__prospect-modal">
+			<div className="create__prospect-modal__heading">
+				<h2>New Prospect Information</h2>
+				<button className="close-modal" onClick={() => toggleDialog()}>
+				X
+				</button>
+			</div>
 			<form onSubmit={handleSubmit} className="create__prospect__form">
-				<div className="create__prospect-modal__heading">
-					<h2>New Prospect Information</h2>
-					<button className="close-modal" onClick={() => toggleDialog()}>
-					X
-					</button>
-				</div>
 
 				<div className="create__prospect-modal__name">
 					<p>Prospect Name:</p>
@@ -170,9 +169,11 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 				</div>
 				<div className="create__prospect-modal__buttons">
 					<button className="save-button" type="submit">Save</button>
-					<button className="cancel-button" onClick={() => toggleDialog()}>Cancel</button>
 				</div>
 			</form>
+			<div className="create__prospect-modal__buttons">
+				<button className="cancel-button" onClick={() => toggleDialog()}>Cancel</button>
+			</div>
 		</dialog>
 	);
 });
