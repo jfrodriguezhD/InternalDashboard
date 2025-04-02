@@ -1,10 +1,15 @@
+import { useContext } from "react";
+import { Prospects } from "../../atoms/prospect_row/Prospect_Row";
 import "./personal_info.css";
+import { ProspectContext } from "../../organism/prospect_view_menu/ProspectView";
 
 interface PersonalInfoEditProps {
   closeModal: () => void;
 }
 
 function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
+  const prospect = useContext(ProspectContext);
+  console.log(prospect)
   return (
     <div className="personal__info__edit">
       <div className="personal__info__edit__header">
