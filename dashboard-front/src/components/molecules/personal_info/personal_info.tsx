@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { Prospects } from "../../atoms/prospect_row/Prospect_Row";
 import "./personal_info.css";
 import { ProspectContext } from "../../organism/prospect_view_menu/ProspectView";
+import { prospectPutApiURL } from "../../../data/endpoints/api_endpoints";
 
 interface PersonalInfoEditProps {
   closeModal: () => void;
@@ -9,7 +10,38 @@ interface PersonalInfoEditProps {
 
 function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
   const prospect = useContext(ProspectContext);
-  console.log(prospect)
+
+  const [data,setData] = useState<Prospects>(prospect!);
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>): void {
+    const { name, value } = event.target;
+    console.log(name, value);
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const modifyURL = `${prospectPutApiURL}/${data.id}`;
+
+    fetch(modifyURL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) =>
+        alert("Profile successfully updated: " + JSON.stringify(data))
+      );
+    location.reload();
+
+    closeModal();
+  };
+
   return (
     <div className="personal__info__edit">
       <div className="personal__info__edit__header">
@@ -19,28 +51,33 @@ function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
         </button>
       </div>
 
-      <form action="" method="post" className="personal__info__edit__form">
+      <form onSubmit={(e) => handleSubmit(e)} method="PUT" className="personal__info__edit__form">
         <label htmlFor="phone_num">Phone: </label>
         <input
           type="tel"
-          name="Phone"
+          name="phone"
           id="phone_num"
           className="personal__info__edit__form__input"
+          value={data?.phone}
+          onChange={handleChange}
         />
         <label htmlFor="email">Email: </label>
         <input
           type="email"
-          name="Email"
+          name="email"
           id="email"
           className="personal__info__edit__form__input"
+          value={data?.email}
+          onChange={handleChange}
         />
         <label htmlFor="resume_file">Resume: </label>
         <div className="file__upload">
           <input
             type="file"
-            name="Resume"
+            name="route_to_resume"
             id="resume_file"
             className="file__input"
+            onChange={handleChange}
           />
           <div className="file__upload__message">
             Drag and drop a file to upload or
@@ -53,6 +90,9 @@ function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
         <div className="file-upload-instructions">
           Please ensure the resume is a Word or PDF file up to 2MB size
         </div>
+        <label htmlFor="route_to_resume">
+          {data.route_to_resume!=""?"Current file: "+ data.route_to_resume : ""}
+        </label>
         <div className="personal__info__submit">
           <input
             type="submit"
