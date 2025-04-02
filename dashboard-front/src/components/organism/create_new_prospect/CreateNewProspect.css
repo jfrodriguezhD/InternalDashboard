@@ -1,4 +1,4 @@
-.edit-profile-modal{
+.create__prospect-modal{
     flex-direction: column;
     width: 40%;
     justify-self: center;
@@ -11,46 +11,46 @@
     width: 5%;
 }
 
-.edit-profile-modal > *{
+.create__prospect-modal > *{
     padding-bottom: 20px;
 }
 
-.edit-profile-modal::backdrop{
+.create__prospect-modal::backdrop{
     background-color: rgba(0, 0, 0, 0.54);
 }
 
-.edit-profile-modal__heading{
+.create__prospect-modal__heading{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.edit-profile-modal input,
-.edit-profile-modal select{
+.create__prospect-modal input,
+.create__prospect-modal select{
     background-color: var(--light-comp);
     border: none;
 }
 
-.edit-profile-modal__capabilities,
-.edit-profile-modal__senority{
+.create__prospect-modal__capabilities,
+.create__prospect-modal__senority{
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
 }
 
-.edit-profile-modal p,
-.edit-profile-modal__buttons button{
+.create__prospect-modal p,
+.create__prospect-modal__buttons button{
     display: block;
     width: 100%;
 }
 
-.edit-profile-modal__buttons button{
+.create__prospect-modal__buttons button{
     border: none;
     border-radius: 6px;
     padding: 4px;
 }
 
-.edit-profile-modal__buttons{
+.create__prospect-modal__buttons{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -66,8 +66,15 @@
     color: var(--white);
 }
 
-.edit-profile-modal select,
-.edit-profile-modal input{
+.create__prospect-modal select,
+.create__prospect-modal input{
     width: 70%;
     padding: 4px 0 4px 10px;
+}
+
+.create__prospect__form{
+	display: flex;
+	flex-direction: column;
+
+	gap: .5rem;
 }

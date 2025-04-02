@@ -34,7 +34,7 @@ const status = [
     "DISCARTED", 
     "PAUSED",
     "NOT_IN_PROCESS",
-    "ARCHIVED", 
+    "ARCHIVED",
 ]
 const job_titles = [
   "BACKEND_DEVELOPER", 
