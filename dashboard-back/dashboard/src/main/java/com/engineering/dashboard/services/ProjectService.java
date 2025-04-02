@@ -2,10 +2,14 @@ package com.engineering.dashboard.services;
 
 import com.engineering.dashboard.entities.ProjectEntity;
 import com.engineering.dashboard.repositories.ProjectRepository;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class ProjectService {
@@ -20,7 +24,6 @@ public class ProjectService {
   public ProjectEntity getProjectById(Long id) {
     Optional<ProjectEntity> optionalProject = projectRepo.findById(id);
     if (optionalProject.isEmpty()) {
-      // Add exception
       return null;
     }
     return optionalProject.get();
@@ -30,9 +33,17 @@ public class ProjectService {
     return projectRepo.save(project);
   }
 
-  public ProjectEntity modifyProject(Long id, ProjectEntity newProject) {
+  public ResponseEntity<ProjectEntity> updateProject(
+    Long id,
+    @Valid @RequestBody ProjectEntity newProject
+  ) {
+    Optional<ProjectEntity> oldProject = projectRepo.findById(id);
+    if (oldProject.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
     newProject.setId(id);
-    return projectRepo.save(newProject);
+    projectRepo.save(newProject);
+    return ResponseEntity.status(HttpStatus.OK).body(newProject);
   }
 
   public void deleteProject(Long id) {
