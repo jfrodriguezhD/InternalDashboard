@@ -1,6 +1,6 @@
 import "./ProjectInfoCard.css";
 import InfoViewHeader from "../../atoms/info_view_header/InfoViewHeader";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { EditProjectModal } from "../../organism/edit_project_modal/EditProjectModal";
 
 interface ProjectInfo {
@@ -11,10 +11,10 @@ interface ProjectInfo {
 function ProjectInfoCard({ projectId, projectName }: ProjectInfo) {
   const projectInfoModal = useRef<HTMLDialogElement>(null);
   const colors: string[] = ["red", "blue", "green", "yellow", "purple"];
+  const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
+
   const setColor = (text: string): string => {
-    //console.log(text);
     const index = Math.floor(Math.random() * (4 - 0 + 1));
-    //console.log(index);
     return colors[index];
   };
 
@@ -54,6 +54,16 @@ function ProjectInfoCard({ projectId, projectName }: ProjectInfo) {
   const projectInfo = () => {
     console.log(projectId);
   };
+
+  const addSelectedProject = (projectName: string) => {
+    setSelectedProjects((prev) => {
+      if (prev.length < 5 && !prev.includes(projectName)) {
+        return [...prev, projectName];
+      }
+      return prev;
+    });
+  };
+
   return (
     <>
       <div className="project__info__card">
@@ -63,19 +73,22 @@ function ProjectInfoCard({ projectId, projectName }: ProjectInfo) {
           dialogRef={projectInfoModal}
         />
         <div className="project__info__list">
-          <p
-            className={"project__info__card__color__" + setColor(projectName)}
-            onClick={projectInfo}
-          >
-            {projectName}
-          </p>
+          {selectedProjects.map((project, index) => (
+            <p
+              key={index}
+              className={"project__info__card__color__" + setColor(project)}
+              onClick={projectInfo}
+            >
+              {project}
+            </p>
+          ))}
         </div>
         <dialog ref={projectInfoModal} className="project__info__modal">
           <EditProjectModal
             closeModal={toggleProjectInfoDialog}
+            addSelectedProject={addSelectedProject}
             selectedProject={""}
-          />{" "}
-          {/* Cambiar selected Project */}
+          />
         </dialog>
       </div>
     </>

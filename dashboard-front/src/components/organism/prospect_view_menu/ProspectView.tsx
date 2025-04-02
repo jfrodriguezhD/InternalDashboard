@@ -40,7 +40,10 @@ export default forwardRef<HTMLDialogElement, Props>(function ProspectView(
             email={prospect.email}
             resume={prospect.route_to_resume}
           />
-          <ProjectInfoCard project={prospect.prospected_for} />
+          <ProjectInfoCard
+            projectName={prospect.prospected_for}
+            projectId={prospect.prospected_for}
+          />
         </ProspectContext.Provider>
       </div>
     </dialog>
