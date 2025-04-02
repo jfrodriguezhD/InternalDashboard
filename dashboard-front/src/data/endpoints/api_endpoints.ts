@@ -1,7 +1,9 @@
 // running in docker
 
-//const capabilityBaseApiURL 	= "http://backend:8080/api/v1/capability"
+//const capabilityBaseApiURL 		= "http://backend:8080/api/v1/capability"
 //const prospectBaseApiURL 		= "http://backend:8080/api/v1/prospect"
+//const prospectPutApiURL     	= "http://backend:8080/api/v1/prospect"
+//const rosterBaseApiURL      	= "http://backend:8080/api/v1/roster"
 
 // running on localhost
 
