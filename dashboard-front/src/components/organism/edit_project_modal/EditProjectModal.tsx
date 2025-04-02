@@ -6,69 +6,113 @@ import { useEffect, useState } from "react";
 interface ProyectInfoEditProps {
   closeModal: () => void;
   selectedProject: string;
+  addSelectedProject: (projectName: string) => void;
 }
 
+const projectBaseApiURL = "http://localhost:8080/api/v1/project";
+const prospectBaseApiURL = "http://localhost:8080/api/v1/prospect/{id}";
 
-const projectBaseApiURL = "http://localhost:8080/api/v1/project"
+function EditProjectModal({
+  closeModal,
+  selectedProject,
+  addSelectedProject,
+}: ProyectInfoEditProps) {
+  const [fullProjectList, setFullProjectList] = useState<Projects[]>([]);
+  const [filteredProjectList, setFilteredProjectList] = useState<Projects[]>(
+    []
+  );
+  const [selectedProjectName, setSelectedProjectName] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-function EditProjectModal({ closeModal, selectedProject }: ProyectInfoEditProps) {
-  // Supposed to get 5 last projects on initialization, changes when a search is called
-  const [projectList, setProjectList] = useState<Projects[]>([])
-
+  // Fetching Projects
   async function fetchData() {
-		try {
-			const response = await fetch(projectBaseApiURL);
-			if (!response.ok) {
-				throw new Error('Network response was not ok ' + response.statusText);
-			}
-			const data: Projects[] = await response.json();
-			setProjectList(data);
+    try {
+      const response = await fetch(projectBaseApiURL);
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      const data: Projects[] = await response.json();
+      setFullProjectList(data);
+      setFilteredProjectList(data.slice(0, 5));
       console.log(data);
-		} catch (error) {
-		  	console.error('There was a problem with the fetch operation:', error);
-		}
-	}
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  }
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  function search(): void {
+  useEffect(() => {
+    search();
+  }, [searchQuery]);
 
-  }
+  useEffect(() => {
+    setSearchQuery("");
+    setFilteredProjectList(fullProjectList.slice(0, 5));
+  }, [closeModal]);
+
+  const search = () => {
+    if (searchQuery === "") {
+      setFilteredProjectList(fullProjectList.slice(0, 5));
+    } else {
+      const filtered = fullProjectList.filter((project) =>
+        project.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredProjectList(filtered);
+    }
+  };
+
+  const handleSave = () => {
+    if (selectedProjectName) {
+      addSelectedProject(selectedProjectName);
+      setSearchQuery("");
+      setFilteredProjectList(fullProjectList.slice(0, 5));
+      closeModal();
+    }
+  };
 
   return (
     <div className="edit-project-modal__container">
       <div className="edit-project-modal__heading">
         <h2>Edit Project Information</h2>
-        <button className="close-edit-project-modal" onClick={closeModal}>
+        <button
+          className="close-edit-project-modal"
+          onClick={() => {
+            setSearchQuery("");
+            setFilteredProjectList(fullProjectList.slice(0, 5));
+            closeModal();
+          }}
+        >
           X
         </button>
       </div>
-
       <input
         className="edit-project__searchbar"
         placeholder="Insert a project name"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <button className="edit-project__searchbutton" onClick={search}>Search</button>
-      <WordBubble
-            group="projects"
-            type="radio"
-            word={selectedProject}
-            key={selectedProject}
-          />
+      <button className="edit-project__searchbutton" onClick={search}>
+        Search
+      </button>
       <div className="edit-project__list">
-        {projectList.map((project) => (
+        {filteredProjectList.map((project) => (
           <WordBubble
             group="projects"
             type="radio"
             word={project.name}
             key={project.name}
+            onClick={() => setSelectedProjectName(project.name)}
           />
         ))}
       </div>
-      <button className="edit-project__submitbutton">Save</button>
+      <button className="edit-project__submitbutton" onClick={handleSave}>
+        Save
+      </button>
     </div>
   );
 }
+
 export { EditProjectModal };

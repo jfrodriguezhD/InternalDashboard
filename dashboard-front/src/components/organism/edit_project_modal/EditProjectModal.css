@@ -7,7 +7,7 @@
 .edit-project-modal__heading {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem;
 }
 
 .edit-project__searchbar {
@@ -34,18 +34,32 @@
   color: var(--dark-comp);
 }
 
+.project-selection-instuctions {
+  align-self: flex-start;
+  padding-left: 1rem;
+}
+
 .edit-project__list {
   display: flex;
   align-self: center;
-  justify-self: center;
+  justify-content: space-around;
   flex-wrap: wrap;
+  width: 100%;
   gap: 1em;
   padding: 0.5rem;
 }
 
 .projects {
+  width: 8rem;
+  height: 5rem;
   border-radius: 25px;
   margin: 0rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .projects:hover {
