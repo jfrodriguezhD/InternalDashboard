@@ -2,11 +2,9 @@
     flex-direction: column;
     width: 30%;
     justify-self: right;
-    align-self: right;
-    padding: 18px;
+    padding: 30px;
     border: none;
-    height: 100%;
-    background-color: var(--dark-comp);
+    height: 100vh;
 }
 
 .prospect__view__modal__header{
@@ -14,7 +12,6 @@
     flex-direction: row;
     justify-content: space-between;
     padding-bottom: 18px;
-    background-color: transparent;
     gap:20px;
     border-radius: 8px;
 }
@@ -23,11 +20,11 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: transparent;
     padding-bottom: 16px;
 }
 
 .prospect__view__modal > *{
+    background-color: var(--background);
     border-radius: 6px;
 }
 

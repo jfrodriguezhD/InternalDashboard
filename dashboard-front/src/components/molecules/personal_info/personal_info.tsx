@@ -11,7 +11,7 @@ interface PersonalInfoEditProps {
 function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
   const prospect = useContext(ProspectContext);
 
-  const [data,setData] = useState<Prospects>(prospect!);
+  const [data, setData] = useState<Prospects>(prospect!);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
     const { name, value } = event.target;
@@ -20,7 +20,7 @@ function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
       ...data,
       [name]: value,
     });
-  };
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,12 +46,16 @@ function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
     <div className="personal__info__edit">
       <div className="personal__info__edit__header">
         <h1>Edit Prospect Information</h1>
-        <button className="closePersonalInfoModal" onClick={closeModal}>
+        <button className="close-modal" onClick={closeModal}>
           X
         </button>
       </div>
 
-      <form onSubmit={(e) => handleSubmit(e)} method="PUT" className="personal__info__edit__form">
+      <form
+        onSubmit={(e) => handleSubmit(e)}
+        method="PUT"
+        className="personal__info__edit__form"
+      >
         <label htmlFor="phone_num">Phone: </label>
         <input
           type="tel"
@@ -91,7 +95,9 @@ function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
           Please ensure the resume is a Word or PDF file up to 2MB size
         </div>
         <label htmlFor="route_to_resume">
-          {data.route_to_resume!=""?"Current file: "+ data.route_to_resume : ""}
+          {data.route_to_resume != ""
+            ? "Current file: " + data.route_to_resume
+            : ""}
         </label>
         <div className="personal__info__submit">
           <input

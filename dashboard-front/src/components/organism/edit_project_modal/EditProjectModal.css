@@ -16,7 +16,8 @@
   align-items: center;
   background-color: var(--light-comp);
   border: none;
-  border-radius: 16px;
+  border-radius: 4px;
+  height: 30px;
   outline: none;
   margin: 0rem 1rem;
 }
@@ -27,6 +28,7 @@
   text-align: center;
   align-self: center;
   border-radius: 16px;
+  background-color: var(--light-comp);
 }
 .edit-project__searchbutton:hover {
   cursor: pointer;
@@ -72,6 +74,7 @@
   text-align: center;
   align-self: center;
   border-radius: 16px;
+  background-color: var(--light-comp);
 }
 
 .edit-project__submitbutton:hover {
