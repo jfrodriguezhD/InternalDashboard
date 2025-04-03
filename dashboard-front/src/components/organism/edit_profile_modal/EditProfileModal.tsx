@@ -8,7 +8,7 @@ import {
 import { forwardRef, useContext, useEffect, useState } from "react";
 import { ProspectContext } from "../prospect_view_menu/ProspectView";
 import { Prospects } from "../../atoms/prospect_row/Prospect_Row";
-import { prospectPutApiURL } from "../../../data/endpoints/api_endpoints";
+import { prospectBaseApiURL } from "../../../data/endpoints/api_endpoints";
 
 interface Props {
   toggleDialog: () => void;
@@ -49,7 +49,7 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const modifyURL = `${prospectPutApiURL}/${person.id}`;
+    const modifyURL = `${prospectBaseApiURL}/${person.id}`;
 
     fetch(modifyURL, {
       method: "PUT",

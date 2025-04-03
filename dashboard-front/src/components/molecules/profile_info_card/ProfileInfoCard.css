@@ -5,10 +5,25 @@
     gap: 1em;
 }
 
+.profile__info__card__content{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile__info__card__content > *{
+    padding-bottom: 20px;
+}
+
+.profile__info__card__content__name{
+    font-weight: bold;
+    padding-bottom: 0px;
+}
+
 .profile__info__card__jobTitle{
     display: flex;
     flex-direction: row;
-    gap: 1.5em;
+    gap: 1em;
+    padding-bottom: 20px;
 }
 
 .profile__info__card__status{
@@ -17,12 +32,7 @@
     gap: 1em;
 }
 
-.profile__info__card__content{
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
+
 
 .personal__info__card__capabilities{
     display: flex;

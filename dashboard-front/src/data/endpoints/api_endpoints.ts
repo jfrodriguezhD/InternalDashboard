@@ -9,10 +9,9 @@
 
 const capabilityBaseApiURL 	= "http://localhost:8080/api/v1/capability"
 const prospectBaseApiURL 	= "http://localhost:8080/api/v1/prospect"
-const prospectPutApiURL     = "http://localhost:8080/api/v1/prospect"
 const rosterBaseApiURL      = "http://localhost:8080/api/v1/roster"
 
-export { prospectBaseApiURL, capabilityBaseApiURL, prospectPutApiURL, rosterBaseApiURL }
+export { prospectBaseApiURL, capabilityBaseApiURL, rosterBaseApiURL }
 
 
 

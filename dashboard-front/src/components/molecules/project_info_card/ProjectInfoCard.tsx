@@ -2,10 +2,11 @@ import "./ProjectInfoCard.css";
 import InfoViewHeader from "../../atoms/info_view_header/InfoViewHeader";
 import { useRef, useEffect, useState } from "react";
 import { EditProjectModal } from "../../organism/edit_project_modal/EditProjectModal";
+import { Projects } from "../../../data/entities_types/types";
 
 interface ProjectInfo {
-  projectId: number;
-  projectName: string;
+  projectId: Projects;
+  projectName: Projects;
 }
 
 function ProjectInfoCard({ projectId, projectName }: ProjectInfo) {
@@ -68,7 +69,7 @@ function ProjectInfoCard({ projectId, projectName }: ProjectInfo) {
     <>
       <div className="project__info__card">
         <InfoViewHeader
-          title="Project Information"
+          title="Project"
           handleClick={toggleProjectInfoDialog}
           dialogRef={projectInfoModal}
         />

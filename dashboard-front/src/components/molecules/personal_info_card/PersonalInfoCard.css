@@ -1,3 +1,20 @@
 .personal__info__card {
   padding: 20px;
 }
+
+.personal__info__card__content{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.personal__info__card_phone,
+.personal__info__card__email,
+.personal__info__card__resume__file{
+  display: flex;
+  gap: 1rem;
+}
+
+.personal__info__card__resume p{
+  padding-bottom: 20px;
+}

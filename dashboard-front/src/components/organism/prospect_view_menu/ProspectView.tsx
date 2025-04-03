@@ -4,6 +4,7 @@ import ProfileInfoCard from "../../molecules/profile_info_card/ProfileInfoCard";
 import ProjectInfoCard from "../../molecules/project_info_card/ProjectInfoCard";
 import { createContext, forwardRef } from "react";
 import { Prospects } from "../../atoms/prospect_row/Prospect_Row";
+import { prospectBaseApiURL } from "../../../data/endpoints/api_endpoints";
 
 interface Props {
   toggleDialog: () => void;
@@ -16,6 +17,21 @@ export default forwardRef<HTMLDialogElement, Props>(function ProspectView(
   { toggleDialog, prospect },
   ref
 ) {
+  const removeProspect = () => {
+    const deleteProspectUrl = `${prospectBaseApiURL}/${prospect.id}`;
+    fetch(deleteProspectUrl, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) =>
+        alert("Profile successfully deleted: " + JSON.stringify(data))
+      );
+    location.reload();
+  };
+
   return (
     <dialog ref={ref} className="prospect-modal-view">
       <div className="prospect__view__modal__header">
@@ -46,7 +62,10 @@ export default forwardRef<HTMLDialogElement, Props>(function ProspectView(
           />
         </ProspectContext.Provider>
       </div>
-      <button className="delete-prospect-button">
+      <button
+        className="delete-prospect-button"
+        onClick={() => removeProspect()}
+      >
         Delete Prospect
         <i className="fa-solid fa-trash"></i>
       </button>
