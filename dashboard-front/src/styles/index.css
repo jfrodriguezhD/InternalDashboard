@@ -10,15 +10,19 @@
   --dark-blue: #689dfe;
 }
 
+html{
+  box-sizing: border-box;
+  background-color: var(--background);
+}
+
 * {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   font-weight: normal;
-  background-color: var(--background);
   color: white;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 h1 {
@@ -38,4 +42,5 @@ h3 {
 
 .main{
   padding: 24px 32px 0 32px;
+  height: calc(100vh - 56px);
 }

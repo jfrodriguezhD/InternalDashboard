@@ -8,8 +8,12 @@
   margin: auto;
   width: 70vw;
   height: 60vh;
-  border-radius: 25px;
-  border: 1.5px solid var(--dark-comp);
+  border-radius: 6px;
+  border: none;
+}
+
+.project__info__modal::backdrop{
+  background-color: rgba(0, 0, 0, 0.54);
 }
 
 .project__info__list {

@@ -4,6 +4,11 @@
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  background-color: var(--background);
+}
+
+.personal__info__modal::backdrop{
+  background-color: rgba(0, 0, 0, 0.54);
 }
 
 .personal__info__modal {
@@ -11,15 +16,6 @@
   width: 50vw;
   height: 75vh;
   border: 1.5px solid var(--dark-comp);
-}
-
-.closePersonalInfoModal {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 30%;
-}
-.closePersonalInfoModal:hover {
-  cursor: pointer;
 }
 
 .personal__info__edit__header {
@@ -36,6 +32,10 @@
   gap: 0.5rem;
 }
 
+.personal__info__edit__form > input{
+  background-color: var(--light-comp);
+}
+
 .personal__info__submit {
   width: 100%;
   display: flex;
@@ -46,7 +46,9 @@
 .personal__info__submit__button {
   padding: 0.5rem;
   width: 100%;
+  background-color: var(--light-comp);
 }
+
 .save__button:hover,
 .personal__info__submit__button:hover {
   cursor: pointer;

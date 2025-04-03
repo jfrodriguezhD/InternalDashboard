@@ -78,7 +78,7 @@ function EditProjectModal({
       <div className="edit-project-modal__heading">
         <h2>Edit Project Information</h2>
         <button
-          className="close-edit-project-modal"
+          className="close-modal"
           onClick={() => {
             setSearchQuery("");
             setFilteredProjectList(fullProjectList.slice(0, 5));

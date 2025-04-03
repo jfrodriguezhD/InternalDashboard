@@ -7,8 +7,17 @@
   border: none;
 }
 
+dialog{
+  background-color: var(--dark-comp);
+}
+
 .close-modal {
   width: 5%;
+  background-color: var(--light-comp);
+}
+
+.close-modal:hover{
+  cursor: pointer;
 }
 
 .edit-profile-modal form > * {
