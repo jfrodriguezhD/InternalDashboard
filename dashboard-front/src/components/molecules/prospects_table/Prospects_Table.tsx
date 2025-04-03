@@ -168,7 +168,7 @@ function Prospects_Table() {
             {
                 tempList.map((data, index) => {
                         if (index < (PAGE_LIMIT * pageNumber) && index >= ((PAGE_LIMIT * pageNumber) - PAGE_LIMIT)) {
-                            return <Prospects_Row data={data} key={index} index={index}/>
+                            return <Prospects_Row data={data} key={index} index={index} classname={"content"}/>
                         }
                     }
                 )

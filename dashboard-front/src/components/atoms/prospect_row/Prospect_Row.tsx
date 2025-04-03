@@ -6,9 +6,10 @@ import { Prospects } from "../../../data/entities_types/types.ts";
 type Prop = {
   data: Prospects;
   index: number;
+  classname: string;
 };
 
-function Prospects_Row({ data, index }: Prop) {
+function Prospects_Row({ data, index, classname }: Prop) {
   const setSelectedRow = useContext(SelectedRowContext);
   const showModal = () => {
     if (setSelectedRow != undefined) {
@@ -21,7 +22,7 @@ function Prospects_Row({ data, index }: Prop) {
   };
 
   return (
-    <div className="prospects__row" onClick={showModal}>
+    <div className={`prospects__row ${classname}`} onClick={showModal}>
       <div className="prospects__row__member">{`${data.name ? data.name : ""} ${
         data.last_name ? data.last_name : ""
       }`}</div>
