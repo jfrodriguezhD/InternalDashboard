@@ -34,7 +34,7 @@ function EditProjectModal({
       const data: Projects[] = await response.json();
       setFullProjectList(data);
       setFilteredProjectList(data.slice(0, 5));
-      console.log(data);
+      //console.log(data);
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }

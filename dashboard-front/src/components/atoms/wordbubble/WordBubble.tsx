@@ -7,6 +7,7 @@ interface WordBubbleProps {
   check?: boolean;
   onClick?: () => void;
   handleChange?: (e: any) => void;
+  handleInput?: (e: any) => void;
 }
 
 export default function WordBubble({
@@ -16,6 +17,7 @@ export default function WordBubble({
   check,
   onClick,
   handleChange,
+  handleInput,
 }: WordBubbleProps) {
   return (
     <>
@@ -26,6 +28,7 @@ export default function WordBubble({
           name={group}
           checked={check}
           onChange={handleChange}
+		  onInput={handleInput}
         ></input>
       </label>
     </>

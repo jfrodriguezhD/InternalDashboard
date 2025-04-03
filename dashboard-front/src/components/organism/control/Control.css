@@ -46,6 +46,9 @@
   height: 100%;
   align-items: center;
   gap: 12px;
+
+  
+  flex-wrap: wrap;
 }
 
 .control__tools {
