@@ -2,7 +2,7 @@ import { ChangeEvent, useContext, useState } from "react";
 import { Prospects } from "../../atoms/prospect_row/Prospect_Row";
 import "./personal_info.css";
 import { ProspectContext } from "../../organism/prospect_view_menu/ProspectView";
-import { prospectPutApiURL } from "../../../data/endpoints/api_endpoints";
+import { prospectBaseApiURL } from "../../../data/endpoints/api_endpoints";
 
 interface PersonalInfoEditProps {
   closeModal: () => void;
@@ -24,7 +24,7 @@ function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const modifyURL = `${prospectPutApiURL}/${data.id}`;
+    const modifyURL = `${prospectBaseApiURL}/${data.id}`;
 
     fetch(modifyURL, {
       method: "PUT",

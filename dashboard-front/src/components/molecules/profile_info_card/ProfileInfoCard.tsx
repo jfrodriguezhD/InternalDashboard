@@ -67,7 +67,7 @@ function ProfileInfoCard({
           dialogRef={profileModal}
         />
         <div className="profile__info__card__content">
-          <p>
+          <p className="profile__info__card__content__name">
             {name} {lastName}
           </p>
           <div className="profile__info__card__jobTitle">
@@ -81,7 +81,10 @@ function ProfileInfoCard({
           <p>Main Capabillities</p>
           <div className="personal__info__card__capabilities">
             {capabilities.map((capability, index) => (
-              <p className={"profile__info__card__color__" + setColor(status)} key={index}>
+              <p
+                className={"profile__info__card__color__" + setColor(status)}
+                key={index}
+              >
                 {capability.name}
               </p>
             ))}
@@ -89,7 +92,10 @@ function ProfileInfoCard({
           <p>Subcapabillity</p>
           <div className="personal__info__card__subcapabilities">
             {subcapabilities.map((capability, index) => (
-              <p className={"profile__info__card__color__" + setColor(status)} key={index}>
+              <p
+                className={"profile__info__card__color__" + setColor(status)}
+                key={index}
+              >
                 {capability.name}
               </p>
             ))}
