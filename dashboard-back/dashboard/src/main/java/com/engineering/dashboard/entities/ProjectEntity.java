@@ -1,7 +1,6 @@
 package com.engineering.dashboard.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +16,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "project")
+@Table(name = "project") // Correct table name
 public class ProjectEntity {
 
   @Id

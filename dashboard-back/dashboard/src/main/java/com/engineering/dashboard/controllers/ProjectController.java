@@ -6,14 +6,21 @@ import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/project")
 public class ProjectController {
 
   @Autowired
-  private ProjectService projectService;
+  ProjectService projectService;
 
   @GetMapping("")
   public List<ProjectEntity> getAllProjects() {
@@ -26,16 +33,16 @@ public class ProjectController {
   }
 
   @PostMapping("")
-  public ProjectEntity postProject(@Valid @RequestBody ProjectEntity project) {
-    return projectService.createProject(project);
+  public ProjectEntity postProject(@Valid @RequestBody ProjectEntity projects) {
+    return projectService.createProject(projects);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<ProjectEntity> putProject(
     @PathVariable Long id,
-    @Valid @RequestBody ProjectEntity project
+    @RequestBody ProjectEntity projects
   ) {
-    return projectService.updateProject(id, project);
+    return projectService.updateProject(id, projects);
   }
 
   @DeleteMapping("/{id}")
