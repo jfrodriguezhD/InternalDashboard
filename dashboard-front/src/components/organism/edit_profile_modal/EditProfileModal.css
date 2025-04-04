@@ -5,6 +5,7 @@
   align-self: center;
   padding: 18px;
   border: none;
+  scrollbar-width: none;
 }
 
 dialog{
@@ -12,8 +13,10 @@ dialog{
 }
 
 .close-modal {
-  width: 5%;
-  background-color: var(--light-comp);
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  transform: scaleX(1.5);
 }
 
 .close-modal:hover{
@@ -32,6 +35,14 @@ dialog{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.edit-profile-modal__name{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 14px;
+
 }
 
 .edit-profile-modal input,
@@ -62,7 +73,8 @@ dialog{
 .edit-profile-modal__buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  padding-top: 20px;
+  gap: 16px;
 }
 
 .save-button {
