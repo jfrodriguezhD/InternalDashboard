@@ -1,7 +1,8 @@
 import { Projects } from "../../../data/entities_types/types";
 import WordBubble from "../../atoms/wordbubble/WordBubble";
+import { ProspectContext } from "../prospect_view_menu/ProspectView";
 import "./EditProjectModal.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 interface ProyectInfoEditProps {
   closeModal: () => void;
@@ -10,11 +11,9 @@ interface ProyectInfoEditProps {
 }
 
 const projectBaseApiURL = "http://localhost:8080/api/v1/project";
-const prospectBaseApiURL = "http://localhost:8080/api/v1/prospect/{id}";
 
 function EditProjectModal({
   closeModal,
-  selectedProject,
   addSelectedProject,
 }: ProyectInfoEditProps) {
   const [fullProjectList, setFullProjectList] = useState<Projects[]>([]);
@@ -23,6 +22,12 @@ function EditProjectModal({
   );
   const [selectedProjectName, setSelectedProjectName] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
+
+  // Dynamic URL construction
+  const selectedProspect = useContext(ProspectContext);
+  const prospectIdApiURL = selectedProspect
+    ? `http://localhost:8080/api/v1/prospect/${selectedProspect.id}`
+    : "";
 
   // Fetching Projects
   async function fetchData() {
@@ -64,9 +69,64 @@ function EditProjectModal({
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (selectedProjectName) {
       addSelectedProject(selectedProjectName);
+
+      const selectedProject = fullProjectList.find(
+        (project) => project.name === selectedProjectName
+      );
+
+      if (selectedProject && prospectIdApiURL) {
+        try {
+          // Fetch existing projects
+          const existingResponse = await fetch(prospectIdApiURL);
+          if (!existingResponse.ok) {
+            throw new Error(
+              "Network response was not ok " + existingResponse.statusText
+            );
+          }
+          const existingProspect = await existingResponse.json();
+          const existingProjects = existingProspect.projects || [];
+
+          // Merge new project with existing projects
+          const updatedProjects = [
+            ...existingProjects,
+            {
+              id: selectedProject.id,
+              name: selectedProject.name,
+              company: selectedProject.company,
+            },
+          ];
+
+          // Construct the request body
+          const requestBody = {
+            ...existingProspect,
+            projects: updatedProjects,
+          };
+
+          // Make the PUT request
+          const response = await fetch(prospectIdApiURL, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody),
+          });
+
+          if (!response.ok) {
+            throw new Error(
+              "Network response was not ok " + response.statusText
+            );
+          }
+
+          const data = await response.json();
+          console.log("Update successful:", data);
+        } catch (error) {
+          console.error("There was a problem with the fetch operation:", error);
+        }
+      }
+
       setSearchQuery("");
       setFilteredProjectList(fullProjectList.slice(0, 5));
       closeModal();
