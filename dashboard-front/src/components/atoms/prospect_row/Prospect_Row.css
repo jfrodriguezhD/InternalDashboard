@@ -6,7 +6,7 @@
 
   background-color: var(--light-comp);
   padding: 4px 16px;
-  color: white;
+  color: var(--text-color);
   border-radius: 6px;
   height: 40px;
 }
