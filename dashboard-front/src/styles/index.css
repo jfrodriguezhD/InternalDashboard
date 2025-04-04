@@ -10,7 +10,7 @@
   --dark-blue: #689dfe;
 }
 
-html{
+html {
   box-sizing: border-box;
   background-color: var(--background);
 }
@@ -40,7 +40,7 @@ h3 {
   font-size: 16px;
 }
 
-.main{
+.main {
   padding: 24px 32px 0 32px;
   height: calc(100vh - 56px);
 }
