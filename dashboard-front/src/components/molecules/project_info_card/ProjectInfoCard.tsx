@@ -58,10 +58,13 @@ function ProjectInfoCard({ projectId, projectName }: ProjectInfo) {
 
   const addSelectedProject = (projectName: string) => {
     setSelectedProjects((prev) => {
-      if (prev.length < 5 && !prev.includes(projectName)) {
-        return [...prev, projectName];
+      if (prev.includes(projectName)) {
+        return prev;
       }
-      return prev;
+      if (prev.length >= 5) {
+        return [...prev.slice(1), projectName];
+      }
+      return [...prev, projectName];
     });
   };
 
@@ -69,7 +72,7 @@ function ProjectInfoCard({ projectId, projectName }: ProjectInfo) {
     <>
       <div className="project__info__card">
         <InfoViewHeader
-          title="Project"
+          title="Prospected For:"
           handleClick={toggleProjectInfoDialog}
           dialogRef={projectInfoModal}
         />

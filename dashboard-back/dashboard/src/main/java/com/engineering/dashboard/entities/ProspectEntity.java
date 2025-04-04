@@ -91,9 +91,12 @@ public class ProspectEntity {
   @ManyToMany
   @JoinTable(
     name = "prospect_project",
-    joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(
+    joinColumns = @JoinColumn(
       name = "prospect_id",
+      referencedColumnName = "id"
+    ),
+    inverseJoinColumns = @JoinColumn(
+      name = "project_id",
       referencedColumnName = "id"
     )
   )
