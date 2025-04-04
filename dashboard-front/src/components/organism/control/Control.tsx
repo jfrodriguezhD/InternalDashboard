@@ -1,27 +1,32 @@
 import "./Control.css";
 import { outputs, filters, tools } from "../../../data/control/control_data";
 import { SearchContext, SortContext } from "../../../pages/App";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ToolButton from "../../atoms/toolbutton/ToolButton";
 import WordBubble from "../../atoms/wordbubble/WordBubble";
 
 export default function Control() {
 
 	const searchContext = useContext(SearchContext);
-  	const sortContext = useContext(SortContext);
+  	const sortContext 	= useContext(SortContext);
 
 	const { search, setSearch } = searchContext;
 	const { sort, setSort } = sortContext;
 
 	const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value)
-		console.log(search)
 	};
 
 	const handleSortChange = (filter: string) => {
 		setSort(filter)
-		console.log(sort)
 	};
+
+	useEffect(() => {
+		sessionStorage.setItem("sort_value", sort);
+	}, [sort])
+	useEffect(() => {
+		sessionStorage.setItem("search_value", search);
+	}, [search])
 
 	return (
 		<div className="control">
@@ -55,6 +60,12 @@ export default function Control() {
 						key={index}
 					/>
 				})}
+					<WordBubble 
+						word="Reset" 
+						group="filters" 
+						type="radio" 
+						handleInput={() => handleSortChange("reset")}
+					/>
 			</div>
 		</section>
 		<section className="control__tools">

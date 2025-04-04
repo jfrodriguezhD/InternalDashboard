@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Outlet } from "react-router";
 import Control from "../components/organism/control/Control";
 import Header from "../components/molecules/header/Header";
@@ -16,9 +16,22 @@ interface SortContextType {
 const SearchContext = createContext<SearchContextType | null>(null);
 const SortContext 	= createContext<SortContextType | null>(null);
 
+
 function App() {
+
+	const [ tempSearch ] 		= useState(sessionStorage.getItem("search_value"))
+	const [ tempSort ] 			= useState(sessionStorage.getItem("sort_value"))
+	
 	const [ search, setSearch ] = useState<string>("")
 	const [ sort, setSort ] 	= useState<string>("")
+
+	useEffect(() => {
+		tempSearch ? setSearch(tempSearch) : setSearch("")
+	}, [tempSearch])
+	useEffect(() => {
+		tempSort ? setSort(tempSort) : setSort("")
+	}, [tempSort])
+
 	return (
 		<>
 			<Header />
