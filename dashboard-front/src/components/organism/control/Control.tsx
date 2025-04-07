@@ -69,9 +69,9 @@ export default function Control() {
 			</div>
 		</section>
 		<section className="control__tools">
-			{tools.map((tool, index) => {
+			{/*tools.map((tool, index) => {
 			return <ToolButton word={tool.word} group="tools" icon={tool.icon} key={index}/>;
-			})}
+			})*/}
 		</section>
 		</div>
 	);

@@ -12,7 +12,7 @@ function ToolButton({ word, icon, group, handleClick }: ToolButtonProps) {
     <label className="ToolButton">
       <i className={icon} />
       <p>{word}</p>
-      <input type="radio" name={group} onClick={handleClick}></input>
+      <input type="radio" name={group} onClick={handleClick} id={word}></input>
     </label>
   );
 }
