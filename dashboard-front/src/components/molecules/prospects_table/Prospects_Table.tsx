@@ -28,8 +28,8 @@ function Prospects_Table() {
     const searchContext = useContext(SearchContext);
   	const sortContext = useContext(SortContext);
 
-	const { search } = searchContext;
-	const { sort } = sortContext;
+	const search = searchContext?.search;
+	const sort = sortContext?.sort;
 
     function toggleView() {
         if (!viewRef.current) {
@@ -158,10 +158,11 @@ function Prospects_Table() {
         }
     }
 
-    function searchBy(
-        search_string: string, og_list: Prospects[], setOG: (arg: Prospects[]) => void){
+    function searchBy(search_string: string, og_list: Prospects[], setOG: (arg: Prospects[]) => void){
         const tempArr = [...og_list].filter((a) => {
-            return (a.name + a.last_name).includes(search_string)
+            if(!a.name || !a.last_name)
+                return
+            return (a.name.toLowerCase() + a.last_name.toLowerCase()).includes(search_string.toLowerCase())
         })
         setSearchList(tempArr)
         setOG(tempArr)
@@ -183,7 +184,7 @@ function Prospects_Table() {
     }, [ sort ])
 
     useEffect(() => {
-        console.log(showList)
+        console.log(searchList)
     }, [showList])
 
     useEffect(() => {
