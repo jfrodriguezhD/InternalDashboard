@@ -17,7 +17,7 @@ type ProspectStarter = {
 interface Props {
   toggleDialog: () => void;
 }
-
+ 
 const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 	({ toggleDialog }: Props, ref) => {
 

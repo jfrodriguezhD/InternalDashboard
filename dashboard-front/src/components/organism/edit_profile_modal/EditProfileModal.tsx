@@ -100,7 +100,7 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
     toggleDialog();
   };
 
-  console.log(person.capabilities);
+  //console.log(person.capabilities);
 
   return (
     <dialog ref={ref} className="edit-profile-modal">
