@@ -14,6 +14,10 @@
 .prospects__row:hover{
 	scale: 1.02;
 	cursor: pointer;
+  .prospects__row__control__tools{
+    visibility: visible;
+  }
+  padding-bottom: 4em;
 }
 .prospects__row.content:hover{
 	filter: brightness(0.92);
@@ -23,6 +27,9 @@
 	background-color: transparent;
 	align-content: center;
 	text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .ACTIVE {
@@ -57,4 +64,12 @@
 .Kaiser {
   background-color: #7667db;
   color: black;
+}
+
+
+.prospects__row__control__tools{
+  display: flex;
+  flex-direction: row;
+  visibility: collapse;
+  max-width: inherit;
 }
