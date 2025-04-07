@@ -10,7 +10,7 @@ type Prospects = {
 	job_title: ['BACKEND_DEVELOPER'] | ['FRONTEND_DEVELOPER'] | ['FULLSTACK_DEVELOPER'];
 	capabilities: Capabilities[];
 	sub_capabilities: Capabilities[];
-	prospected_for: Projects;
+	projects: Projects[];
 }
 
 type Capabilities = {

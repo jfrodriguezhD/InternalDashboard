@@ -44,14 +44,12 @@ function Prospects_Row({ data, index, classname }: Prop) {
           if (i) return i.name;
         })}
       </div>
-      <div
-        className={
-          "prospects__row__member prospects__row__member__prospected_for " +
-          (data.prospected_for ? data.prospected_for.company : "")
-        }
-      >
-        {" "}
-        {data.prospected_for ? data.prospected_for.name : ""}{" "}
+      <div className="prospects__row__member">
+		{data.projects.map((project, index) => {
+			return <div className={"prospects__row__member__prospected_for " + (project ? project.company : "")} key={index}> 
+				{" "} {project ? project.name : ""}{" "} 
+			</div>
+		})}        
       </div>
     </div>
   );

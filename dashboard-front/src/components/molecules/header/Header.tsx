@@ -21,14 +21,10 @@ function Header() {
   }
 
   useEffect(() => {
-    const darkMode = JSON.parse(localStorage.getItem('darkMode'));
-    if (darkMode != null) {
-     setDarkMode(darkMode);
-     setThemeVariables(darkMode);
-    }
-    else{
-      setDarkMode(true);
-    }
+    const storedDarkMode = localStorage.getItem('darkMode')
+	const darkMode = storedDarkMode != "undefined" ? JSON.parse(storedDarkMode || "true") : true;
+    setDarkMode(darkMode);
+    setThemeVariables(darkMode);
   }, []);
   
   useEffect(() => {
