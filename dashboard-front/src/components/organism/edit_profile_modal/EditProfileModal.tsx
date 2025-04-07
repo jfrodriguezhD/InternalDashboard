@@ -62,23 +62,73 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
     }
   }
 
-  const handleCapabilityChange = (capability: Capabilities, type: string) => {
-    setPerson((prevState) => {
-      const updatedCapabilities =
-        type === "MAIN_CAPABILITY"
-          ? [...(prevState.capabilities || []), capability]
-          : prevState.capabilities || [];
-      const updatedSubCapabilities =
-        type === "SECONDARY_CAPABILITY"
-          ? [...(prevState.sub_capabilities || []), capability]
-          : prevState.sub_capabilities || [];
-      return {
-        ...prevState,
-        capabilities: updatedCapabilities,
-        sub_capabilities: updatedSubCapabilities,
-      };
-    });
+  const handleCapabilityChange = (capability: Capabilities) => {
+    if (capability.type === "MAIN_CAPABILITY") {
+      setPerson((prevPerson) => {
+        //List of previous capabilities
+        const prevCapabilities = prevPerson.capabilities;
+
+        const removeCap = prevCapabilities.filter(
+          (prevCap) => prevCap.id == capability.id
+        );
+        let updatedCap;
+        if (removeCap.length == 0) {
+          updatedCap = [...prevCapabilities, capability];
+        } else {
+          updatedCap = prevCapabilities.filter(
+            (prevCap) => prevCap.id != capability.id
+          );
+        }
+        return { ...prevPerson, capabilities: updatedCap };
+      });
+    } else {
+      setPerson((prevPerson) => {
+        //List of previous capabilities
+        const prevSubCapabilities = prevPerson.sub_capabilities;
+
+        const removeCap = prevSubCapabilities.filter(
+          (prevSubCap) => prevSubCap.id == capability.id
+        );
+        let updatedSubCap;
+        if (removeCap.length == 0) {
+          updatedSubCap = [...prevSubCapabilities, capability];
+        } else {
+          updatedSubCap = prevSubCapabilities.filter(
+            (prevSubCap) => prevSubCap.id != capability.id
+          );
+        }
+        return { ...prevPerson, sub_capabilities: updatedSubCap };
+      });
+    }
   };
+
+  //   const initCap = new Set(prevPerson.capabilities);
+  //   ...person,
+  //   capabilities:
+  // })
+  // setPerson((prevState) => {
+  // }
+  //   const updatedCapabilities =
+  //     type === "MAIN_CAPABILITY"
+  //       ? [...(prevState.capabilities || []), capability]
+  //       : prevState.capabilities || [];
+  //   const updatedSubCapabilities =
+  //     type === "SECONDARY_CAPABILITY"
+  //       ? [...(prevState.sub_capabilities || []), capability]
+  //       : prevState.sub_capabilities || [];
+  //       setPerson({
+  //         ...person,
+  //         seniority: [
+  //           senority as "SENIOR" | "CONSULTANT" | "ANALYST" | "MANAGER",
+  //         ],
+  //       });
+  //   return {
+  //     ...prevState,
+  //     capabilities: updatedCapabilities,
+  //     sub_capabilities: updatedSubCapabilities,
+  //   };
+  // });
+  // };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -99,8 +149,6 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
 
     toggleDialog();
   };
-
-  //console.log(person.capabilities);
 
   return (
     <dialog ref={ref} className="edit-profile-modal">
@@ -132,7 +180,6 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
             }}
           />
         </div>
-
         <div className="edit-profile-modal__senority">
           <p>Senority:</p>
           {senorities.map((senority, index) => (
@@ -142,7 +189,7 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
               type={"radio"}
               check={person?.seniority[0] == senority}
               key={index}
-              handleChange={() => {
+              onClick={() => {
                 setPerson({
                   ...person,
                   seniority: [
@@ -153,7 +200,6 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
             />
           ))}
         </div>
-
         <div className="edit-profile-modal__status">
           <p>Status:</p>
           <select
@@ -171,7 +217,6 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
             <option value="ARCHIVED">Archived</option>
           </select>
         </div>
-
         <div className="edit-profile-modal__job-title">
           <p>Job Title:</p>
           <select
@@ -186,7 +231,6 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
             <option value="FULLSTACK_DEVELOPER">Full Stack Developer</option>
           </select>
         </div>
-
         <div className="edit-profile-modal__capabilities">
           <p>Main Capabilities:</p>
           {Capabilities.filter(
@@ -200,13 +244,10 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
                 .map((capability) => capability.name)
                 .includes(mainCapability.name)}
               key={index}
-              handleChange={() =>
-                handleCapabilityChange(mainCapability, "MAIN_CAPABILITY")
-              }
+              handleChange={() => handleCapabilityChange(mainCapability)}
             />
           ))}
         </div>
-
         <div className="edit-profile-modal__capabilities">
           <p>Sub Capabilities:</p>
           {Capabilities.filter(
@@ -220,13 +261,10 @@ export default forwardRef<HTMLDialogElement, Props>(function EditProfileModal(
                 .map((capability) => capability.name)
                 .includes(subCapability.name)}
               key={index}
-              handleChange={() =>
-                handleCapabilityChange(subCapability, "SECONDARY_CAPABILITY")
-              }
+              handleChange={() => handleCapabilityChange(subCapability)}
             />
           ))}
         </div>
-
         <div className="edit-profile-modal__buttons">
           <button className="save-button" type="submit">
             Save
