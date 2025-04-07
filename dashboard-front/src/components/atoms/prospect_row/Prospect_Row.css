@@ -72,4 +72,8 @@
   flex-direction: row;
   visibility: collapse;
   max-width: inherit;
+  .ToolButton {
+    background-color: var(--dark-comp);
+  }
+  gap: 0.5em;
 }

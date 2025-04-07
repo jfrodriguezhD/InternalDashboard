@@ -76,7 +76,7 @@ function Prospects_Row({ data, index, classname }: Prop) {
         data.last_name ? data.last_name : ""
       }`}
       <section className="prospects__row__control__tools">
-          {tools.map((tool, index) => {
+          {tools.slice(1).map((tool, index) => {
           return <ToolButton word={tool.word} group={`prospects_row__tools__${tool.word}${data.id}`} icon={tool.icon} key={index} handleClick={()=>handleBtnClick(event,tool.word)}/>;
           })}
         </section>
