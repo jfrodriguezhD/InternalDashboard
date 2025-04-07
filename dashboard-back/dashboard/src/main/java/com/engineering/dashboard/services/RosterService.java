@@ -1,5 +1,6 @@
 package com.engineering.dashboard.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,8 @@ public class RosterService {
     }
 
     public ResponseEntity<RosterEntity> createRoster(@Valid @RequestBody RosterEntity roster) {
+        roster.setLastModified(LocalDateTime.now());
+        roster.setCreatedTime(LocalDateTime.now());
         rosterRepository.save(roster);
         return ResponseEntity.status(HttpStatus.OK).body(roster);
     }
@@ -46,6 +49,7 @@ public class RosterService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
+        roster.setLastModified(LocalDateTime.now());
         roster.setId(rostersId);
         rosterRepository.save(roster);
         return ResponseEntity.status(HttpStatus.OK).body(roster);

@@ -4,6 +4,8 @@ import com.engineering.dashboard.entities.ProjectEntity;
 import com.engineering.dashboard.entities.ProspectEntity;
 import com.engineering.dashboard.repositories.ProspectRepository;
 import jakarta.validation.Valid;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class ProspectService {
   public ResponseEntity<ProspectEntity> createProspect(
     @Valid @RequestBody ProspectEntity prospect
   ) {
+    prospect.setCreatedTime(LocalDateTime.now());
+    prospect.setLastModified(LocalDateTime.now());
     prospectRepository.save(prospect);
     return ResponseEntity.status(HttpStatus.OK).body(prospect);
   }
@@ -94,7 +98,8 @@ public class ProspectService {
       }
       oldProspect.setProjects(existingProjects);
     }
-
+    
+    oldProspect.setLastModified(LocalDateTime.now());
     prospectRepository.save(oldProspect);
     return ResponseEntity.status(HttpStatus.OK).body(oldProspect);
   }

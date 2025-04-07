@@ -21,7 +21,7 @@ public class CapabilityController {
   }
 
   /* GET BY ID */
-  @GetMapping("/{capabilityId}")
+  @GetMapping("/{capabilitiesId}")
   public ResponseEntity<CapabilityEntity> getCapabilityById(
     @PathVariable Long capabilitiesId
   ) {
@@ -37,7 +37,7 @@ public class CapabilityController {
   }
 
   /* PUT */
-  @PutMapping("/{capabilityId}")
+  @PutMapping("/{capabilitiesId}")
   public ResponseEntity<CapabilityEntity> updateCapability(
     @PathVariable Long capabilitiesId,
     @RequestBody CapabilityEntity capabilityEntity
@@ -46,7 +46,7 @@ public class CapabilityController {
   }
 
   /* DELETE */
-  @DeleteMapping("/{capabilityId}")
+  @DeleteMapping("/{capabilitiesId}")
   public ResponseEntity<Void> deleteCapability(
     @PathVariable Long capabilitiesId
   ) {

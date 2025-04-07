@@ -2,6 +2,8 @@ package com.engineering.dashboard.services;
 
 import com.engineering.dashboard.entities.CapabilityEntity;
 import com.engineering.dashboard.repositories.CapabilityRepository;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,8 @@ public class CapabilityService {
   public ResponseEntity<CapabilityEntity> createCapability(
     CapabilityEntity capabilityEntity
   ) {
+    capabilityEntity.setCreatedTime(LocalDateTime.now());
+    capabilityEntity.setLastModified(LocalDateTime.now());
     CapabilityEntity savedCapability = capabilityRepository.save(
       capabilityEntity
     );
@@ -51,6 +55,7 @@ public class CapabilityService {
       return ResponseEntity.notFound().build();
     }
     capabilityEntity.setId(capabilitiesId);
+    capabilityEntity.setLastModified(LocalDateTime.now());
     CapabilityEntity updatedCapability = capabilityRepository.save(
       capabilityEntity
     );

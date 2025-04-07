@@ -1,5 +1,7 @@
 package com.engineering.dashboard.entities;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -26,6 +28,9 @@ public class UserEntity {
     @Size(min = 8, message = "Password must be at least 8 characters long")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@-$!%?&])", message = "Password must have at least one uppercase letter, one lowercase, one digit and a special character")
     private String password;
+    
+    private LocalDateTime createdTime;
+    private LocalDateTime lastModified;
 
     private String level;
 }

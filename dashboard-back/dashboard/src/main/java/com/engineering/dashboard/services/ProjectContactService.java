@@ -2,6 +2,8 @@ package com.engineering.dashboard.services;
 
 import com.engineering.dashboard.entities.ProjectContactEntity;
 import com.engineering.dashboard.repositories.ProjectContactRepository;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ public class ProjectContactService {
   public ProjectContactEntity createProjectContact(
     ProjectContactEntity projectContact
   ) {
+    projectContact.setCreatedTime(LocalDateTime.now());
+    projectContact.setLastModified(LocalDateTime.now());
     return projectContactRepository.save(projectContact);
   }
 
@@ -42,6 +46,7 @@ public class ProjectContactService {
     ProjectContactEntity projectContact = getProjectContactById(
       projectContactId
     );
+    projectContact.setLastModified(LocalDateTime.now());
     projectContact.setName(projectContactDetails.getName());
     projectContact.setPhone(projectContactDetails.getPhone());
     projectContact.setProject(projectContactDetails.getProject());

@@ -1,5 +1,6 @@
 package com.engineering.dashboard.entities;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,6 +35,9 @@ public class CapabilityEntity {
 
   @Column(nullable = false)
   private String type;
+
+  private LocalDateTime createdTime;
+  private LocalDateTime lastModified;
 
   @ElementCollection
   @Enumerated(EnumType.STRING)

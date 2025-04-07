@@ -3,6 +3,8 @@ package com.engineering.dashboard.services;
 import com.engineering.dashboard.entities.ProjectEntity;
 import com.engineering.dashboard.repositories.ProjectRepository;
 import jakarta.validation.Valid;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class ProjectService {
   }
 
   public ProjectEntity createProject(ProjectEntity project) {
+    project.setCreatedTime(LocalDateTime.now());
+    project.setLastModified(LocalDateTime.now());
     return projectRepo.save(project);
   }
 
@@ -41,6 +45,7 @@ public class ProjectService {
     if (oldProject.isEmpty()) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
+    newProject.setLastModified(LocalDateTime.now());
     newProject.setId(id);
     projectRepo.save(newProject);
     return ResponseEntity.status(HttpStatus.OK).body(newProject);

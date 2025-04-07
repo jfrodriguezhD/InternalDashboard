@@ -1,5 +1,6 @@
 package com.engineering.dashboard.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,8 @@ public class UserService {
     }
 
     public ResponseEntity<UserEntity> createUser(@Valid @RequestBody UserEntity user) {
+        user.setCreatedTime(LocalDateTime.now());
+        user.setLastModified(LocalDateTime.now());
         userRepository.save(user);
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
@@ -48,6 +51,7 @@ public class UserService {
         }
 
         user.setId(usersId);
+        user.setLastModified(LocalDateTime.now());
         userRepository.save(user);
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }

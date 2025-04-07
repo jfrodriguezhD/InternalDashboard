@@ -1,5 +1,6 @@
 package com.engineering.dashboard.entities;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.ElementCollection;
@@ -82,6 +83,9 @@ public class RosterEntity {
     )
   )
   private List<CapabilityEntity> sub_capabilities;
+
+  private LocalDateTime createdTime;
+  private LocalDateTime lastModified;
 
   @ManyToMany(mappedBy = "roster_prospected")
   private List<ProjectEntity> projects;
