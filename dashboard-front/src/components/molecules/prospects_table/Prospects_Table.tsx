@@ -173,19 +173,15 @@ function Prospects_Table() {
     }, [])
 
     useEffect(() => {
-        sortBy(sort, list, setShowList)
-        searchBy(search, sortList, setShowList)
+        sortBy(sort ?? "", list, setShowList)
+        searchBy(search ?? "", sortList, setShowList)
     }, [ list ])
     useEffect(() => {
-        searchBy(search, sortList, setShowList)
+        searchBy(search ?? "", sortList, setShowList)
     }, [ search ])
     useEffect(() => {
-            sortBy(sort, list, setShowList)
+            sortBy(sort ?? "", list, setShowList)
     }, [ sort ])
-
-    useEffect(() => {
-        console.log(searchList)
-    }, [showList])
 
     useEffect(() => {
       updatePageQuantity()
