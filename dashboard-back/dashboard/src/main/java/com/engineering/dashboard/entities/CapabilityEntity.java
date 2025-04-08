@@ -6,7 +6,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -30,19 +29,16 @@ public class CapabilityEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String name;
 
-  @Column(nullable = false)
-  private String type;
-
   private LocalDateTime createdTime;
+
   private LocalDateTime lastModified;
 
-  @ElementCollection
+  @Column(nullable = false)
   @Enumerated(EnumType.STRING)
-  @Column(name = "enum_values")
-  private List<CapabilityEnum> enumValues;
+  private CapabilityEnum type;
 
   public enum CapabilityEnum {
     MAIN_CAPABILITY,
