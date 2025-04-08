@@ -34,57 +34,39 @@
 
 
 
-.personal__info__card__capabilities{
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-}
-
+.personal__info__card__capabilities, 
 .personal__info__card__subcapabilities{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 1em;
 }
 
-.profile__info__card__color__red{
-    padding-inline: 0.5rem;
-    padding-block: 0.25rem;
-    border-radius: 50%;
-    background-color: var(--red);
+.personal__info__card__capabilities > *, 
+.personal__info__card__subcapabilities > *{
+    padding: 0 12px;
+    min-height: 30px;
+    border-radius: 24px;
     align-content: center;
     justify-content: center;
+    color: black;
+    font-weight: 500;
+}
+
+.profile__info__card__color__red{
+    background-color: var(--red);
 }
 .profile__info__card__color__yellow{
-    padding-inline: 0.5rem;
-    padding-block: 0.25rem;
-    border-radius: 50%;
     background-color: var(--yellow);
-    align-content: center;
-    justify-content: center;
 }
 .profile__info__card__color__purple{
-    padding-inline: 0.5rem;
-    padding-block: 0.25rem;
-    border-radius: 50%;
     background-color: var(--dark-blue);
-    align-content: center;
-    justify-content: center;
 }
 .profile__info__card__color__blue{
-    padding-inline: 0.5rem;
-    padding-block: 0.25rem;
-    border-radius: 50%;
     background-color: var(--light-blue);
-    align-content: center;
-    justify-content: center;
 }
 .profile__info__card__color__green{
-    padding-inline: 0.5rem;
-    padding-block: 0.25rem;
-    border-radius: 50%;
     background-color: var(--green);
-    align-content: center;
-    justify-content: center;
 }
 
 .profile__info__card__status__Active{

@@ -15,6 +15,24 @@
   gap: 1rem;
 }
 
-.personal__info__card__resume p{
+.fa-file{
+  font-size: 50px;
+}
+
+.personal__info__card_phone,
+.personal__info__card__email{
+    align-items: center;
+}
+
+.personal__info__card__resume{
+  padding-bottom: 10px;
+}
+
+.personal__info__card__resume > p{
   padding-bottom: 20px;
 }
+
+.personal__info__card__resume__file p{ 
+  align-self: center;
+}
+
