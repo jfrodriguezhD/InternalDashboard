@@ -2,7 +2,6 @@ package com.engineering.dashboard.entities;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,7 +31,7 @@ public class ProjectContactEntity {
   private LocalDateTime createdTime;
   private LocalDateTime lastModified;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "project_id")
   private ProjectEntity project;
 }
