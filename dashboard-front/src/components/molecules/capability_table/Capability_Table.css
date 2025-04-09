@@ -2,7 +2,8 @@
     padding-top: 20px;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90%;
+    justify-self: center;
 }
 
 .capability-table thead,
