@@ -32,18 +32,9 @@ function ProfileInfoCard({
   subcapabilities,
 }: Prospect) {
   const colors: string[] = ["red", "blue", "green", "yellow", "purple"];
-  const setColor = (
-    text:
-      | ["ACTIVE"]
-      | ["HIRED"]
-      | ["NOT_IN_PROCESS"]
-      | ["DISCARTED"]
-      | ["PAUSED"]
-      | ["ARCHIVED"]
-  ): string => {
-    //console.log(text);
+
+  const setColor = (): string => {
     const index = Math.floor(Math.random() * (4 - 0 + 1));
-    //console.log(index);
     return colors[index];
   };
 
@@ -82,7 +73,7 @@ function ProfileInfoCard({
           <div className="personal__info__card__capabilities">
             {capabilities.map((capability, index) => (
               <p
-                className={"profile__info__card__color__" + setColor(status)}
+                className={"profile__info__card__color__" + setColor()}
                 key={index}
               >
                 {capability.name}
@@ -93,7 +84,7 @@ function ProfileInfoCard({
           <div className="personal__info__card__subcapabilities">
             {subcapabilities.map((capability, index) => (
               <p
-                className={"profile__info__card__color__" + setColor(status)}
+                className={"profile__info__card__color__" + setColor()}
                 key={index}
               >
                 {capability.name}
