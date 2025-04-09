@@ -1,6 +1,8 @@
 
 # Internal Dashboard
 
+![Screenshot of main view](./resources/main-page.png)
+
 ## Needed Dependencies
 
 * Podman
