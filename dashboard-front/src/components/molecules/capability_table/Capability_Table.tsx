@@ -24,6 +24,20 @@ const Capability_Table = ({ isRemoveActive }: Capability_Table_Props) => {
     fetchCapabilities();
   }, []);
 
+  const handleDelete = (id: number) => {
+    fetch(`${capabilityBaseApiURL}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) =>
+        alert("Profile successfully deleted: " + JSON.stringify(data))
+      );
+    location.reload();
+  };
+
   return (
     <>
       <table className="capability-table">
@@ -41,7 +55,11 @@ const Capability_Table = ({ isRemoveActive }: Capability_Table_Props) => {
               <td className="capability-table__name">{capability.name}</td>
               <td className="capability-table__type">{capability.type}</td>
               {isRemoveActive ? (
-                <ToolButton icon={"fa-solid fa-trash"} group={"dasd"} />
+                <ToolButton
+                  icon={"fa-solid fa-trash"}
+                  group={"dasd"}
+                  handleClick={() => handleDelete(capability.id)}
+                />
               ) : (
                 <></>
               )}
