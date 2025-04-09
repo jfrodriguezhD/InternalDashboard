@@ -1,9 +1,8 @@
-import "./Control.css";
-import { outputs, filters, tools } from "../../../data/control/control_data";
-import { SearchContext, SortContext } from "../../../pages/App";
 import { useContext, useEffect } from "react";
-import ToolButton from "../../atoms/toolbutton/ToolButton";
+import { filters, outputs } from "../../../data/control/control_data";
+import { SearchContext, SortContext } from "../../../pages/App";
 import WordBubble from "../../atoms/wordbubble/WordBubble";
+import "./Control.css";
 
 export default function Control() {
 

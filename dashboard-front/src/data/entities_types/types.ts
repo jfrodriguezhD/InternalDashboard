@@ -11,6 +11,8 @@ type Prospects = {
 	capabilities: Capabilities[];
 	sub_capabilities: Capabilities[];
 	projects: Projects[];
+	createdTime: Date;
+	lastModified: Date;
 }
 
 type Capabilities = {
@@ -19,6 +21,8 @@ type Capabilities = {
 	type: 'MAIN_CAPABILITY' | 'SECONDARY_CAPABILITY';
 	prospects: Prospects[];
 	prospects_sub: Prospects[];
+	createdTime: Date;
+	lastModified: Date;
 }
 
 type Projects = {
@@ -28,6 +32,8 @@ type Projects = {
 	prospects: Prospects[];
 	roster: Roster[];
 	project_contacts: ProjectContacts[];
+	createdTime: Date;
+	lastModified: Date;
 }
 
 type Roster = {
@@ -44,6 +50,8 @@ type Roster = {
 	sub_capabilities: Capabilities[];
 	prospected_for: Projects[];
 	project: Projects;
+	createdTime: Date;
+	lastModified: Date;
 }
   
 type ProjectContacts = {
@@ -51,6 +59,8 @@ type ProjectContacts = {
 	name: string;
 	phone: number;
 	project: Projects[];
+	createdTime: Date;
+	lastModified: Date;
 }
 
 export type { Prospects, Capabilities, Projects, Roster, ProjectContacts }
