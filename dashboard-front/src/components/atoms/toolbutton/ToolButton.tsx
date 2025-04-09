@@ -1,7 +1,7 @@
 import "./ToolButton.css";
 
 interface ToolButtonProps {
-  word: string;
+  word?: string;
   icon: string;
   group: string;
   handleClick?: () => void;

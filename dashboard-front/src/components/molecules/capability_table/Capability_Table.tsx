@@ -1,0 +1,56 @@
+import { useEffect, useState } from "react";
+import { Capabilities } from "../../../data/entities_types/types";
+import { capabilityBaseApiURL } from "../../../data/endpoints/api_endpoints";
+import "./Capability_Table.css";
+import ToolButton from "../../atoms/toolbutton/ToolButton";
+
+interface Capability_Table_Props {
+  isRemoveActive: boolean;
+}
+
+const Capability_Table = ({ isRemoveActive }: Capability_Table_Props) => {
+  const [capabilities, setCapabilities] = useState<Capabilities[]>([]);
+
+  useEffect(() => {
+    const fetchCapabilities = async () => {
+      try {
+        const capabilitiesFetch = await fetch(capabilityBaseApiURL);
+        const data = await capabilitiesFetch.json();
+        setCapabilities(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCapabilities();
+  }, []);
+
+  return (
+    <>
+      <table className="capability-table">
+        <thead>
+          <tr className="capability-table__row">
+            <td className="capability-table__id">ID</td>
+            <td className="capability-table__name">Name</td>
+            <td className="capability-table__type">Type</td>
+          </tr>
+        </thead>
+        <tbody>
+          {capabilities.map((capability, cont) => (
+            <tr className="capability-table__row" key={cont}>
+              <td className="capability-table__id">{capability.id}</td>
+              <td className="capability-table__name">{capability.name}</td>
+              <td className="capability-table__type">{capability.type}</td>
+              {isRemoveActive ? (
+                <ToolButton icon={"fa-solid fa-trash"} group={"dasd"} />
+              ) : (
+                <></>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
+};
+
+export default Capability_Table;
