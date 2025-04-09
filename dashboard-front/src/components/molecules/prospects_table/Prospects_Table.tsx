@@ -75,86 +75,103 @@ function Prospects_Table() {
         sort_type: string, og_list: Prospects[], setOG: (arg: Prospects[]) => void) {
         switch (sort_type) {
             case "Name": {
-                    const tempArr = [...og_list].sort((a, b) => {
-                        if (a.name < b.name) {
-                        return -1;
-                        }
-                        if (a.name > b.name) {
-                        return 1;
-                        }
-                        return 0;
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].sort((a, b) => {
+                    if (a.name < b.name) {
+                    return -1;
+                    }
+                    if (a.name > b.name) {
+                    return 1;
+                    }
+                    return 0;
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Capabilities": {
-                    const tempArr = [...og_list].sort((a, b) => {
-                        if (a.capabilities < b.capabilities) {
-                        return -1;
-                        }
-                        if (a.capabilities > b.capabilities) {
-                        return 1;
-                        }
-                        return 0;
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].sort((a, b) => {
+                    if (a.capabilities < b.capabilities) {
+                    return -1;
+                    }
+                    if (a.capabilities > b.capabilities) {
+                    return 1;
+                    }
+                    return 0;
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Project": {
-                    const tempArr = [...og_list].sort((a, b) => {
-                        if(!a.prospected_for || !b.prospected_for){
-                            return 0
-                        }
-                        if (a.prospected_for.name < b.prospected_for.name) {
-                        return -1;
-                        }
-                        if (a.prospected_for.name > b.prospected_for.name) {
-                        return 1;
-                        }
-                        return 0;
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].sort((a, b) => {
+                    if(!a.projects || !b.projects){
+                        return 0
+                    }
+                    if (a.projects[0].name < b.projects[0].name) {
+                    return -1;
+                    }
+                    if (a.projects[0].name > b.projects[0].name) {
+                    return 1;
+                    }
+                    return 0;
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Active": {
-                    const tempArr = [...og_list].filter((a) => {
-                        return a.status[0] == "ACTIVE"
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].filter((a) => {
+                    return a.status[0] == "ACTIVE"
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Hired": {
-                    const tempArr = [...og_list].filter((a) => {
-                        return a.status[0] == "HIRED"
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].filter((a) => {
+                    return a.status[0] == "HIRED"
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Not In Process": {
-                    const tempArr = [...og_list].filter((a) => {
-                        return a.status[0] == "NOT_IN_PROCESS"
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].filter((a) => {
+                    return a.status[0] == "NOT_IN_PROCESS"
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Discarted": {
-                    const tempArr = [...og_list].filter((a) => {
-                        return a.status[0] == "DISCARTED"
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].filter((a) => {
+                    return a.status[0] == "DISCARTED"
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
+            case "modified_time": {
+                const tempArr = [...og_list].sort((a, b) => {
+                    if(!a.lastModified || !b.lastModified){
+                        return 0
+                    }
+                    if (a.lastModified < b.lastModified) {
+                    return -1;
+                    }
+                    if (a.lastModified > b.lastModified) {
+                    return 1;
+                    }
+                    return 0;
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             default:
                 setSortList(og_list)
                 setOG(og_list)
-                break;
+            break;
         }
     }
 
@@ -170,6 +187,8 @@ function Prospects_Table() {
 
     useEffect(() => {
         fetchData()
+        if(sort && sort == "")
+            sortBy("modified_time", list, setShowList)
     }, [])
 
     useEffect(() => {

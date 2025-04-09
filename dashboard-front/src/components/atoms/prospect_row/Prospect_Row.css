@@ -14,13 +14,13 @@
 .prospects__row:hover{
 	scale: 1.02;
 	cursor: pointer;
+}
+.prospects__row.content:hover{
+	filter: brightness(0.92);
   .prospects__row__control__tools{
     visibility: visible;
   }
   padding-bottom: 4em;
-}
-.prospects__row.content:hover{
-	filter: brightness(0.92);
 }
 
 .prospects__row__member{
