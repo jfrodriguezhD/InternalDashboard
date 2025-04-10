@@ -11,21 +11,30 @@
   z-index: 1;
 }
 
-.project-creation-modal {
+.project-edition-modal {
   background-color: var(--background);
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 50vw;
-  height: 75vh;
+  height: 90vh;
   padding: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 2;
 }
 
-.project-creation-modal__header {
+.project-edition-modal__header {
   display: flex;
   justify-content: space-between;
+}
+.project-edition-modal__form__select {
+  color: black;
+  cursor: pointer;
+}
+.project-edition-modal__form__select__option {
+  color: black;
+  cursor: pointer;
+  background-color: var(--light-gray);
 }
 
 .close-modal {
@@ -37,7 +46,7 @@
 .close-modal:hover {
   color: var(--red);
 }
-.project-creation-modal__form {
+.project-edition-modal__form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -45,7 +54,7 @@
 .project-name {
   padding-right: 1rem;
 }
-.project-creation-modal__form__input {
+.project-edition-modal__form__input {
   color: black;
 }
 .save__button,
