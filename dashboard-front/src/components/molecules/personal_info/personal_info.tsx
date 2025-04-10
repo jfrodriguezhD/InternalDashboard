@@ -95,7 +95,7 @@ function Personal_Info_Edit({ closeModal }: PersonalInfoEditProps) {
           Please ensure the resume is a Word or PDF file up to 2MB size
         </div>
         <label htmlFor="route_to_resume">
-          {data.route_to_resume != ""
+          {data?.route_to_resume
             ? "Current file: " + data.route_to_resume
             : ""}
         </label>

@@ -1,14 +1,19 @@
-import { useEffect, useState, useRef } from "react";
+import { createContext, Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { rosterBaseApiURL } from "../../../data/endpoints/api_endpoints";
 import { Roster } from "../../../data/entities_types/types";
 import Roster_Footer from "../../atoms/roster_footer/Roster_Footer";
 import Roster_Row from "../../atoms/roster_row/Roster_Row";
 import { CreateNewRoster } from "../../organism/create_new_roster/CreateNewRoster";
 import "./Roster_Table.css";
+import RosterView from "../../organism/roster_view/RosterView";
+
+export const SelectedRowContext = createContext<Dispatch<SetStateAction<number>> | undefined>(undefined);
 
 function Roster_Table() {
 
 	const [rosterList, setRosterList] = useState<Roster[]>([])
+    const [selectedRow, setSelectedRow] = useState<number>(0);
+    const viewRef = useRef<HTMLDialogElement>(null);
 	const profileModal = useRef<HTMLDialogElement>(null);
   
 	async function fetchData() {
@@ -38,6 +43,15 @@ function Roster_Table() {
             : profileModal.current.showModal();
     }
 
+	function toggleView() {
+        if (!viewRef.current) {
+            return;
+        }
+        viewRef.current.hasAttribute("open")
+            ? viewRef.current.close()
+            : viewRef.current.showModal();
+    }
+
   	return (
     	<>
       	<div className="roster-table">
@@ -50,9 +64,20 @@ function Roster_Table() {
 			<p className="roster__cell">Project</p>
 			<p className="roster__cell">Prospected for</p>
 		</div>
-        {rosterList.map((member) => (
-        	<Roster_Row member={member}/>
-        ))}
+		{
+			rosterList.length > 0 ? 
+				<RosterView roster={rosterList[selectedRow]} toggleDialog={toggleView} ref={viewRef} />
+				: null
+		}
+
+		<SelectedRowContext.Provider value={setSelectedRow}>
+			{
+				rosterList.map((member, index) => (
+						<Roster_Row member={member} index={index} key={index}/>
+					)
+				)
+			}
+		</SelectedRowContext.Provider>
 		<div className='roster_table add__new__member' onClick={() => toggleDialog()}>
 			Add New Roster Member
 		</div>

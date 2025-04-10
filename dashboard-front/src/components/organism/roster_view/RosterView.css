@@ -1,0 +1,48 @@
+.roster-modal-view{
+    flex-direction: column;
+    width: 30%;
+    justify-self: right;
+    padding: 30px;
+    border: none;
+    height: 100vh;
+    scrollbar-width: none;
+}
+
+.roster__view__modal__header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 18px;
+    gap:20px;
+    border-radius: 8px;
+}
+
+.roster__view__modal{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 16px;
+}
+
+.roster__view__modal > *{
+    background-color: var(--background);
+    border-radius: 6px;
+}
+
+.delete-roster-button{
+    display: flex;
+    color: var(--red);
+    background-color: transparent;
+    border: none;
+    justify-self: flex-end;
+    gap: 8px;
+}
+
+.delete-roster-button:hover{
+    cursor: pointer;
+    transform:scale(1.05);
+}
+
+.fa-trash{
+    color: var(--red);
+}
