@@ -1,0 +1,49 @@
+.capability-table{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-self: center;
+}
+
+.capability-table thead,
+.capability-table tbody{
+    display: flex;
+    flex-direction: column;
+}
+
+.capability-table thead .capability-table__row{ 
+    background-color: var(--dark-comp);
+}
+
+.capability-table,
+.capability-table > *{
+    gap: 10px
+}
+
+.capability-table__row{
+    display: flex;
+    background-color: var(--light-comp);
+    border-radius: 4px;
+    padding: 4px 0;
+    height: 40px;
+    align-items: center;
+}
+
+
+.capability-table__id{
+    padding-left: 10px;
+    width: 10%;
+}
+
+.capability-table__name{
+    width: 50%;
+}
+
+.capability-table__type{
+    width: 40%;
+}
+
+.capability-table__row i{
+    align-self: center;
+}
