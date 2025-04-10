@@ -1,7 +1,7 @@
 .ToolButton {
   display: flex;
   background-color: var(--light-comp);
-  height: 30px;
+  min-height: 28px;
   text-align: center;
   padding: 0 12px;
   gap: 8px;

@@ -8,19 +8,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "rosters")
 public class RosterEntity {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   private String name;
@@ -34,11 +37,11 @@ public class RosterEntity {
   private List<StatusEnum> status;
 
   private enum StatusEnum {
-    COMING_AVAILABLE, 
-	ASSIGNED, 
-	AVAILABLE, 
-	NOT_AVAILABLE, 
-	HOLD 
+    COMING_AVAILABLE,
+    ASSIGNED,
+    AVAILABLE,
+    NOT_AVAILABLE,
+    HOLD
   }
 
   @ElementCollection
@@ -63,25 +66,11 @@ public class RosterEntity {
   }
 
   @ManyToMany
-  @JoinTable(
-    name = "roster_capabilities",
-    joinColumns = @JoinColumn(name = "roster_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(
-      name = "capability_id",
-      referencedColumnName = "id"
-    )
-  )
+  @JoinTable(name = "roster_capabilities", joinColumns = @JoinColumn(name = "roster_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "capability_id", referencedColumnName = "id"))
   private List<CapabilityEntity> capabilities;
 
   @ManyToMany
-  @JoinTable(
-    name = "roster_subcapabilities",
-    joinColumns = @JoinColumn(name = "roster_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(
-      name = "capability_id",
-      referencedColumnName = "id"
-    )
-  )
+  @JoinTable(name = "roster_subcapabilities", joinColumns = @JoinColumn(name = "roster_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "capability_id", referencedColumnName = "id"))
   private List<CapabilityEntity> sub_capabilities;
 
   private LocalDateTime createdTime;

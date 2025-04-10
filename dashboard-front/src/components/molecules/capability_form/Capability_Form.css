@@ -1,0 +1,33 @@
+.capability-form{
+    display: flex;
+    justify-self: center;
+    padding-top: 30px;
+    gap: 10px;
+}
+
+.capability-form > *{
+    background-color: var(--light-comp);
+    border: none;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 14px;
+}
+
+.add-capability, 
+.remove-capability{
+    padding-left: 0;
+    width: 40px;
+    border: none;
+    color: var(--dark-comp);
+    font-size: 26px;
+    font-weight: bolder;
+    border-radius: 40px;
+    
+}
+.add-capability{
+    background-color: var(--green);
+}
+
+.remove-capability{
+    background-color: var(--red);
+}

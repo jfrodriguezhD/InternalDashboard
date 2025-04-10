@@ -8,7 +8,7 @@
 * Podman
 * IDE capable of running local Java env
 * NPM
-* Postegres
+* Postgres
 
 ## Dashboard Database
 

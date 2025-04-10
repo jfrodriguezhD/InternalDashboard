@@ -156,10 +156,10 @@ function Prospects_Table() {
                     if(!a.lastModified || !b.lastModified){
                         return 0
                     }
-                    if (a.lastModified < b.lastModified) {
+                    if (a.lastModified > b.lastModified) {
                     return -1;
                     }
-                    if (a.lastModified > b.lastModified) {
+                    if (a.lastModified < b.lastModified) {
                     return 1;
                     }
                     return 0;
@@ -187,13 +187,13 @@ function Prospects_Table() {
 
     useEffect(() => {
         fetchData()
-        if(sort && sort == "")
-            sortBy("modified_time", list, setShowList)
     }, [])
 
     useEffect(() => {
         sortBy(sort ?? "", list, setShowList)
         searchBy(search ?? "", sortList, setShowList)
+        if(!sort || sort == "")
+            sortBy("modified_time", list, setShowList)
     }, [ list ])
     useEffect(() => {
         searchBy(search ?? "", sortList, setShowList)
