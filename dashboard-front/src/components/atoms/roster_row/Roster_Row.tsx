@@ -16,7 +16,7 @@ function Roster_Row({member}:Props) {
     <>
     <div className='roster-member' onClick={()=>setSelected(member.id)}>
       <p className='roster__name__cell'>{member.name} {member.last_name}</p>
-      <p className={"roster__cell "+member.status}>{member.status}</p>
+      <p className={"roster__cell "+ member.status}>{member.status}</p>
       <p className="roster__cell">{member.seniority}</p>
       <p className="roster__cell">{member.sub_capabilities.length>0?member.sub_capabilities[0].name:"Not Assigned"}</p>
       <p className="roster__cell">{member.capabilities.length>0?member.capabilities[0].name:"Not assigned"}</p>

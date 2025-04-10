@@ -1,4 +1,4 @@
-.create__prospect-modal{
+.create__roster-modal{
     flex-direction: column;
     width: 40%;
     justify-self: center;
@@ -12,46 +12,46 @@
     width: 5%;
 }
 
-.create__prospect-modal > *{
+.create__roster-modal > *{
     padding-bottom: 20px;
 }
 
-.create__prospect-modal::backdrop{
+.create__roster-modal::backdrop{
     background-color: rgba(0, 0, 0, 0.54);
 }
 
-.create__prospect-modal__heading{
+.create__roster-modal__heading{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.create__prospect-modal input,
-.create__prospect-modal select{
+.create__roster-modal input,
+.create__roster-modal select{
     background-color: var(--light-comp);
     border: none;
 }
 
-.create__prospect-modal__capabilities,
-.create__prospect-modal__senority{
+.create__roster-modal__capabilities,
+.create__roster-modal__senority{
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
 }
 
-.create__prospect-modal p,
-.create__prospect-modal__buttons button{
+.create__roster-modal p,
+.create__roster-modal__buttons button{
     display: block;
     width: 100%;
 }
 
-.create__prospect-modal__buttons button{
+.create__roster-modal__buttons button{
     border: none;
     border-radius: 6px;
     padding: 4px;
 }
 
-.create__prospect-modal__buttons{
+.create__roster-modal__buttons{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -67,13 +67,13 @@
     color: var(--white);
 }
 
-.create__prospect-modal select,
-.create__prospect-modal input{
+.create__roster-modal select,
+.create__roster-modal input{
     width: 70%;
     padding: 4px 0 4px 10px;
 }
 
-.create__prospect__form{
+.create__roster__form{
 	display: flex;
 	flex-direction: column;
 

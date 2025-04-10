@@ -19,7 +19,6 @@ function Prospects_Table() {
 
     const [ list, setList ] = useState<Prospects[]>([])
     const [ sortList, setSortList ] = useState<Prospects[]>([])
-    const [ searchList, setSearchList ] = useState<Prospects[]>([])
     const [ showList, setShowList ] = useState<Prospects[]>([])
 
     const profileModal = useRef<HTMLDialogElement>(null);
@@ -33,12 +32,12 @@ function Prospects_Table() {
 
     function toggleView() {
         if (!viewRef.current) {
-        return;
+            return;
+        }
+        viewRef.current.hasAttribute("open")
+            ? viewRef.current.close()
+            : viewRef.current.showModal();
     }
-    viewRef.current.hasAttribute("open")
-        ? viewRef.current.close()
-        : viewRef.current.showModal();
-      }
 
     function updatePageQuantity() {
         if(page){
@@ -54,7 +53,6 @@ function Prospects_Table() {
             }
             const data: Prospects[] = await response.json();
             setList(data)
-            setSearchList(data)
             setShowList(data)
             setSortList(data)
         } catch (error) {
@@ -69,7 +67,7 @@ function Prospects_Table() {
         profileModal.current.hasAttribute("open")
             ? profileModal.current.close()
             : profileModal.current.showModal();
-        }
+    }
 
     function sortBy(
         sort_type: string, og_list: Prospects[], setOG: (arg: Prospects[]) => void) {
@@ -181,7 +179,6 @@ function Prospects_Table() {
                 return
             return (a.name.toLowerCase() + a.last_name.toLowerCase()).includes(search_string.toLowerCase())
         })
-        setSearchList(tempArr)
         setOG(tempArr)
     }
 
@@ -217,14 +214,18 @@ function Prospects_Table() {
             <div>Prospected For</div>
         </div>
         <div className="prospects__table__row__container">
-            {showList.length>0?<ProspectView prospect={showList[selectedRow]} toggleDialog={toggleView} ref={viewRef} />:null}
+            {
+            showList.length > 0 ? 
+                <ProspectView prospect={showList[selectedRow]} toggleDialog={toggleView} ref={viewRef} />
+                : null
+            }
             <SelectedRowContext.Provider value={setSelectedRow}>
             {
                 showList.map((data, index) => {
                         if (index < (PAGE_LIMIT * pageNumber) && index >= ((PAGE_LIMIT * pageNumber) - PAGE_LIMIT)) {
                             return <Prospects_Row data={data} key={index} index={index} classname={"content"}/>
                         }
-                    }
+                    } 
                 )
             }
             </SelectedRowContext.Provider>

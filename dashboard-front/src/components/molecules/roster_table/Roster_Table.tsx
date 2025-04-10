@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { rosterBaseApiURL } from "../../../data/endpoints/api_endpoints";
+import { Roster } from "../../../data/entities_types/types";
 import Roster_Footer from "../../atoms/roster_footer/Roster_Footer";
 import Roster_Row from "../../atoms/roster_row/Roster_Row";
-import "./Roster_Table.css"; 
-import { Roster } from "../../../data/entities_types/types";
-import { rosterBaseApiURL } from "../../../data/endpoints/api_endpoints";
+import { CreateNewRoster } from "../../organism/create_new_roster/CreateNewRoster";
+import "./Roster_Table.css";
 
 function Roster_Table() {
 
 	const [rosterList, setRosterList] = useState<Roster[]>([])
+	const profileModal = useRef<HTMLDialogElement>(null);
   
 	async function fetchData() {
   
@@ -26,15 +28,15 @@ function Roster_Table() {
 	useEffect(() => {
 	  fetchData();
 	}, []);
-	
-	function toggleDialog() {/*
-		if (!profileModal.current) {
-		  return;
-		}
-		profileModal.current.hasAttribute("open")
-		  ? profileModal.current.close()
-		  : profileModal.current.showModal();*/
-	  }
+
+	function toggleDialog() {
+        if (!profileModal.current) {
+            return;
+        }
+        profileModal.current.hasAttribute("open")
+            ? profileModal.current.close()
+            : profileModal.current.showModal();
+    }
 
   	return (
     	<>
@@ -56,6 +58,7 @@ function Roster_Table() {
 		</div>
       </div>
       <Roster_Footer len={Math.floor(rosterList.length / 10)} selected={1} />
+	  <CreateNewRoster toggleDialog={ toggleDialog } ref={ profileModal }/>
     </>
   );
 }

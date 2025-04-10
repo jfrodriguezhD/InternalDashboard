@@ -77,3 +77,7 @@
   }
   gap: 0.5em;
 }
+
+.capability__nametag__container{
+  flex-direction: row;
+}

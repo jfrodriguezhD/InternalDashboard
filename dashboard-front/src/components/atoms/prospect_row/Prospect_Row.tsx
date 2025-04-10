@@ -77,7 +77,7 @@ function Prospects_Row({ data, index, classname }: Prop) {
       }`}
       <section className="prospects__row__control__tools">
           {tools.slice(1).map((tool, index) => {
-          return <ToolButton word={tool.word} group={`prospects_row__tools__${tool.word}${data.id}`} icon={tool.icon} key={index} handleClick={()=>handleBtnClick(event,tool.word)}/>;
+            return <ToolButton word={tool.word} group={`prospects_row__tools__${tool.word}${data.id}`} icon={tool.icon} key={index} handleClick={()=>handleBtnClick(event,tool.word)}/>;
           })}
         </section>
       </div>
@@ -94,9 +94,10 @@ function Prospects_Row({ data, index, classname }: Prop) {
       <div className="prospects__row__member">
         {data.job_title ? data.job_title : ""}
       </div>
-      <div className="prospects__row__member">
+      <div className="prospects__row__member capability__nametag__container">
         {data.capabilities.map((i) => {
-          if (i) return i.name;
+          if (i) 
+            return <div className="capability__nametag">{i.name}</div>;
         })}
       </div>
       <div className="prospects__row__member">
