@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { Outlet } from "react-router";
 import Control from "../components/organism/control/Control";
 import Header from "../components/molecules/header/Header";
-import { Prospects } from '../data/entities_types/types';
+import { Prospects, Roster } from '../data/entities_types/types';
 
 interface SearchContextType {
 	search: string;
@@ -20,9 +20,20 @@ interface SelectedProspectContextType{
 }
 
 
-interface ShowListContextType{
-	showList:Prospects[];
-	setShowList: (list:Prospects[]) => void;
+interface ProspectShowListContextType{
+	prospectShowList:Prospects[];
+	setProspectShowList: (list:Prospects[]) => void;
+}
+
+interface SelectedRosterContextType{
+	selectedRoster:Roster | undefined;
+	setSelectedRoster:(roster:Roster) => void;
+}
+
+
+interface RosterShowListContextType{
+	rosterShowList:Roster[];
+	setRosterShowList: (list:Roster[]) => void;
 }
 
 interface SelectedRowContextType{
@@ -34,7 +45,9 @@ const SelectedRowContext = createContext<SelectedRowContextType | undefined>(und
 const SearchContext = createContext<SearchContextType | null>(null);
 const SortContext 	= createContext<SortContextType | null>(null);
 const SelectedProspectContext = createContext<SelectedProspectContextType | null>(null);
-const ShowListContext = createContext<ShowListContextType | null>(null);
+const ProspectShowListContext = createContext<ProspectShowListContextType | null>(null);
+const SelectedRosterContext = createContext<SelectedRosterContextType | null>(null);
+const RosterShowListContext = createContext<RosterShowListContextType | null>(null);
 
 function App() {
 
@@ -44,7 +57,9 @@ function App() {
 	const [ search, setSearch ] = useState<string>("")
 	const [ sort, setSort ] 	= useState<string>("")
 	const [selectedProspect, setSelectedProspect] = useState<Prospects>();
-    const [ showList, setShowList ] = useState<Prospects[]>([])
+    const [ prospectShowList, setProspectShowList ] = useState<Prospects[]>([])
+	const [selectedRoster, setSelectedRoster] = useState<Roster>();
+    const [ rosterShowList, setRosterShowList ] = useState<Roster[]>([])
 	const [selectedRow, setSelectedRow] = useState<number>(-1);
 
 	useEffect(() => {
@@ -60,14 +75,18 @@ function App() {
 			<SearchContext.Provider 	value={ { search, setSearch } }>
 				<SortContext.Provider 	value={ { sort, setSort } }>
 					<SelectedProspectContext.Provider value={{selectedProspect,setSelectedProspect}}>
-						<ShowListContext.Provider value={{showList,setShowList}}>
+						<ProspectShowListContext.Provider value={{prospectShowList, setProspectShowList}}>
 							<SelectedRowContext.Provider value={{selectedRow,setSelectedRow}}>
-								<main className="main">
-									<Control />
-									<Outlet />
-								</main>
+								<RosterShowListContext.Provider value={{rosterShowList,setRosterShowList}}>
+									<SelectedRosterContext.Provider value={{selectedRoster,setSelectedRoster}}>
+										<main className="main">
+											<Control />
+											<Outlet />
+										</main>
+									</SelectedRosterContext.Provider>
+								</RosterShowListContext.Provider>
 							</SelectedRowContext.Provider>
-						</ShowListContext.Provider>
+						</ProspectShowListContext.Provider>
 					</SelectedProspectContext.Provider>
 				</SortContext.Provider>
 			</SearchContext.Provider>
@@ -76,4 +95,4 @@ function App() {
 }
 
 export default App;
-export { SortContext, SearchContext, SelectedProspectContext, ShowListContext,SelectedRowContext }
+export { SortContext, SearchContext, SelectedProspectContext, ProspectShowListContext ,SelectedRowContext, RosterShowListContext,SelectedRosterContext }

@@ -5,24 +5,29 @@ import Roster_Footer from "../../atoms/roster_footer/Roster_Footer";
 import Roster_Row from "../../atoms/roster_row/Roster_Row";
 import { CreateNewRoster } from "../../organism/create_new_roster/CreateNewRoster";
 import "./Roster_Table.css";
-import RosterView from "../../organism/roster_view/RosterView";
-import { SearchContext, SortContext } from "../../../pages/App";
-
-export const SelectedRowContext = createContext<Dispatch<SetStateAction<number>> | undefined>(undefined);
+import RosterView, { RosterContext } from "../../organism/roster_view/RosterView";
+import { RosterShowListContext, SearchContext, SelectedRosterContext, SelectedRowContext, SortContext } from "../../../pages/App";
 
 function Roster_Table() {
 
 	const [rosterList, setRosterList] = useState<Roster[]>([])
-    const [selectedRow, setSelectedRow] = useState<number>(0);
+    const {selectedRow, setSelectedRow} = useContext(SelectedRowContext);
     const viewRef = useRef<HTMLDialogElement>(null);
 	const profileModal = useRef<HTMLDialogElement>(null);
   
 	const [ sortList, setSortList ] = useState<Roster[]>([])
-	const [ showList, setShowList ] = useState<Roster[]>([])
+	const { rosterShowList, setRosterShowList } = useContext(RosterShowListContext);
 	const searchContext = useContext(SearchContext);
 	const sortContext = useContext(SortContext);
+	const selectedRoster = useContext(SelectedRosterContext);
+
 	const search = searchContext?.search;
 	const sort = sortContext?.sort;
+	
+    if(rosterShowList.length > 0 && selectedRow!=-1){
+        selectedRoster?.setSelectedRoster(rosterShowList[selectedRow]);
+    }
+
 
 	async function fetchData() {
 		  try {
@@ -33,7 +38,7 @@ function Roster_Table() {
 			  const data: Roster[] = await response.json();
 			  setRosterList(data);
 			  setSortList(data)
-			  setShowList(data)
+			  setRosterShowList(data)
 		  } catch (error) {
 				console.error('There was a problem with the fetch operation:', error);
 		  }
@@ -125,16 +130,16 @@ function Roster_Table() {
 	}, []);
 
 	useEffect(() => {
-        sortBy(sort ?? "", rosterList, setShowList)
-        searchBy(search ?? "", sortList, setShowList)
+        sortBy(sort ?? "", rosterList, setRosterShowList)
+        searchBy(search ?? "", sortList, setRosterShowList)
         if(!sort || sort == "")
-            sortBy("modified_time", rosterList, setShowList)
+            sortBy("modified_time", rosterList, setRosterShowList)
     }, [ rosterList ])
     useEffect(() => {
-        searchBy(search ?? "", sortList, setShowList)
+        searchBy(search ?? "", sortList, setRosterShowList)
     }, [ search ])
     useEffect(() => {
-            sortBy(sort ?? "", rosterList, setShowList)
+            sortBy(sort ?? "", rosterList, setRosterShowList)
     }, [ sort ])
 
 	function toggleDialog() {
@@ -155,6 +160,10 @@ function Roster_Table() {
             : viewRef.current.showModal();
     }
 
+	if(rosterShowList.length>0 && selectedRow>=rosterShowList.length){
+		setSelectedRow(-1);
+	}
+
   	return (
     	<>
       	<div className="roster-table">
@@ -168,24 +177,21 @@ function Roster_Table() {
 			<p className="roster__cell">Prospected for</p>
 		</div>
 		{
-			showList.length > 0 ? 
-				<RosterView roster={showList[selectedRow]} toggleDialog={toggleView} ref={viewRef} />
+			rosterShowList.length > 0 ? 
+				<RosterView roster={rosterShowList[selectedRow!=-1?selectedRow:0]} toggleDialog={toggleView} ref={viewRef} />
 				: null
 		}
-
-		<SelectedRowContext.Provider value={setSelectedRow}>
-			{
-				showList.map((member, index) => (
-						<Roster_Row member={member} index={index} key={index}/>
-					)
+		{
+			rosterShowList.map((member, index) => (
+					<Roster_Row member={member} index={index} key={index}/>
 				)
-			}
-		</SelectedRowContext.Provider>
+			)
+		}
 		<div className='roster_table add__new__member' onClick={() => toggleDialog()}>
 			Add New Roster Member
 		</div>
       </div>
-      <Roster_Footer len={Math.floor(showList.length / 10)} selected={1} />
+      <Roster_Footer len={Math.floor(rosterShowList.length / 10)} selected={1} />
 	  <CreateNewRoster toggleDialog={ toggleDialog } ref={ profileModal }/>
     </>
   );

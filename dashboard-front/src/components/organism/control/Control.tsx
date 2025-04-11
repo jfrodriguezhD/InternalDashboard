@@ -1,59 +1,89 @@
 import "./Control.css";
 import { outputs, filters, tools } from "../../../data/control/control_data";
-import { SearchContext, SelectedProspectContext, SelectedRowContext, ShowListContext, SortContext } from "../../../pages/App";
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { SearchContext, SelectedProspectContext, SelectedRowContext, ProspectShowListContext, SortContext, SelectedRosterContext, RosterShowListContext } from "../../../pages/App";
+import { useContext, useEffect, useState } from "react";
 import ToolButton from "../../atoms/toolbutton/ToolButton";
 import WordBubble from "../../atoms/wordbubble/WordBubble";
-import { prospectBaseApiURL } from "../../../data/endpoints/api_endpoints";
+import { prospectBaseApiURL, rosterBaseApiURL } from "../../../data/endpoints/api_endpoints";
+import { useLocation } from "react-router-dom";
 
 export default function Control() {
 
-	const [ prospectPinList, setProspectPinList ] = useState<number[]>();
+	const [ prospectPinList, setProspectPinList ] = useState<number[]>([]);
+	const [ rosterPinList, setRosterPinList ] = useState<number[]>([]);
 
 	const searchContext = useContext(SearchContext);
   	const sortContext 	= useContext(SortContext);
-	const showListContext = useContext(ShowListContext);
+	const prospectShowListContext = useContext(ProspectShowListContext);
+	const rosterShowListContext = useContext(RosterShowListContext);
 	const selectedProspectContext = useContext(SelectedProspectContext);
+	const selectedRosterContext = useContext(SelectedRosterContext);
 	const selectedRowContext = useContext(SelectedRowContext);
 
 	const { search, setSearch } = searchContext;
 	const { sort, setSort } = sortContext;
-	const { showList, setShowList } = showListContext;
+	const { prospectShowList, setProspectShowList } = prospectShowListContext;
+	const { rosterShowList, setRosterShowList } = rosterShowListContext;
 	const { selectedProspect, setSelectedProspect } = selectedProspectContext;
+	const { selectedRoster, setSelectedRoster } = selectedRosterContext;
 	const {selectedRow, setSelectedRow} = selectedRowContext;
+
+	const path = useLocation().pathname;
+	const page = path.split("/")[1];
+
+	console.log(page);
+
+	if(page=="roster"){
+		console.log("kpe")
+	}
 
 	const showEditModal = () => {
 		const modal = document.querySelector(
-		  ".prospect-modal-view"
+		  page=="roster"?".roster-modal-view":".prospect-modal-view"
 		) as HTMLDialogElement;
 		modal!.showModal();
 	};
 
-	const archiveProspect = () => {
-		selectedProspect.status = ["ARCHIVED"];
+	const archive = () => {
+		if(page=="roster"){
+			selectedRoster.status = ["ARCHIVED"];
+		}
+		else{
+			selectedProspect.status = ["ARCHIVED"];
+		}
 	
-		const modifyURL = `${prospectBaseApiURL}/${selectedProspect.id}`;
+		const modifyURL = page=="roster"?`${rosterBaseApiURL}/${selectedRoster.id}`:`${prospectBaseApiURL}/${selectedProspect.id}`;
 	
 		fetch(modifyURL, {
 		  method: "PUT",
 		  headers: {
 			"Content-Type": "application/json",
 		  },
-		  body: JSON.stringify(selectedProspect),
+		  body: JSON.stringify(page=="roster"?selectedRoster:selectedProspect),
 		})
 		  .then((response) => response.json())
 		  .then((data) =>
-			alert("Profile successfully updated: " + JSON.stringify(data))
+			alert("Profile successfully updated: " + selectedRoster + JSON.stringify(data))
 		  );
 		location.reload();
 	}
 
-	const pinProspect = () => {
-		if(prospectPinList?.includes(selectedProspect.id)){
-			setProspectPinList(prospectPinList.filter(item => item !== selectedProspect.id));
+	const pin = () => {
+		if(page=="roster"){
+			if(rosterPinList?.includes(selectedRoster.id)){
+				setRosterPinList(rosterPinList.filter(item => item !== selectedRoster.id));
+			}
+			else{
+				setRosterPinList([selectedRoster.id,...rosterPinList]);
+			}
 		}
 		else{
-			setProspectPinList([selectedProspect.id,...prospectPinList]);
+			if(prospectPinList?.includes(selectedProspect.id)){
+				setProspectPinList(prospectPinList.filter(item => item !== selectedProspect.id));
+			}
+			else{
+				setProspectPinList([selectedProspect.id,...prospectPinList]);
+			}
 		}
 		setSelectedRow(-1);
 	}
@@ -65,10 +95,10 @@ export default function Control() {
 				showEditModal();
 				break;
 		  	case tools[1].word:
-				archiveProspect();
+				archive();
 				break;
 		  	case tools[2].word:
-				pinProspect();
+				pin();
 				break;
 		}
 	}
@@ -100,12 +130,31 @@ export default function Control() {
 	  }, [prospectPinList]);
 
 	useEffect(()=>{
-		setShowList([
-			...showList.filter(obj => prospectPinList?.includes(obj.id))
+		page!="roster"?setProspectShowList([
+			...prospectShowList.filter(obj => prospectPinList?.includes(obj.id))
 			.sort((a,b) => prospectPinList?.indexOf(a.id) - prospectPinList?.indexOf(b.id)),
-			...showList.filter(obj => !prospectPinList?.includes(obj.id))
-		]);	
-	},[showList[0],prospectPinList]);
+			...prospectShowList.filter(obj => !prospectPinList?.includes(obj.id))
+		]):null;	
+	},[prospectShowList[0],prospectPinList]);
+
+
+	useEffect(() => {
+		const storedPinList = localStorage.getItem('pinned-roster')
+		const pinList = storedPinList? JSON.parse(storedPinList) : [];
+		setRosterPinList(pinList);	
+	  }, []);
+	  
+	useEffect(() => {
+		localStorage.setItem('pinned-roster', JSON.stringify(rosterPinList));
+	  }, [rosterPinList]);
+
+	useEffect(()=>{
+		page=="roster"?setRosterShowList([
+			...rosterShowList.filter(obj => rosterPinList?.includes(obj.id))
+			.sort((a,b) => rosterPinList?.indexOf(a.id) - rosterPinList?.indexOf(b.id)),
+			...rosterShowList.filter(obj => !rosterPinList?.includes(obj.id))
+		]):null;	
+	},[rosterShowList[0],rosterPinList]);
 
 	return (
 		<div className="control">
