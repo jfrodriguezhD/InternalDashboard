@@ -41,7 +41,8 @@ public class RosterEntity {
     ASSIGNED,
     AVAILABLE,
     NOT_AVAILABLE,
-    HOLD
+    HOLD,
+    ARCHIVED
   }
 
   @ElementCollection
