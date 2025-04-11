@@ -21,15 +21,11 @@ interface ProjectContact {
   projectId: number;
 }
 
-interface ProjectEditionFormProps {
+interface ProjectDeleteFormProps {
   onClose: () => void;
 }
 
-const ProjectEditionForm: React.FC<ProjectEditionFormProps> = ({ onClose }) => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [company, setCompany] = useState("");
-  const [projectName, setProjectName] = useState("");
+const ProjectDeleteForm: React.FC<ProjectDeleteFormProps> = ({ onClose }) => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -47,38 +43,11 @@ const ProjectEditionForm: React.FC<ProjectEditionFormProps> = ({ onClose }) => {
     fetchProjects();
   }, []);
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhone(e.target.value);
-  };
-
-  const handleCompanyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCompany(e.target.value);
-  };
-
-  const handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProjectName(e.target.value);
-  };
-
   const handleProjectSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedProjectName = e.target.value;
     const project = projects.find((p) => p.name === selectedProjectName);
     if (project) {
       setSelectedProject(project);
-      setProjectName(project.name);
-      setCompany(project.company);
-
-      if (project.projectContacts.length > 0) {
-        const contact = project.projectContacts[0];
-        setName(contact.name);
-        setPhone(contact.phone);
-      } else {
-        setName("");
-        setPhone("");
-      }
     }
   };
 
@@ -90,53 +59,40 @@ const ProjectEditionForm: React.FC<ProjectEditionFormProps> = ({ onClose }) => {
       return;
     }
 
-    const projectContactRequestBody = {
-      name,
-      phone,
-    };
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete the project "${selectedProject.name}"?`
+    );
 
-    const projectRequestBody = {
-      company,
-      name: projectName,
-    };
+    if (!confirmDelete) {
+      return;
+    }
 
     try {
-      if (selectedProject.projectContacts.length > 0) {
-        const contactId = selectedProject.projectContacts[0].id;
+      for (const contact of selectedProject.projectContacts) {
         const projectContactResponse = await fetch(
-          `http://localhost:8080/api/v1/project_contact/${contactId}`,
+          `http://localhost:8080/api/v1/project_contact/${contact.id}`,
           {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(projectContactRequestBody),
+            method: "DELETE",
           }
         );
 
-        if (projectContactResponse.ok) {
-          console.log("Project contact saved successfully");
-        } else {
-          console.error("Failed to save project contact");
+        if (!projectContactResponse.ok) {
+          console.error("Failed to delete project contact");
         }
       }
 
       const projectResponse = await fetch(
         `http://localhost:8080/api/v1/project/${selectedProject.id}`,
         {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(projectRequestBody),
+          method: "DELETE",
         }
       );
 
       if (projectResponse.ok) {
-        console.log("Project saved successfully");
+        console.log("Project deleted successfully");
         onClose();
       } else {
-        console.error("Failed to save project");
+        console.error("Failed to delete project");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -144,81 +100,44 @@ const ProjectEditionForm: React.FC<ProjectEditionFormProps> = ({ onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="project-edition-modal__form">
-      <label htmlFor="project-edition-list">Select a Project to edit: </label>
+    <form onSubmit={handleSubmit} className="project-delete-modal__form">
+      <label htmlFor="project-delete-list">Select a Project to delete: </label>
       <select
-        name="project-edition-list"
-        id="project-edition-list"
-        className="project-edition-modal__form__select"
+        name="project-delete-list"
+        id="project-delete-list"
+        className="project-delete-modal__form__select"
         onChange={handleProjectSelect}
+        defaultValue=""
       >
-        <option value="">Select a project</option>
+        <option value="" disabled hidden>
+          Select a project
+        </option>
         {projects.map((project) => (
           <option
             key={project.id}
             value={project.name}
-            className="project-edition-modal__form__select__option"
+            className="project-delete-modal__form__select__option"
           >
             {project.name}
           </option>
         ))}
       </select>
 
-      <label htmlFor="project-name">Project Name: </label>
-      <input
-        type="text"
-        name="project-name"
-        id="project-name"
-        className="project-edition-modal__form__input"
-        value={projectName}
-        onChange={handleProjectNameChange}
-      />
-
-      <label htmlFor="project-company-name">Company Name: </label>
-      <input
-        type="text"
-        name="project-company-name"
-        id="project-company-name"
-        className="project-edition-modal__form__input"
-        value={company}
-        onChange={handleCompanyChange}
-      />
-
-      <label htmlFor="project-contact-name">Project Contact Name: </label>
-      <input
-        type="text"
-        name="project-contact-name"
-        id="project-contact-name"
-        className="project-edition-modal__form__input"
-        value={name}
-        onChange={handleNameChange}
-      />
-
-      <label htmlFor="project-contact-phone">Project Contact Phone: </label>
-      <input
-        type="tel"
-        name="project-contact-phone"
-        id="project-contact-phone"
-        className="project-edition-modal__form__input"
-        value={phone}
-        onChange={handlePhoneChange}
-      />
-
       <input
         type="submit"
-        value="Save"
+        value="Delete"
         id="project_info"
-        className="project-edition-modal__submit save__button"
+        className="project-delete-modal__submit delete__button"
       />
 
       <input
         type="button"
         value="Cancel"
-        className="project-edition-modal__submit cancel__button"
+        className="project-delete-modal__submit cancel__delete__button"
         onClick={onClose}
       />
     </form>
   );
 };
 
-export default ProjectEditionForm;
+export default ProjectDeleteForm;

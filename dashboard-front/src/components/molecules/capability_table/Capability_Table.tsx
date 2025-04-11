@@ -10,6 +10,8 @@ interface Capability_Table_Props {
 
 const Capability_Table = ({ isRemoveActive }: Capability_Table_Props) => {
   const [capabilities, setCapabilities] = useState<Capabilities[]>([]);
+  const [page, setPage] = useState(1);
+  const maxElements = 10;
 
   useEffect(() => {
     const fetchCapabilities = async () => {
@@ -38,6 +40,10 @@ const Capability_Table = ({ isRemoveActive }: Capability_Table_Props) => {
     location.reload();
   };
 
+  const handlePageSelection = (cont: number) => {
+    setPage(cont);
+  };
+
   return (
     <>
       <table className="capability-table">
@@ -49,26 +55,40 @@ const Capability_Table = ({ isRemoveActive }: Capability_Table_Props) => {
           </tr>
         </thead>
         <tbody>
-          {capabilities.map((capability, cont) => (
-            <tr className="capability-table__row" key={cont}>
-              <td className="capability-table__id">{capability.id}</td>
-              <td className="capability-table__name">{capability.name}</td>
-              <td className="capability-table__type">{capability.type}</td>
-              {isRemoveActive ? (
-                <td>
-                  <ToolButton
-                    icon={"fa-solid fa-trash"}
-                    group={"dasd"}
-                    handleClick={() => handleDelete(capability.id)}
-                  />
-                </td>
-              ) : (
-                <></>
-              )}
-            </tr>
-          ))}
+          {capabilities
+            .filter((capability, cont) => {
+              if (cont < 10 * page && cont >= 10 * (page - 1))
+                return capability;
+            })
+            .map((capability, cont) => (
+              <tr className="capability-table__row" key={cont}>
+                <td className="capability-table__id">{capability.id}</td>
+                <td className="capability-table__name">{capability.name}</td>
+                <td className="capability-table__type">{capability.type}</td>
+                {isRemoveActive ? (
+                  <td>
+                    <ToolButton
+                      icon={"fa-solid fa-trash"}
+                      group={"dasd"}
+                      handleClick={() => handleDelete(capability.id)}
+                    />
+                  </td>
+                ) : (
+                  <></>
+                )}
+              </tr>
+            ))}
         </tbody>
       </table>
+      <div className="capability-pagination">
+        {capabilities
+          .filter((capability, cont) => {
+            if ((cont + 1) % maxElements == 1) return capability;
+          })
+          .map((_capability, cont) => (
+            <a onClick={() => handlePageSelection(cont + 1)}>{cont + 1}</a>
+          ))}
+      </div>
     </>
   );
 };

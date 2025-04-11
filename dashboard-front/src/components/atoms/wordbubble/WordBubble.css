@@ -20,9 +20,29 @@
   color: var(--dark-comp);
 }
 
-.WordBubble:has(input[type="checkbox"]:checked) {
+.capabilities:has(input:checked){
+  color: var(--dark-comp)
+}
+
+.capabilities:has(input:checked):nth-child(5n - 3) {
+  background-color: var(--yellow);
+}
+
+.capabilities:nth-child(5n - 2):has(input:checked) {
+  background-color: var(--dark-blue);
+}
+
+.capabilities:nth-child(5n - 1):has(input:checked) {
   background-color: var(--light-blue);
-  color: var(--dark-comp);
+}
+
+.capabilities:nth-child(5n):has(input:checked) {
+  background-color: var(--green);
+}
+
+.capabilities:nth-child(5n + 1):has(input:checked) {
+  background-color: var(--red);
+
 }
 
 /* Diferent classes styles*/

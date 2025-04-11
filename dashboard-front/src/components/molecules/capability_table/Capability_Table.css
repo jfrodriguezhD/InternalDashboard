@@ -47,3 +47,17 @@
 .capability-table__row i{
     align-self: center;
 }
+
+.capability-pagination{
+    display: flex;
+    justify-self: center;
+    justify-content: flex-end;
+    padding: 10px 0;
+    width: 90%;
+    gap: 10px;
+}
+
+.capability-pagination a:hover,
+.capability--selected{
+    color: var(--yellow);
+}

@@ -1,13 +1,13 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { prospectBaseApiURL } from "../../../data/endpoints/api_endpoints.ts";
 import { PAGE_LIMIT } from "../../../data/general_variables/important_figures.ts";
+import { SearchContext, SelectedProspectContext, SelectedRowContext, ProspectShowListContext, SortContext } from "../../../pages/App.tsx";
 import { Prospects, Prospects_Row } from "../../atoms/prospect_row/Prospect_Row.tsx";
 import { Prospects_Footer_Page_Marker } from "../../atoms/prospects_footer_page_marker/Prospects_Footer_Page_Marker.tsx";
 import { CreateNewProspect } from "../../organism/create_new_prospect/CreateNewProspect.tsx";
 import ProspectView from "../../organism/prospect_view_menu/ProspectView.tsx";
 import "./Prospects_Table.css";
-import { SearchContext, SelectedProspectContext, SelectedRowContext, ProspectShowListContext, SortContext } from "../../../pages/App.tsx";
 
 function Prospects_Table() {
 
@@ -93,7 +93,10 @@ function Prospects_Table() {
             }
             break;
             case "Capabilities": {
-                const tempArr = [...og_list].sort((a, b) => {
+                let tempArr = [...og_list].filter((a) => {
+                    return a.capabilities.length >= 1
+                })
+                tempArr = [...tempArr].sort((a, b) => {
                     if (a.capabilities < b.capabilities) {
                     return -1;
                     }
@@ -107,17 +110,17 @@ function Prospects_Table() {
             }
             break;
             case "Project": {
-                const tempArr = [...og_list].sort((a, b) => {
-                    if(!a.projects || !b.projects){
-                        return 0
-                    }
-                    if (a.projects[0].name < b.projects[0].name) {
-                    return -1;
-                    }
-                    if (a.projects[0].name > b.projects[0].name) {
-                    return 1;
-                    }
-                    return 0;
+                let tempArr = [...og_list].filter((a) => {
+                    return a.projects.length >= 1
+                })
+                tempArr = [...tempArr].sort((a, b) => {
+                    let tempA = a.projects[0].name
+                    let tempB = b.projects[0].name
+                    if (tempA < tempB) 
+                        return -1;
+                    if (tempA > tempB)
+                        return 1;
+                    return 0
                 })
                 setSortList(tempArr)
                 setOG(tempArr)

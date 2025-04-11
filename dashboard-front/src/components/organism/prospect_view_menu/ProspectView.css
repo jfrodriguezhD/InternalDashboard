@@ -5,6 +5,7 @@
     padding: 30px;
     border: none;
     height: 100vh;
+    scrollbar-width: none;
 }
 
 .prospect__view__modal__header{

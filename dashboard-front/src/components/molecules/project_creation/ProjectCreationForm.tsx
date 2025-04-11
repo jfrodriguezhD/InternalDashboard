@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 interface ProjectCreationFormProps {
-  onClose: () => void;
+  onClose: (newProject?: any) => void;
 }
 
 const ProjectCreationForm: React.FC<ProjectCreationFormProps> = ({
@@ -77,7 +77,8 @@ const ProjectCreationForm: React.FC<ProjectCreationFormProps> = ({
 
       if (projectContactResponse.ok) {
         console.log("Project contact saved successfully");
-        onClose();
+        project.projectContacts = [{ name, phone }];
+        onClose(project);
       } else {
         const errorResponse = await projectContactResponse.json();
         console.error("Failed to save project contact", errorResponse);
@@ -96,6 +97,7 @@ const ProjectCreationForm: React.FC<ProjectCreationFormProps> = ({
         id="project-name"
         className="project-creation-modal__form__input"
         onChange={handleProjectNameChange}
+        required
       />
 
       <label htmlFor="project-company-name">Company Name: </label>
@@ -105,6 +107,7 @@ const ProjectCreationForm: React.FC<ProjectCreationFormProps> = ({
         id="project-company-name"
         className="project-creation-modal__form__input"
         onChange={handleCompanyChange}
+        required
       />
 
       <label htmlFor="project-contact-name">Project Contact Name: </label>
@@ -114,6 +117,7 @@ const ProjectCreationForm: React.FC<ProjectCreationFormProps> = ({
         id="project-contact-name"
         className="project-creation-modal__form__input"
         onChange={handleNameChange}
+        required
       />
 
       <label htmlFor="project-contact-phone">Project Contact Phone: </label>
@@ -123,6 +127,7 @@ const ProjectCreationForm: React.FC<ProjectCreationFormProps> = ({
         id="project-contact-phone"
         className="project-creation-modal__form__input"
         onChange={handlePhoneChange}
+        required
       />
 
       <input
@@ -136,7 +141,7 @@ const ProjectCreationForm: React.FC<ProjectCreationFormProps> = ({
         type="button"
         value="Cancel"
         className="project-creation-modal__submit cancel__button"
-        onClick={onClose}
+        onClick={() => onClose()}
       />
     </form>
   );

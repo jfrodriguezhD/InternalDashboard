@@ -1,0 +1,44 @@
+.project-table {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  justify-self: center;
+  align-items: center;
+}
+
+.project-table thead .project-table__row {
+  background-color: var(--dark-comp);
+}
+.project-table tbody {
+  display: flex;
+  flex-direction: column;
+}
+.project-table,
+.project-table > * {
+  gap: 10px;
+}
+.project-table__row {
+  display: flex;
+  background-color: var(--light-comp);
+  border-radius: 4px;
+  padding: 4px 0;
+  height: 40px;
+  width: 90vw;
+  align-items: center;
+}
+.project-table__name {
+  padding-left: 10px;
+  width: 30%;
+}
+.project-table__company {
+  width: 20%;
+}
+.project-table__contact-name {
+  width: 30%;
+}
+.project-table__contact-phone {
+  width: 20%;
+}
+.project-table__row i {
+  align-self: center;
+}

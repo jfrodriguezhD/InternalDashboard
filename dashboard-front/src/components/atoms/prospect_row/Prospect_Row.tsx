@@ -54,17 +54,19 @@ function Prospects_Row({ data, index, classname }: Prop) {
         {data.job_title ? data.job_title : ""}
       </div>
       <div className="prospects__row__member capability__nametag__container">
-        {data.capabilities.map((i) => {
-          if (i) 
-            return <div className="capability__nametag">{i.name}</div>;
+        {data.capabilities.map((data, index) => {
+          if (data) 
+            return <div className="capability__nametag" key={index}>{data.name}</div>;
         })}
       </div>
-      <div className="prospects__row__member">
-		{data.projects.map((project, index) => {
-			return <div className={"prospects__row__member__prospected_for " + (project ? project.company : "")} key={index}> 
-				{" "} {project ? project.name : ""}{" "} 
-			</div>
-		})}        
+      <div className="prospects__row__member prospected_for__nametag__container">
+        {data.projects.map((data, index) => {
+              if (data && index < 1) {
+                return <div className="prospected_for__nametag" key={index}>{data.name}</div>
+              }
+            }
+          )
+        }
       </div>
     </div>
   );
