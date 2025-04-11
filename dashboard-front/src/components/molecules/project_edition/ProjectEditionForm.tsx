@@ -21,11 +21,15 @@ interface ProjectContact {
   projectId: number;
 }
 
-interface ProjectDeleteFormProps {
+interface ProjectEditionFormProps {
   onClose: () => void;
 }
 
-const ProjectDeleteForm: React.FC<ProjectDeleteFormProps> = ({ onClose }) => {
+const ProjectEditionForm: React.FC<ProjectEditionFormProps> = ({ onClose }) => {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [company, setCompany] = useState("");
+  const [projectName, setProjectName] = useState("");
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -43,11 +47,38 @@ const ProjectDeleteForm: React.FC<ProjectDeleteFormProps> = ({ onClose }) => {
     fetchProjects();
   }, []);
 
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhone(e.target.value);
+  };
+
+  const handleCompanyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCompany(e.target.value);
+  };
+
+  const handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProjectName(e.target.value);
+  };
+
   const handleProjectSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedProjectName = e.target.value;
     const project = projects.find((p) => p.name === selectedProjectName);
     if (project) {
       setSelectedProject(project);
+      setProjectName(project.name);
+      setCompany(project.company);
+
+      if (project.projectContacts.length > 0) {
+        const contact = project.projectContacts[0];
+        setName(contact.name);
+        setPhone(contact.phone);
+      } else {
+        setName("");
+        setPhone("");
+      }
     }
   };
 
@@ -59,40 +90,53 @@ const ProjectDeleteForm: React.FC<ProjectDeleteFormProps> = ({ onClose }) => {
       return;
     }
 
-    const confirmDelete = window.confirm(
-      `Are you sure you want to delete the project "${selectedProject.name}"?`
-    );
+    const projectContactRequestBody = {
+      name,
+      phone,
+    };
 
-    if (!confirmDelete) {
-      return;
-    }
+    const projectRequestBody = {
+      company,
+      name: projectName,
+    };
 
     try {
-      for (const contact of selectedProject.projectContacts) {
+      if (selectedProject.projectContacts.length > 0) {
+        const contactId = selectedProject.projectContacts[0].id;
         const projectContactResponse = await fetch(
-          `http://localhost:8080/api/v1/project_contact/${contact.id}`,
+          `http://localhost:8080/api/v1/project_contact/${contactId}`,
           {
-            method: "DELETE",
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(projectContactRequestBody),
           }
         );
 
-        if (!projectContactResponse.ok) {
-          console.error("Failed to delete project contact");
+        if (projectContactResponse.ok) {
+          console.log("Project contact saved successfully");
+        } else {
+          console.error("Failed to save project contact");
         }
       }
 
       const projectResponse = await fetch(
         `http://localhost:8080/api/v1/project/${selectedProject.id}`,
         {
-          method: "DELETE",
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(projectRequestBody),
         }
       );
 
       if (projectResponse.ok) {
-        console.log("Project deleted successfully");
+        console.log("Project saved successfully");
         onClose();
       } else {
-        console.error("Failed to delete project");
+        console.error("Failed to save project");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -100,14 +144,13 @@ const ProjectDeleteForm: React.FC<ProjectDeleteFormProps> = ({ onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="project-delete-modal__form">
-      <label htmlFor="project-delete-list">Select a Project to delete: </label>
+    <form onSubmit={handleSubmit} className="project-edition-modal__form">
+      <label htmlFor="project-edition-list">Select a Project to edit: </label>
       <select
-        name="project-delete-list"
-        id="project-delete-list"
-        className="project-delete-modal__form__select"
+        name="project-edition-list"
+        id="project-edition-list"
+        className="project-edition-modal__form__select"
         onChange={handleProjectSelect}
-        defaultValue=""
       >
         <option value="" disabled hidden>
           Select a project
@@ -116,28 +159,68 @@ const ProjectDeleteForm: React.FC<ProjectDeleteFormProps> = ({ onClose }) => {
           <option
             key={project.id}
             value={project.name}
-            className="project-delete-modal__form__select__option"
+            className="project-edition-modal__form__select__option"
           >
             {project.name}
           </option>
         ))}
       </select>
 
+      <label htmlFor="project-name">Project Name: </label>
+      <input
+        type="text"
+        name="project-name"
+        id="project-name"
+        className="project-edition-modal__form__input"
+        value={projectName}
+        onChange={handleProjectNameChange}
+      />
+
+      <label htmlFor="project-company-name">Company Name: </label>
+      <input
+        type="text"
+        name="project-company-name"
+        id="project-company-name"
+        className="project-edition-modal__form__input"
+        value={company}
+        onChange={handleCompanyChange}
+      />
+
+      <label htmlFor="project-contact-name">Project Contact Name: </label>
+      <input
+        type="text"
+        name="project-contact-name"
+        id="project-contact-name"
+        className="project-edition-modal__form__input"
+        value={name}
+        onChange={handleNameChange}
+      />
+
+      <label htmlFor="project-contact-phone">Project Contact Phone: </label>
+      <input
+        type="tel"
+        name="project-contact-phone"
+        id="project-contact-phone"
+        className="project-edition-modal__form__input"
+        value={phone}
+        onChange={handlePhoneChange}
+      />
+
       <input
         type="submit"
-        value="Delete"
+        value="Save"
         id="project_info"
-        className="project-delete-modal__submit delete__button"
+        className="project-edition-modal__submit save__button"
       />
 
       <input
         type="button"
         value="Cancel"
-        className="project-delete-modal__submit cancel__delete__button"
+        className="project-edition-modal__submit cancel__button"
         onClick={onClose}
       />
     </form>
   );
 };
 
-export default ProjectDeleteForm;
+export default ProjectEditionForm;
