@@ -10,6 +10,7 @@
   height: 60vh;
   border-radius: 6px;
   border: none;
+  scrollbar-width: none;
 }
 
 .project__info__modal::backdrop{
