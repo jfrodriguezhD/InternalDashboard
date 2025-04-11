@@ -1,0 +1,81 @@
+.profile__info__card{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.profile__info__card__content{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile__info__card__content > *{
+    padding-bottom: 20px;
+}
+
+.profile__info__card__content__name{
+    font-weight: bold;
+    padding-bottom: 0px;
+}
+
+.profile__info__card__jobTitle{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    padding-bottom: 20px;
+}
+
+.profile__info__card__status{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+
+
+.personal__info__card__capabilities, 
+.personal__info__card__subcapabilities{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.personal__info__card__capabilities > *, 
+.personal__info__card__subcapabilities > *{
+    padding: 0 12px;
+    min-height: 30px;
+    border-radius: 24px;
+    align-content: center;
+    justify-content: center;
+    color: black;
+    font-weight: 500;
+}
+
+.profile__info__card__color__red{
+    background-color: var(--red);
+}
+.profile__info__card__color__yellow{
+    background-color: var(--yellow);
+}
+.profile__info__card__color__purple{
+    background-color: var(--dark-blue);
+}
+.profile__info__card__color__blue{
+    background-color: var(--light-blue);
+}
+.profile__info__card__color__green{
+    background-color: var(--green);
+}
+
+.profile__info__card__status__Active{
+    color: var(--green);
+}
+.profile__info__card__status__Discarted{
+    color: var(--red);
+}.profile__info__card__status__Hired{
+    color: var(--dark-blue);
+}.profile__info__card__status__Paused{
+    color: gray;
+}

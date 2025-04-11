@@ -1,0 +1,75 @@
+.project__info__card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.project__info__modal {
+  margin: auto;
+  width: 70vw;
+  height: 60vh;
+  border-radius: 6px;
+  border: none;
+}
+
+.project__info__modal::backdrop{
+  background-color: rgba(0, 0, 0, 0.54);
+}
+
+.project__info__list {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.project__info__card__color__red {
+  padding-inline: 0.5rem;
+  padding-block: 0.25rem;
+  border-radius: 25px;
+  background-color: red;
+  align-content: center;
+  justify-content: center;
+}
+
+.project__info__card__color__yellow {
+  padding-inline: 0.5rem;
+  padding-block: 0.25rem;
+  border-radius: 25px;
+  background-color: rgb(183, 183, 0);
+  align-content: center;
+  justify-content: center;
+}
+
+.project__info__card__color__purple {
+  padding-inline: 0.5rem;
+  padding-block: 0.25rem;
+  border-radius: 25px;
+  background-color: purple;
+  align-content: center;
+  justify-content: center;
+}
+
+.project__info__card__color__blue {
+  padding-inline: 0.5rem;
+  padding-block: 0.25rem;
+  border-radius: 25px;
+  background-color: blue;
+  align-content: center;
+  justify-content: center;
+}
+
+.project__info__card__color__green {
+  padding-inline: 0.5rem;
+  padding-block: 0.25rem;
+  border-radius: 25px;
+  background-color: green;
+  align-content: center;
+  justify-content: center;
+}
+
+.project__info__list {
+  width: 100%;
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
