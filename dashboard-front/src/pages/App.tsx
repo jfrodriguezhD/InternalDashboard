@@ -47,8 +47,6 @@ function App() {
     const [ showList, setShowList ] = useState<Prospects[]>([])
 	const [selectedRow, setSelectedRow] = useState<number>(-1);
 
-	console.log(showList);
-
 	useEffect(() => {
 		tempSearch ? setSearch(tempSearch) : setSearch("")
 	}, [tempSearch])

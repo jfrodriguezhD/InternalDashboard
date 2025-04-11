@@ -1,7 +1,7 @@
 import "./Control.css";
 import { outputs, filters, tools } from "../../../data/control/control_data";
 import { SearchContext, SelectedProspectContext, SelectedRowContext, ShowListContext, SortContext } from "../../../pages/App";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import ToolButton from "../../atoms/toolbutton/ToolButton";
 import WordBubble from "../../atoms/wordbubble/WordBubble";
 import { prospectBaseApiURL } from "../../../data/endpoints/api_endpoints";
@@ -22,33 +22,12 @@ export default function Control() {
 	const { selectedProspect, setSelectedProspect } = selectedProspectContext;
 	const {selectedRow, setSelectedRow} = selectedRowContext;
 
-	useEffect(() => {
-		const storedPinList = localStorage.getItem('pinned-prospects')
-		const pinList = storedPinList? JSON.parse(storedPinList) : [];
-		setProspectPinList(pinList);	
-		setShowList([
-			...showList.filter(obj => prospectPinList?.includes(obj.id))
-			.sort((a,b) => prospectPinList?.indexOf(a.id) - prospectPinList?.indexOf(b.id)),
-			...showList.filter(obj => !prospectPinList?.includes(obj.id))
-		])
-		console.log(showList);
-		console.log(pinList)
-			
-		setShowList([
-			...showList.filter(obj => prospectPinList?.includes(obj.id))
-			.sort((a,b) => prospectPinList?.indexOf(a.id) - prospectPinList?.indexOf(b.id)),
-			...showList.filter(obj => !prospectPinList?.includes(obj.id))
-		]);
-	  }, []);
-	  
-	useEffect(() => {
-		localStorage.setItem('pinned-prospects', JSON.stringify(prospectPinList));
-		setShowList([
-			...showList.filter(obj => prospectPinList?.includes(obj.id))
-			.sort((a,b) => prospectPinList?.indexOf(a.id) - prospectPinList?.indexOf(b.id)),
-			...showList.filter(obj => !prospectPinList?.includes(obj.id))
-		]);
-	  }, [prospectPinList]);
+	const showEditModal = () => {
+		const modal = document.querySelector(
+		  ".prospect-modal-view"
+		) as HTMLDialogElement;
+		modal!.showModal();
+	};
 
 	const archiveProspect = () => {
 		selectedProspect.status = ["ARCHIVED"];
@@ -75,33 +54,25 @@ export default function Control() {
 		}
 		else{
 			setProspectPinList([selectedProspect.id,...prospectPinList]);
-			setSelectedRow(0);
 		}
+		setSelectedRow(-1);
 	}
 	
 	const handleToolBtnClick = (e: MouseEvent, toolType:string) =>{
+		e?.preventDefault();
 		switch (toolType){
-		  case tools[0].word:
-			e?.preventDefault();
-			showModal();
-			break;
-		  case tools[1].word:
-			e?.preventDefault();
-			archiveProspect();
-			break;
-		  case tools[2].word:
-			pinProspect();
-			break;
+			case tools[0].word:
+				showEditModal();
+				break;
+		  	case tools[1].word:
+				archiveProspect();
+				break;
+		  	case tools[2].word:
+				pinProspect();
+				break;
 		}
-	  }
+	}
 	
-	const showModal = () => {
-		const modal = document.querySelector(
-		  ".prospect-modal-view"
-		) as HTMLDialogElement;
-		modal!.showModal();
-	};
-
 	const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value)
 	};
@@ -116,6 +87,25 @@ export default function Control() {
 	useEffect(() => {
 		sessionStorage.setItem("search_value", search);
 	}, [search])
+
+
+	useEffect(() => {
+		const storedPinList = localStorage.getItem('pinned-prospects')
+		const pinList = storedPinList? JSON.parse(storedPinList) : [];
+		setProspectPinList(pinList);	
+	  }, []);
+	  
+	useEffect(() => {
+		localStorage.setItem('pinned-prospects', JSON.stringify(prospectPinList));
+	  }, [prospectPinList]);
+
+	useEffect(()=>{
+		setShowList([
+			...showList.filter(obj => prospectPinList?.includes(obj.id))
+			.sort((a,b) => prospectPinList?.indexOf(a.id) - prospectPinList?.indexOf(b.id)),
+			...showList.filter(obj => !prospectPinList?.includes(obj.id))
+		]);	
+	},[showList[0],prospectPinList]);
 
 	return (
 		<div className="control">

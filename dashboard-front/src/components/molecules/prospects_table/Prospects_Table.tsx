@@ -209,6 +209,7 @@ function Prospects_Table() {
       updatePageQuantity()
     }, [ page ])
 
+
     return (
         <div className="prospects__table">
         <div className="prospects__table__header">
