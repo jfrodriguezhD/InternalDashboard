@@ -12,15 +12,11 @@
 }
 
 .prospects__row:hover{
-	scale: 1.02;
+	scale: 1.025;
 	cursor: pointer;
 }
 .prospects__row.content:hover{
 	filter: brightness(0.92);
-  .prospects__row__control__tools{
-    visibility: visible;
-  }
-  padding-bottom: 4em;
 }
 
 .prospects__row__member{
@@ -66,16 +62,12 @@
   color: black;
 }
 
-
-.prospects__row__control__tools{
-  display: flex;
-  flex-direction: row;
-  visibility: collapse;
-  max-width: inherit;
-  .ToolButton {
-    background-color: var(--dark-comp);
-  }
-  gap: 0.5em;
+.selected{
+  padding-top: 1em;
+  padding-bottom: 2.5em;
+  scale: 1.01;
+  filter: contrast(0.75);
+  
 }
 
 .capability__nametag__container{

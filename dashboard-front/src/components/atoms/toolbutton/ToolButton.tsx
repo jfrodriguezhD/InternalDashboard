@@ -1,3 +1,5 @@
+import { use, useState } from "react";
+import { tools } from "../../../data/control/control_data";
 import "./ToolButton.css";
 
 interface ToolButtonProps {
@@ -12,7 +14,7 @@ function ToolButton({ word, icon, group, handleClick }: ToolButtonProps) {
     <label className="ToolButton">
       <i className={icon} />
       <p>{word}</p>
-      <input type="radio" name={group} onClick={handleClick} id={word}></input>
+      <input type="radio" name={group} onClick={handleClick} id={word} ></input>
     </label>
   );
 }

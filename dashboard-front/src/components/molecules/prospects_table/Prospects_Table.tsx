@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { prospectBaseApiURL } from "../../../data/endpoints/api_endpoints.ts";
 import { PAGE_LIMIT } from "../../../data/general_variables/important_figures.ts";
@@ -7,28 +7,34 @@ import { Prospects_Footer_Page_Marker } from "../../atoms/prospects_footer_page_
 import { CreateNewProspect } from "../../organism/create_new_prospect/CreateNewProspect.tsx";
 import ProspectView from "../../organism/prospect_view_menu/ProspectView.tsx";
 import "./Prospects_Table.css";
-import { SearchContext, SortContext } from "../../../pages/App.tsx";
-
-export const SelectedRowContext = createContext<Dispatch<SetStateAction<number>> | undefined>(undefined);
+import { SearchContext, SelectedProspectContext, SelectedRowContext, ShowListContext, SortContext } from "../../../pages/App.tsx";
 
 function Prospects_Table() {
 
-    const [selectedRow, setSelectedRow] = useState<number>(0);
+    const {selectedRow, setSelectedRow} = useContext(SelectedRowContext);
     const [pageNumber, setPageNumber] = useState(1);
     const { page } = useParams();
 
     const [ list, setList ] = useState<Prospects[]>([])
     const [ sortList, setSortList ] = useState<Prospects[]>([])
-    const [ showList, setShowList ] = useState<Prospects[]>([])
+    const [ searchList, setSearchList ] = useState<Prospects[]>([])
+    //const [ showList, setShowList ] = useState<Prospects[]>([])
 
     const profileModal = useRef<HTMLDialogElement>(null);
     const viewRef = useRef<HTMLDialogElement>(null);
 
     const searchContext = useContext(SearchContext);
   	const sortContext = useContext(SortContext);
+    const prospectContext = useContext(SelectedProspectContext);
+    const showListContext = useContext(ShowListContext);
 
 	const search = searchContext?.search;
 	const sort = sortContext?.sort;
+    const {showList, setShowList} = showListContext;
+
+    if(sortList.length > 0 && selectedRow!=-1){
+        prospectContext?.setSelectedProspect(showList[selectedRow]);
+    }
 
     function toggleView() {
         if (!viewRef.current) {
@@ -203,6 +209,7 @@ function Prospects_Table() {
       updatePageQuantity()
     }, [ page ])
 
+
     return (
         <div className="prospects__table">
         <div className="prospects__table__header">
@@ -216,10 +223,9 @@ function Prospects_Table() {
         <div className="prospects__table__row__container">
             {
             showList.length > 0 ? 
-                <ProspectView prospect={showList[selectedRow]} toggleDialog={toggleView} ref={viewRef} />
+                <ProspectView prospect={selectedRow!=-1?showList[selectedRow]:showList[0]} toggleDialog={toggleView} ref={viewRef} />
                 : null
             }
-            <SelectedRowContext.Provider value={setSelectedRow}>
             {
                 showList.map((data, index) => {
                         if (index < (PAGE_LIMIT * pageNumber) && index >= ((PAGE_LIMIT * pageNumber) - PAGE_LIMIT)) {
@@ -228,7 +234,6 @@ function Prospects_Table() {
                     } 
                 )
             }
-            </SelectedRowContext.Provider>
             <div className='prospects__row add__new__prospect' onClick={() => toggleDialog()}>
                 Add New Prospect
             </div>
