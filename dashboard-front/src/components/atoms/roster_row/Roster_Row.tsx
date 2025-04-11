@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Roster } from '../../../data/entities_types/types';
 import './Roster_Row.css';
 import { tools } from "../../../data/control/control_data.ts";
-import { SelectedRowContext } from '../../molecules/roster_table/Roster_Table';
+import { SelectedRowContext } from '../../../pages/App.tsx';
 
 interface Props{
   member:Roster;
@@ -12,26 +12,31 @@ interface Props{
  
 function Roster_Row({member, index}:Props) {
   
-  const setSelectedRow = useContext(SelectedRowContext);
+  const {selectedRow, setSelectedRow} = useContext(SelectedRowContext);
+
+  
+  const toggleSelection = () =>{
+    if (isSelected){
+      setSelectedRow?setSelectedRow(-1):null;
+    }
+    else{
+      setSelectedRow?setSelectedRow(index):null
+    }
+  }
 
   const showModal = () => {
-    if (setSelectedRow != undefined) {
-      setSelectedRow(index);
-    }
+    setSelectedRow?setSelectedRow(index):null
     const modal = document.querySelector(
       ".roster-modal-view"
     ) as HTMLDialogElement;
-    if(event?.target instanceof(HTMLInputElement) && event.target.id!=tools[0].word){
-      modal!.close();
-    }
-    else{
-      modal!.showModal();
-    }
+    modal!.showModal();
   };
+
+  const isSelected = index == selectedRow;
 
   return (
     <>
-    <div className='roster-member' onClick={showModal}>
+    <div className={`roster-member ${isSelected?"selected":""}`} onClick={toggleSelection} onDoubleClick={showModal}>
       <p className='roster__name__cell'>{member.name} {member.last_name}</p>
       <p className={"roster__cell "+ member.status}>{member.status}</p>
       <p className="roster__cell">{member.seniority}</p>

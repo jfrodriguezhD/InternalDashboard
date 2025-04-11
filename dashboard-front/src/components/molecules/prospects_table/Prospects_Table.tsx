@@ -7,7 +7,7 @@ import { Prospects_Footer_Page_Marker } from "../../atoms/prospects_footer_page_
 import { CreateNewProspect } from "../../organism/create_new_prospect/CreateNewProspect.tsx";
 import ProspectView from "../../organism/prospect_view_menu/ProspectView.tsx";
 import "./Prospects_Table.css";
-import { SearchContext, SelectedProspectContext, SelectedRowContext, ShowListContext, SortContext } from "../../../pages/App.tsx";
+import { SearchContext, SelectedProspectContext, SelectedRowContext, ProspectShowListContext, SortContext } from "../../../pages/App.tsx";
 
 function Prospects_Table() {
 
@@ -26,14 +26,14 @@ function Prospects_Table() {
     const searchContext = useContext(SearchContext);
   	const sortContext = useContext(SortContext);
     const prospectContext = useContext(SelectedProspectContext);
-    const showListContext = useContext(ShowListContext);
+    const showListContext = useContext(ProspectShowListContext);
 
 	const search = searchContext?.search;
 	const sort = sortContext?.sort;
-    const {showList, setShowList} = showListContext;
+    const {prospectShowList, setProspectShowList} = showListContext;
 
-    if(sortList.length > 0 && selectedRow!=-1){
-        prospectContext?.setSelectedProspect(showList[selectedRow]);
+    if(prospectShowList.length > 0 && selectedRow!=-1){
+        prospectContext?.setSelectedProspect(prospectShowList[selectedRow]);
     }
 
     function toggleView() {
@@ -59,7 +59,7 @@ function Prospects_Table() {
             }
             const data: Prospects[] = await response.json();
             setList(data)
-            setShowList(data)
+            setProspectShowList(data)
             setSortList(data)
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
@@ -193,21 +193,26 @@ function Prospects_Table() {
     }, [])
 
     useEffect(() => {
-        sortBy(sort ?? "", list, setShowList)
-        searchBy(search ?? "", sortList, setShowList)
+        sortBy(sort ?? "", list, setProspectShowList)
+        searchBy(search ?? "", sortList, setProspectShowList)
         if(!sort || sort == "")
-            sortBy("modified_time", list, setShowList)
+            sortBy("modified_time", list, setProspectShowList)
     }, [ list ])
     useEffect(() => {
-        searchBy(search ?? "", sortList, setShowList)
+        searchBy(search ?? "", sortList, setProspectShowList)
     }, [ search ])
     useEffect(() => {
-            sortBy(sort ?? "", list, setShowList)
+            sortBy(sort ?? "", list, setProspectShowList)
     }, [ sort ])
 
     useEffect(() => {
       updatePageQuantity()
     }, [ page ])
+
+    
+	if(prospectShowList.length>0 && selectedRow>=prospectShowList.length){
+		setSelectedRow(-1);
+	}
 
 
     return (
@@ -222,12 +227,12 @@ function Prospects_Table() {
         </div>
         <div className="prospects__table__row__container">
             {
-            showList.length > 0 ? 
-                <ProspectView prospect={selectedRow!=-1?showList[selectedRow]:showList[0]} toggleDialog={toggleView} ref={viewRef} />
+            prospectShowList.length > 0 ? 
+                <ProspectView prospect={selectedRow!=-1?prospectShowList[selectedRow]:prospectShowList[0]} toggleDialog={toggleView} ref={viewRef} />
                 : null
             }
             {
-                showList.map((data, index) => {
+                prospectShowList.map((data, index) => {
                         if (index < (PAGE_LIMIT * pageNumber) && index >= ((PAGE_LIMIT * pageNumber) - PAGE_LIMIT)) {
                             return <Prospects_Row data={data} key={index} index={index} classname={"content"}/>
                         }
@@ -240,7 +245,7 @@ function Prospects_Table() {
         </div>
         <div className="prospects__table__footer">
             <div className="prospects__table__footer__page__number__marker">
-            <Prospects_Footer_Page_Marker data={showList.length} />
+            <Prospects_Footer_Page_Marker data={prospectShowList.length} />
             </div>
             <CreateNewProspect toggleDialog={ toggleDialog } ref={ profileModal }/>
         </div>
