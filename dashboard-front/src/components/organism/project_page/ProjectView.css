@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 1rem;
   padding-top: 1rem;
+  scrollbar-width: none;
 }
 
 .project-main-container__title {
@@ -10,7 +11,6 @@
 }
 
 .project-edition-buttons button {
-  color: white;
   background-color: var(--light-comp);
   cursor: pointer;
   border-radius: 25px;
@@ -25,4 +25,12 @@
   display: flex;
   place-content: center;
   gap: 1rem;
+}
+
+.project-table {
+  align-self: center;
+  margin-bottom: 10px;
+}
+.delete-project-button {
+  color: red;
 }
