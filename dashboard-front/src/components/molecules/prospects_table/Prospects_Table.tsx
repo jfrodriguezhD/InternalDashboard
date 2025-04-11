@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { prospectBaseApiURL } from "../../../data/endpoints/api_endpoints.ts";
 import { PAGE_LIMIT } from "../../../data/general_variables/important_figures.ts";
-import { SearchContext, SelectedProspectContext, SelectedRowContext, ShowListContext, SortContext } from "../../../pages/App.tsx";
+import { SearchContext, SelectedProspectContext, SelectedRowContext, ProspectShowListContext, SortContext } from "../../../pages/App.tsx";
 import { Prospects, Prospects_Row } from "../../atoms/prospect_row/Prospect_Row.tsx";
 import { Prospects_Footer_Page_Marker } from "../../atoms/prospects_footer_page_marker/Prospects_Footer_Page_Marker.tsx";
 import { CreateNewProspect } from "../../organism/create_new_prospect/CreateNewProspect.tsx";
