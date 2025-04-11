@@ -63,7 +63,7 @@ export default function Control() {
 		})
 		  .then((response) => response.json())
 		  .then((data) =>
-			alert("Profile successfully updated: " + selectedRoster + JSON.stringify(data))
+			alert("Profile successfully updated: " + JSON.stringify(data))
 		  );
 		location.reload();
 	}
