@@ -31,10 +31,7 @@ const ProjectEditionForm: React.FC<ProjectEditionFormProps> = ({ onClose }) => {
   const [company, setCompany] = useState("");
   const [projectName, setProjectName] = useState("");
   const [projects, setProjects] = useState<Project[]>([]);
-  const [projectContacts, setProjectContacts] = useState<ProjectContact[]>([]);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [selectedProjectContact, setSelectedProjectContact] =
-    useState<ProjectContact | null>(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -47,28 +44,8 @@ const ProjectEditionForm: React.FC<ProjectEditionFormProps> = ({ onClose }) => {
       }
     };
 
-    const fetchProjectContacts = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:8080/api/v1/project_contact"
-        );
-        const data = await response.json();
-        setProjectContacts(data);
-      } catch (error) {
-        console.error("Error fetching project contacts:", error);
-      }
-    };
-
     fetchProjects();
-    fetchProjectContacts();
   }, []);
-
-  useEffect(() => {
-    if (selectedProjectContact) {
-      setName(selectedProjectContact.name);
-      setPhone(selectedProjectContact.phone);
-    }
-  }, [selectedProjectContact]);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -94,17 +71,24 @@ const ProjectEditionForm: React.FC<ProjectEditionFormProps> = ({ onClose }) => {
       setProjectName(project.name);
       setCompany(project.company);
 
-      const contact = projectContacts.find((pc) => pc.projectId === project.id);
-      if (contact) {
-        setSelectedProjectContact(contact);
+      if (project.projectContacts.length > 0) {
+        const contact = project.projectContacts[0];
         setName(contact.name);
         setPhone(contact.phone);
+      } else {
+        setName("");
+        setPhone("");
       }
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!selectedProject) {
+      console.error("No project selected");
+      return;
+    }
 
     const projectContactRequestBody = {
       name,
@@ -117,9 +101,10 @@ const ProjectEditionForm: React.FC<ProjectEditionFormProps> = ({ onClose }) => {
     };
 
     try {
-      if (selectedProjectContact) {
+      if (selectedProject.projectContacts.length > 0) {
+        const contactId = selectedProject.projectContacts[0].id;
         const projectContactResponse = await fetch(
-          `http://localhost:8080/api/v1/project_contact/${selectedProjectContact.id}`,
+          `http://localhost:8080/api/v1/project_contact/${contactId}`,
           {
             method: "PUT",
             headers: {
@@ -137,7 +122,7 @@ const ProjectEditionForm: React.FC<ProjectEditionFormProps> = ({ onClose }) => {
       }
 
       const projectResponse = await fetch(
-        `http://localhost:8080/api/v1/project/${selectedProject?.id}`,
+        `http://localhost:8080/api/v1/project/${selectedProject.id}`,
         {
           method: "PUT",
           headers: {

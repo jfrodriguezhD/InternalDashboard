@@ -3,11 +3,12 @@ import { useState } from "react";
 import Header from "../../molecules/header/Header";
 import ProjectCreationModal from "../../molecules/project_creation/ProjectCreationModal";
 import ProjectEditionModal from "../../molecules/project_edition/ProjectEditionModal";
+import ProjectDeleteModal from "../../molecules/project_delete/ProjectDeleteModal";
 
 function ProjectView() {
-  const [activeModal, setActiveModal] = useState<"create" | "edit" | null>(
-    null
-  );
+  const [activeModal, setActiveModal] = useState<
+    "create" | "edit" | "delete" | null
+  >(null);
 
   const handleCreateProjectClick = () => {
     setActiveModal("create");
@@ -15,6 +16,10 @@ function ProjectView() {
 
   const handleEditProjectClick = () => {
     setActiveModal("edit");
+  };
+
+  const handleDeleteProjectClick = () => {
+    setActiveModal("delete");
   };
 
   const handleCloseModal = () => {
@@ -42,7 +47,10 @@ function ProjectView() {
           >
             Edit Existing Project
           </button>
-          <button className="delete-project-button">
+          <button
+            className="delete-project-button"
+            onClick={handleDeleteProjectClick}
+          >
             Delete Existing Project
           </button>
         </div>
@@ -53,6 +61,9 @@ function ProjectView() {
       )}
       {activeModal === "edit" && (
         <ProjectEditionModal onClose={handleCloseModal} />
+      )}
+      {activeModal === "delete" && (
+        <ProjectDeleteModal onClose={handleCloseModal} />
       )}
     </>
   );
