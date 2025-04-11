@@ -49,7 +49,12 @@
 }
 
 .control__tools {
+  visibility: visible;
   display: flex;
   padding-top: 24px;
   gap: 12px;
+}
+
+.hidden{
+  visibility: collapse;
 }
