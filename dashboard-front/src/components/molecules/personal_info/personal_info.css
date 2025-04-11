@@ -16,6 +16,7 @@
   width: 50vw;
   height: 75vh;
   border: 1.5px solid var(--dark-comp);
+  scrollbar-width: none;
 }
 
 .personal__info__edit__header {
