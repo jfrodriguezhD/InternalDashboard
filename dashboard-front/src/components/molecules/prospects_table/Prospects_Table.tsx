@@ -222,10 +222,9 @@ function Prospects_Table() {
         <div className="prospects__table__row__container">
             {
             showList.length > 0 ? 
-                <ProspectView prospect={showList[selectedRow]} toggleDialog={toggleView} ref={viewRef} />
+                <ProspectView prospect={selectedRow!=-1?showList[selectedRow]:showList[0]} toggleDialog={toggleView} ref={viewRef} />
                 : null
             }
-            <SelectedRowContext.Provider value={setSelectedRow}>
             {
                 showList.map((data, index) => {
                         if (index < (PAGE_LIMIT * pageNumber) && index >= ((PAGE_LIMIT * pageNumber) - PAGE_LIMIT)) {
