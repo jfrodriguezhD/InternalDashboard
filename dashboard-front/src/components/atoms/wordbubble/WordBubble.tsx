@@ -28,7 +28,7 @@ export default function WordBubble({
           type={type}
           name={group}
           checked={check}
-          onChange={handleChange}
+          onChange={() => handleChange()}
           onInput={handleInput}
         ></input>
       </label>

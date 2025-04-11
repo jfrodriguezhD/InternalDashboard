@@ -1,0 +1,28 @@
+.project-main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.project-main-container__title {
+  align-self: center;
+}
+
+.project-edition-buttons button {
+  color: white;
+  background-color: var(--light-comp);
+  cursor: pointer;
+  border-radius: 25px;
+  padding: 0.5rem;
+}
+
+.project-edition-buttons button:hover {
+  background-color: rgba(56, 56, 56, 0.5);
+}
+
+.project-edition-buttons {
+  display: flex;
+  place-content: center;
+  gap: 1rem;
+}

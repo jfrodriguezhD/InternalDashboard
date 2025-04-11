@@ -42,7 +42,7 @@ function HamburguerMenu({ setMenuVisible }: HamburguerMenuProps) {
                   </div>
                 </li>
               </Link>
-              <Link to="/projects" onClick={handleLinkClick}>
+              <Link to="/project" onClick={handleLinkClick}>
                 <li className="nav-link">
                   <div className="nav-element">
                     <p className="material-symbols-outlined ham-icon">

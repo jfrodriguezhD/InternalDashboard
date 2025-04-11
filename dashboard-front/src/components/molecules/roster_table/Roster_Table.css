@@ -20,11 +20,13 @@
     color: var(--light-gray);
   }
 	border-style: dashed;
-
 	display: flex;
 	justify-content: center;
-  	align-items: center;
+  align-items: center;
+}
 
+.add__new__member:hover{
+	scale: 1.02;
 	cursor: pointer;
 }
 

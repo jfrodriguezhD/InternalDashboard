@@ -23,8 +23,8 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 
 	const [Capabilities, setCapabilities] = useState<Capabilities[]>([])
 	const [formData, setFormData] = useState<ProspectStarter>({
-		name: "",
-		last_name: "",
+		name: " ",
+		last_name: " ",
 		status: ["HIRED"],
 		seniority: ["ANALYST"],
 		job_title: ["FRONTEND_DEVELOPER"],
@@ -56,10 +56,10 @@ const CreateNewProspect = forwardRef<HTMLDialogElement, Props>(
 	const handleCapabilityChange = (capability: Capabilities, type: string) => {
 		setFormData(prevState => {
 			const updatedCapabilities = type === "MAIN_CAPABILITY"
-				? [...(prevState.capabilities || []), capability]
+				? [...new Set([...(prevState.capabilities || []), capability])]
 				: prevState.capabilities || [];
 			const updatedSubCapabilities = type === "SECONDARY_CAPABILITY"
-				? [...(prevState.sub_capabilities || []), capability]
+				? [...new Set([...(prevState.sub_capabilities || []), capability])]
 				: prevState.sub_capabilities || [];
 			return {
 				...prevState,

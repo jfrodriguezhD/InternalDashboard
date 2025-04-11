@@ -16,7 +16,7 @@
 	cursor: pointer;
 }
 .prospects__row.content:hover{
-  filter: brightness(0.92);
+	filter: brightness(0.92);
 }
 
 .prospects__row__member{
@@ -68,4 +68,8 @@
   scale: 1.01;
   filter: contrast(0.75);
   
+}
+
+.capability__nametag__container{
+  flex-direction: row;
 }

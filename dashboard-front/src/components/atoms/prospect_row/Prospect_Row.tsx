@@ -53,9 +53,10 @@ function Prospects_Row({ data, index, classname }: Prop) {
       <div className="prospects__row__member">
         {data.job_title ? data.job_title : ""}
       </div>
-      <div className="prospects__row__member">
+      <div className="prospects__row__member capability__nametag__container">
         {data.capabilities.map((i) => {
-          if (i) return i.name;
+          if (i) 
+            return <div className="capability__nametag">{i.name}</div>;
         })}
       </div>
       <div className="prospects__row__member">

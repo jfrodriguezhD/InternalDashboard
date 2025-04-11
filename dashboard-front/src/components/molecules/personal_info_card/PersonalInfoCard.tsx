@@ -55,17 +55,18 @@ function PersonalInfoCard({ phone, email, resume }: PersonalInfo) {
         />
         <div className="personal__info__card__content">
           <p className="personal__info__card_phone">
-            <i className="fa-solid fa-envelope"></i> {phone}
+            <i className="fa-solid fa-mobile "></i>{" "}
+            {phone != 0 ? phone : 52000000000}
           </p>
           <p className="personal__info__card__email">
-            <i className="fa-solid fa-mobile"></i>
-            {email}
+            <i className="fa-solid fa-envelope"></i>
+            {email != null ? email : "dummy@deloitte.com"}
           </p>
           <div className="personal__info__card__resume">
             <p>Resume:</p>
             <a href={resume} className="personal__info__card__resume__file">
               <i className="fa-solid fa-file"></i>
-              {resume ? resume : "No resume"}
+              <p>{resume ? resume : "No resume"}</p>
             </a>
           </div>
         </div>

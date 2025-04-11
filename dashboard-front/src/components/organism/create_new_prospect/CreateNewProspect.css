@@ -5,6 +5,7 @@
     align-self: center;
     padding: 18px;
     border: none;
+    scrollbar-width: none;
 }
 
 .close-modal{

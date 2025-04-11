@@ -1,22 +1,15 @@
 package com.engineering.dashboard.entities;
 
-import java.time.LocalDateTime;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "project_contact")
+@Table(name = "project_contacts")
 public class ProjectContactEntity {
 
   @Id
@@ -32,7 +25,8 @@ public class ProjectContactEntity {
   private LocalDateTime createdTime;
   private LocalDateTime lastModified;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name = "project_id")
+  @JsonBackReference
   private ProjectEntity project;
 }

@@ -38,12 +38,12 @@ function Prospects_Table() {
 
     function toggleView() {
         if (!viewRef.current) {
-        return;
+            return;
+        }
+        viewRef.current.hasAttribute("open")
+            ? viewRef.current.close()
+            : viewRef.current.showModal();
     }
-    viewRef.current.hasAttribute("open")
-        ? viewRef.current.close()
-        : viewRef.current.showModal();
-      }
 
     function updatePageQuantity() {
         if(page){
@@ -59,7 +59,6 @@ function Prospects_Table() {
             }
             const data: Prospects[] = await response.json();
             setList(data)
-            setSearchList(data)
             setShowList(data)
             setSortList(data)
         } catch (error) {
@@ -74,92 +73,109 @@ function Prospects_Table() {
         profileModal.current.hasAttribute("open")
             ? profileModal.current.close()
             : profileModal.current.showModal();
-        }
+    }
 
     function sortBy(
         sort_type: string, og_list: Prospects[], setOG: (arg: Prospects[]) => void) {
         switch (sort_type) {
             case "Name": {
-                    const tempArr = [...og_list].sort((a, b) => {
-                        if (a.name < b.name) {
-                        return -1;
-                        }
-                        if (a.name > b.name) {
-                        return 1;
-                        }
-                        return 0;
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].sort((a, b) => {
+                    if (a.name < b.name) {
+                    return -1;
+                    }
+                    if (a.name > b.name) {
+                    return 1;
+                    }
+                    return 0;
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Capabilities": {
-                    const tempArr = [...og_list].sort((a, b) => {
-                        if (a.capabilities < b.capabilities) {
-                        return -1;
-                        }
-                        if (a.capabilities > b.capabilities) {
-                        return 1;
-                        }
-                        return 0;
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].sort((a, b) => {
+                    if (a.capabilities < b.capabilities) {
+                    return -1;
+                    }
+                    if (a.capabilities > b.capabilities) {
+                    return 1;
+                    }
+                    return 0;
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Project": {
-                    const tempArr = [...og_list].sort((a, b) => {
-                        if(!a.prospected_for || !b.prospected_for){
-                            return 0
-                        }
-                        if (a.prospected_for.name < b.prospected_for.name) {
-                        return -1;
-                        }
-                        if (a.prospected_for.name > b.prospected_for.name) {
-                        return 1;
-                        }
-                        return 0;
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].sort((a, b) => {
+                    if(!a.projects || !b.projects){
+                        return 0
+                    }
+                    if (a.projects[0].name < b.projects[0].name) {
+                    return -1;
+                    }
+                    if (a.projects[0].name > b.projects[0].name) {
+                    return 1;
+                    }
+                    return 0;
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Active": {
-                    const tempArr = [...og_list].filter((a) => {
-                        return a.status[0] == "ACTIVE"
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].filter((a) => {
+                    return a.status[0] == "ACTIVE"
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Hired": {
-                    const tempArr = [...og_list].filter((a) => {
-                        return a.status[0] == "HIRED"
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].filter((a) => {
+                    return a.status[0] == "HIRED"
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Not In Process": {
-                    const tempArr = [...og_list].filter((a) => {
-                        return a.status[0] == "NOT_IN_PROCESS"
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].filter((a) => {
+                    return a.status[0] == "NOT_IN_PROCESS"
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             case "Discarted": {
-                    const tempArr = [...og_list].filter((a) => {
-                        return a.status[0] == "DISCARTED"
-                    })
-                    setSortList(tempArr)
-                    setOG(tempArr)
-                }
-                break;
+                const tempArr = [...og_list].filter((a) => {
+                    return a.status[0] == "DISCARTED"
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
+            case "modified_time": {
+                const tempArr = [...og_list].sort((a, b) => {
+                    if(!a.lastModified || !b.lastModified){
+                        return 0
+                    }
+                    if (a.lastModified > b.lastModified) {
+                    return -1;
+                    }
+                    if (a.lastModified < b.lastModified) {
+                    return 1;
+                    }
+                    return 0;
+                })
+                setSortList(tempArr)
+                setOG(tempArr)
+            }
+            break;
             default:
                 setSortList(og_list)
                 setOG(og_list)
-                break;
+            break;
         }
     }
 
@@ -169,7 +185,6 @@ function Prospects_Table() {
                 return
             return (a.name.toLowerCase() + a.last_name.toLowerCase()).includes(search_string.toLowerCase())
         })
-        setSearchList(tempArr)
         setOG(tempArr)
     }
 
@@ -180,6 +195,8 @@ function Prospects_Table() {
     useEffect(() => {
         sortBy(sort ?? "", list, setShowList)
         searchBy(search ?? "", sortList, setShowList)
+        if(!sort || sort == "")
+            sortBy("modified_time", list, setShowList)
     }, [ list ])
     useEffect(() => {
         searchBy(search ?? "", sortList, setShowList)
@@ -203,13 +220,18 @@ function Prospects_Table() {
             <div>Prospected For</div>
         </div>
         <div className="prospects__table__row__container">
-            {showList.length>0? <ProspectView prospect={showList[selectedRow!=-1?selectedRow:0]} toggleDialog={toggleView} ref={viewRef} />:null}
+            {
+            showList.length > 0 ? 
+                <ProspectView prospect={showList[selectedRow]} toggleDialog={toggleView} ref={viewRef} />
+                : null
+            }
+            <SelectedRowContext.Provider value={setSelectedRow}>
             {
                 showList.map((data, index) => {
                         if (index < (PAGE_LIMIT * pageNumber) && index >= ((PAGE_LIMIT * pageNumber) - PAGE_LIMIT)) {
                             return <Prospects_Row data={data} key={index} index={index} classname={"content"}/>
                         }
-                    }
+                    } 
                 )
             }
             <div className='prospects__row add__new__prospect' onClick={() => toggleDialog()}>

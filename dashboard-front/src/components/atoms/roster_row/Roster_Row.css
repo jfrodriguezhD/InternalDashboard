@@ -9,6 +9,12 @@
     border-radius: 6px;
     height: 40px;
 }
+ 
+.roster-member:hover{
+	scale: 1.02;
+	filter: brightness(0.92);
+	cursor: pointer;
+}
 
 .AVAILABLE {
     color: var(--green);

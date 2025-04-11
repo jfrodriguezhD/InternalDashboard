@@ -1,6 +1,7 @@
 package com.engineering.dashboard.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,14 +12,13 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "project") // Correct table name
+@Table(name = "projects")
 public class ProjectEntity {
 
   @Id
@@ -26,10 +26,15 @@ public class ProjectEntity {
   private long id;
 
   @NotBlank
+  @Column(unique = true)
   private String name;
 
   @NotBlank
   private String company;
+
+  private LocalDateTime createdTime;
+
+  private LocalDateTime lastModified;
 
   @OneToMany(mappedBy = "project")
   private List<ProjectContactEntity> projectContacts;
@@ -40,9 +45,6 @@ public class ProjectEntity {
   @JsonIgnore
   @ManyToMany(mappedBy = "projects")
   private List<ProspectEntity> prospects;
-
-  private LocalDateTime createdTime;
-  private LocalDateTime lastModified;
 
   @ManyToMany
   @JoinTable(

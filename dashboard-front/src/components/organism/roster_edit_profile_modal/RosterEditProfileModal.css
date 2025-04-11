@@ -1,0 +1,94 @@
+.edit-profile-modal {
+  flex-direction: column;
+  width: 40%;
+  justify-self: center;
+  align-self: center;
+  padding: 18px;
+  border: none;
+  scrollbar-width: none;
+}
+
+dialog{
+  background-color: var(--dark-comp);
+}
+
+.close-modal {
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  transform: scaleX(1.5);
+}
+
+.close-modal:hover{
+  cursor: pointer;
+}
+
+.edit-profile-modal form > * {
+  padding-bottom: 20px;
+}
+
+.edit-profile-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.54);
+}
+
+.edit-profile-modal__heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.edit-profile-modal__name{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 14px;
+
+}
+
+.edit-profile-modal input,
+.edit-profile-modal select {
+  background-color: var(--light-comp);
+  border: none;
+}
+
+.edit-profile-modal__capabilities,
+.edit-profile-modal__senority {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.edit-profile-modal p,
+.edit-profile-modal__buttons button {
+  display: block;
+  width: 100%;
+}
+
+.edit-profile-modal__buttons button {
+  border: none;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.edit-profile-modal__buttons {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  gap: 16px;
+}
+
+.save-button {
+  background-color: var(--green);
+  color: var(--dark-comp);
+}
+
+.cancel-button {
+  background-color: var(--light-comp);
+  color: var(--white);
+}
+
+.edit-profile-modal select,
+.edit-profile-modal input {
+  width: 70%;
+  padding: 4px 0 4px 10px;
+}

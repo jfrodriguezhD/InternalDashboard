@@ -3,7 +3,7 @@ import { tools } from "../../../data/control/control_data";
 import "./ToolButton.css";
 
 interface ToolButtonProps {
-  word: string;
+  word?: string;
   icon: string;
   group: string;
   handleClick?: () => void;
