@@ -59,6 +59,14 @@ const ProjectDeleteForm: React.FC<ProjectDeleteFormProps> = ({ onClose }) => {
       return;
     }
 
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete the project "${selectedProject.name}"?`
+    );
+
+    if (!confirmDelete) {
+      return;
+    }
+
     try {
       for (const contact of selectedProject.projectContacts) {
         const projectContactResponse = await fetch(
@@ -99,8 +107,11 @@ const ProjectDeleteForm: React.FC<ProjectDeleteFormProps> = ({ onClose }) => {
         id="project-delete-list"
         className="project-delete-modal__form__select"
         onChange={handleProjectSelect}
+        defaultValue=""
       >
-        <option value="">Select a project</option>
+        <option value="" disabled hidden>
+          Select a project
+        </option>
         {projects.map((project) => (
           <option
             key={project.id}
